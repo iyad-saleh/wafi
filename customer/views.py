@@ -16,7 +16,7 @@ from django.contrib.auth.decorators import user_passes_test
 # is_RESERVATION
 # is_ACCOUNTANT
 # is_CUSTOMER
-# @user_passes_test(lambda u: u.is_MANAGER)
+@login_required
 def index(request):
     company = request.user.company
     customers = Customer.objects.filter(company=company)
@@ -33,7 +33,7 @@ def index(request):
             })
         })
 
-@user_passes_test(lambda u: u.is_MANAGER)
+@login_required
 def customer_list(request):
     company = request.user.company
     customers = Customer.objects.filter(company=company)
@@ -41,7 +41,7 @@ def customer_list(request):
         'customers':customers
     })
 
-# @user_passes_test(lambda u: u.is_superuser)
+@login_required
 def add_customer(request):
     if not request.user.is_MANAGER:
         return HttpResponse(
@@ -57,7 +57,7 @@ def add_customer(request):
         form = CustomerForm(request.POST,request.FILES)
         # print("request.POST: ",request.POST)
         if form.is_valid() and accountForm.is_valid():
-            # print('form is valid ')
+            # print(form)
             account = accountForm.save(commit=False)
             account.company=request.user.company
             account.author=request.user
@@ -91,7 +91,7 @@ def add_customer(request):
         'form': form,'accountForm':accountForm
     })
 
-# @user_passes_test(lambda u: u.is_superuser)
+@login_required
 def edit_customer(request, pk):
     customer = get_object_or_404(Customer, pk=pk)
     account = get_object_or_404(Account , pk = customer.account.pk)
@@ -134,7 +134,7 @@ def edit_customer(request, pk):
         'customer': customer,
     })
 
-# @user_passes_test(lambda u: u.is_superuser)
+@login_required
 @ require_POST
 def remove_customer(request, pk):
     customer = get_object_or_404(Customer, pk=pk)
