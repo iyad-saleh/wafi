@@ -8,6 +8,8 @@ from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKe
 from account.models  import Account
 from common.models import BaseModel, SoftDeleteModel
 
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 
 
@@ -46,3 +48,17 @@ class Customer(BaseModel, SoftDeleteModel):
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.logo.path)
+
+@receiver(models.signals.pre_save, sender=Customer)
+def delete_file_on_change_extension(sender, instance, **kwargs):
+    if instance.pk:
+        try:
+            old_logo = Customer.objects.get(pk=instance.pk).logo
+        except Customer.DoesNotExist:
+            return
+        else:
+
+            new_logo = instance.logo
+            if not 'default.jpg' in   old_logo.url:
+                if  old_logo.url != new_logo.url:
+                    old_logo.delete(save=False)
