@@ -1,7 +1,7 @@
 
 {% for employee in employees %}
 <tr id="employee-{{ employee.pk }}" class="employee-row">
-
+    <td>{{ forloop.counter }}</td>
     <td>{{ employee.account.name  }}</td>
     <td>{{ employee.start_date  }}</td>
     <td>

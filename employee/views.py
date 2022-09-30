@@ -14,20 +14,29 @@ from django.contrib.auth.decorators import user_passes_test
 # is_RESERVATION
 # is_ACCOUNTANT
 # is_CUSTOMER
-@user_passes_test(lambda u: u.is_MANAGER)
+@login_required
 def index(request):
-    # if request.user.is_MANAGER:
-    return render(request, 'employee/index.html')
-    # return HttpResponse(
-    #     status=403,
-    #     headers={
-    #         'HX-Trigger': json.dumps({
+    company = request.user.company
+    employees = Employee.objects.filter(company=company)
 
-    #            "employeeListChanged": None,
-    #         })
-    #     })
+    if hasattr( request.user  ,'is_MANAGER' ) :
+        accountForm = AccountForm()
+        form = EmployeeForm()
+        return render(request, 'employee/index.html',
+            {'form': form,'accountForm':accountForm,
+            'employees':employees,
+            'navbar':"mycompany",'submenu':"employee"})
 
-@user_passes_test(lambda u: u.is_MANAGER)
+    return HttpResponse(
+        status=403,
+        headers={
+            'HX-Trigger': json.dumps({
+
+               "employeeListChanged": None,
+            })
+        })
+
+@login_required
 def employee_list(request):
     company = request.user.company
     emps = Employee.objects.filter(company=company)
