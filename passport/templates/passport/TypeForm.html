@@ -1,0 +1,71 @@
+{% load crispy_forms_tags %}
+
+<form
+      hx-post="{% url 'add_passport' %}"
+      hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'
+      class="modal-content"
+       x-show.transition.duration.2000ms="open"
+        @click.outside="open = false"
+        x-transition
+
+      >
+ <div class="modal-body container">
+    <div class="mb-3 row">
+       <div class="form-group col-md-3 mb-0">
+        {{ form.first_name|as_crispy_field }}
+       </div>
+       <div class="form-group col-md-3 mb-0">
+       {{ form.last_name|as_crispy_field }}
+       </div>
+       <div class="form-group col-md-3 mb-0">
+       {{ form.father_name|as_crispy_field }}
+       </div>
+       <div class="form-group col-md-3 mb-0">
+       {{ form.mother_name|as_crispy_field }}
+       </div>
+    </div>
+
+    <div class="mb-3 row">
+       <div class="form-group col-md-3 mb-0">
+        {{ form.birth_date|as_crispy_field }}
+       </div>
+       <div class="form-group col-md-3 mb-0">
+       {{ form.birth_place|as_crispy_field }}
+       </div>
+
+       <div class="form-group col-md-3 mb-0">
+       {{ form.passport_number|as_crispy_field }}
+       </div>
+       <div class="form-group col-md-3 mb-0">
+       {{ form.issue_date|as_crispy_field }}
+       </div>
+    </div>
+
+    <div class="mb-3 row">
+       <div class="form-group col-md-3 mb-0">
+        {{ form.issue_end|as_crispy_field }}
+       </div>
+       <div class="form-group col-md-3 mb-0">
+       {{ form.national_number|as_crispy_field }}
+       </div>
+ <div class="form-group col-md-3 mb-0">
+        {{ form.sex|as_crispy_field }}
+       </div>
+       <div class="form-group col-md-3 mb-0">
+       {{ form.nationality|as_crispy_field }}
+       </div>
+    </div>
+
+    <div class="mb-3 row">
+
+       <div class="form-group col-md-3 mb-0">
+       {{ form.issue_place|as_crispy_field }}
+       </div>
+       <div class="form-group col-md-3 mb-0">
+          {{ form.photo|as_crispy_field }}
+       </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </div>
+</form>
+

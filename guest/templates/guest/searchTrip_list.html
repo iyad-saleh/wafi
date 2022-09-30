@@ -1,0 +1,25 @@
+<table class="table">
+        <thead>
+          <tr>
+         <th>#</th>
+          <th>cityFrom</th>
+          <th>cityTo</th>
+          <th>start_time</th>
+          <th>company</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for trip in trips %}
+        <tr >
+            <td>{{ forloop.counter }}</td>
+            <td>{{ trip.cityFrom  }}</td>
+            <td>{{ trip.cityTo  }}</td>
+            <td>{{ trip.start_time|date:'Y-m-d'  }}</td>
+            <td>{{ trip.company  }}</td>
+        </tr>
+
+        {% empty %}
+        <td colspan="4" class="text-center"> ... sorry no Trip...</td>
+        {% endfor %}
+     </tbody>
+ </table>

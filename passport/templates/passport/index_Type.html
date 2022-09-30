@@ -1,0 +1,60 @@
+
+    <div class="container mt-3 pt-3">
+      <div class="px-5 my-5 text-center">
+        <h1>Passport  .</h1>
+
+      </div>
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+ <symbol id="icon-expand" viewBox="0 0 32 32">
+    <path fill-rule="evenodd" d="M32 0v12l-4.321-4.321-6.625 6.625-3.359-3.359 6.625-6.625-4.321-4.321zM7.679 4.321l6.625 6.625-3.359 3.359-6.625-6.625-4.321 4.321v-12h12zM27.679 24.321l4.321-4.321v12h-12l4.321-4.321-6.625-6.625 3.359-3.359zM14.304 21.054l-6.625 6.625 4.321 4.321h-12v-12l4.321 4.321 6.625-6.625z"/>
+  </symbol>
+ <symbol id="icon-contract" viewBox="0 0 32 32">
+    <path fill-rule="evenodd" d="M2 18h12v12l-4.321-4.321-6.313 6.313-3.359-3.359 6.313-6.313zM25.679 22.321l6.313 6.313-3.359 3.359-6.313-6.313-4.321 4.321v-12h12zM30 14h-12v-12l4.321 4.321 6.313-6.313 3.359 3.359-6.313 6.313zM9.679 6.321l4.321-4.321v12h-12l4.321-4.321-6.313-6.313 3.359-3.359z"/>
+  </symbol>
+</svg>
+      <div  x-data="{ open: false }" class="mb-3" >
+         <button class="btn btn-outline-success mb-1" @click="open = ! open" >
+          <svg class="" width="25" height="25">
+            <use  x-show="!open" xlink:href="#icon-expand"/>
+
+            <use  x-show="open" xlink:href="#icon-contract" />
+
+          </svg>
+          </button>
+
+      {% include 'passport/TypeForm.html' %}
+      </div>
+      <table class="table"   id="MyTable">
+        <thead>
+           <tr>
+
+            <th>first_name</th>
+            <th>last_name</th>
+            <th>father_name</th>
+            <th>mother_name</th>
+            <th>birth_date</th>
+            <th>birth_place</th>
+            <th>passport_number</th>
+            <th>issue_date</th>
+            <th>issue_end</th>
+            <th>national_number</th>
+            <th>photo</th>
+            <th>nationality</th>
+            <th>sex</th>
+            <th>issue_place</th>
+            <th>author</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody hx-trigger="load, passportListChanged from:body" hx-get="{% url 'passport_list' %}" hx-target="this">
+          <tr>
+            <td class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+

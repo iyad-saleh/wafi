@@ -1,0 +1,29 @@
+
+{% for journal in journals %}
+
+        <tr id="journal-{{ journal.pk }}"
+        {% if journal.ked.id|divisibleby:2 %}  class="table-active"
+        {% elif journal.ked.id|divisibleby:3 %} class="table-primary"
+        {% else %}   class="table-success"
+        {% endif %}>
+
+            <td>{{ journal.id  }}</td>
+            <td>{{ journal.ked.id  }}: {{ journal.ked  }}</td>
+            <td>{{ journal.account_credit  }}</td>
+            <td>{{ journal.account_dept  }}</td>
+            <td>{{ journal.ked_date|date:"Y-m-d"  }}</td>
+            <td>{{ journal.dept  }}</td>
+            <td>{{ journal.credit  }}</td>
+            <td>{{ journal.coin  }}</td>
+            <td>{{ journal.memo  }}</td>
+            <td>{{ journal.author  }}</td>
+            <td></td>
+        </tr>
+
+{% endfor %}
+
+
+
+
+
+

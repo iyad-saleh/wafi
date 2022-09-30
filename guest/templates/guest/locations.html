@@ -1,0 +1,11 @@
+
+ <select required class="custom-select px-4" name="toLoc" style="height: 47px;" id="to" >
+    <option value="" selected>TO</option>
+
+{% for location in locations %}
+<option value="{{location.id}}"> {{location}}</option>
+{%  endfor %}
+
+
+</select>
+

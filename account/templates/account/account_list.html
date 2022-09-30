@@ -1,0 +1,15 @@
+{% for account in accounts %}
+<tr id="account-{{ account.pk }}" class="account-row">
+
+    <td>{{ account.name  }}</td>
+    <td>{{ account.get_account_type_display  }}</td>
+
+    <td>{{ account.author  }}</td>
+
+
+
+  <td>
+    <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_account' pk=account.pk %}" hx-target="#dialog">Edit</button>
+  </td>
+</tr>
+{% endfor %}

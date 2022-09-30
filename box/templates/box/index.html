@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+    <div class="container px-3 " height="100%">
+      <div class="px-5 my-5 text-center">
+        <h1>Box list .</h1>
+        <p>Box list .</p>
+      </div>
+      <!-- <button hx-get="{% url 'add_box' %}" hx-target="#dialog" class="btn btn-primary mb-3">
+        Add a Box
+      </button> --> <div   >
+       {% include 'box/box_Type_form.html' with accountForm=accountForm %}
+     </div>
+      <table class="table">
+        <thead>
+          <tr>
+
+          <th>name</th>
+          <th>author</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody
+               hx-trigger="load, boxListChanged from:body"
+               hx-get="{% url 'box_list' %}"
+               hx-target="this">
+          <tr>
+            <td class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+{% endblock %}
+

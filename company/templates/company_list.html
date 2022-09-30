@@ -1,0 +1,63 @@
+{% for company in companys %}
+<tr id="company-{{ company.pk }}" class="company-row">
+
+    <td>{{ company.name  }}</td>
+    <td>
+      <img class="rounded-circle article-img"
+        height="60" width="60"   src="{{ company.logo.url }}">
+    </td>
+    <td>{{ company.address  }}</td>
+    <td>{{ company.phoneNumber1  }}</td>
+    <td>{{ company.phoneNumber2  }}</td>
+    <td>{{ company.tradeRecord  }}</td>
+    <td>{{ company.email  }}</td>
+    <td>{{ company.webSite  }}</td>
+
+    <td>
+      <a class="btn btn-primary btn-sm"
+      hx-get="{% url 'edit_company' pk=company.pk %}"
+      hx-target="#dialog" >Edit</a>
+    </td>
+
+</tr>
+<tr>
+<td>{{ company.name  }} Users</td>
+    <td colspan="8">
+        <table class="table table-dark table-striped" >
+
+            <thead >
+                <tr>
+
+                    <th>username</th>
+                    <th>date_joined</th>
+                    <th>is_active</th>
+                    <th>is_MANAGER</th>
+                    <th>is_RESERVATION</th>
+                    <th>is_ACCOUNTANT</th>
+                    <th>is_CUSTOMER</th>
+                    <th></th>
+                </tr>
+            </thead>
+                <tbody>
+            {%  for user in company.myuser_set.all %}
+
+            <tr>
+               <td>{{ user.username }}</td>
+               <td>{{ user.date_joined|date:"Y-m-d" }}</td>
+              <td>{{ user.is_active }}</td>
+              <td>{{ user.is_MANAGER }}</td>
+              <td>{{ user.is_RESERVATION }}</td>
+              <td>{{ user.is_ACCOUNTANT }}</td>
+              <td>{{ user.is_CUSTOMER }}</td>
+              <td>
+              <a class="btn btn-primary btn-sm" href ="{% url 'profile' pk=user.pk %}" >Edit</a>
+            </td>
+            </tr>
+            {% empty %}
+            <tr><td  colspan="7" > No users in {{ company.name }}</td></tr>
+            {%  endfor %}
+         </tbody>
+        </table>
+
+</td></tr><tr  style=" border-bottom: 5px solid #ddd;"></tr>
+{% endfor %}

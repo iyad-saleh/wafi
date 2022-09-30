@@ -1,0 +1,16 @@
+{% for box in boxs %}
+<tr id="box-{{ box.pk }}" class="box-row">
+
+    <td>{{ box.account.name  }}</td>
+
+    <td>{{ box.author  }}</td>
+
+
+  <td>
+    <button
+             class="btn btn-primary btn-sm"
+             hx-get="{% url 'edit_box' pk=box.pk %}"
+             hx-target="#dialog"   >Edit</button>
+  </td>
+</tr>
+{% endfor %}

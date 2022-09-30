@@ -1,0 +1,14 @@
+{% for category in categorys %}
+<tr id="category-{{ category.pk }}" class="category-row">
+
+    <td>{{ category.name  }}</td>
+
+
+
+  <td>
+    <button class="btn btn-primary btn-sm"
+    hx-get="{% url 'edit_category' pk=category.pk %}"
+    hx-target="#dialog">Edit</button>
+  </td>
+</tr>
+{% endfor %}

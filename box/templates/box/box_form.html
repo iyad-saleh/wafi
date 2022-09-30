@@ -1,0 +1,38 @@
+<!-- {% load widget_tweaks %} -->
+<!-- {% with WIDGET_ERROR_CLASS='is-invalid' %} -->
+{% load crispy_forms_tags %}
+<div class="container">
+   <form
+       hx-post="{{ request.path }}"
+       hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'
+       class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title">Edit Box</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+
+
+  <div class="modal-body container">
+    <div class="mb-3 row">
+      {{  accountForm.name|as_crispy_field }}
+    </div>
+
+
+
+
+
+  </div>
+  <!-- {% crispy accountForm %}
+  {% crispy form %} -->
+  <div class="modal-footer">
+    {% if box %}
+    <button type="button" class="btn btn-danger" hx-confirm="Are you sure you wish to delete {{ box.account.name }}?" hx-post="{% url 'remove_box' pk=box.pk %}">Remove</button>
+    <span class="flex-grow-1"></span>
+    {% endif %}
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+      Cancel
+    </button>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </div>
+</form></div>
+{% endwith %}

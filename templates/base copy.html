@@ -1,0 +1,173 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" >
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ user.company }} / {{ user.username }}</title>
+  
+  
+  <!-- Vendors styles-->
+  <link rel="stylesheet" href="{% static 'admin/vendors/simplebar/css/simplebar.css' %}"  >
+  <link rel="stylesheet" href="{% static 'admin/css/vendors/simplebar.css' %}">
+  <!-- Main styles for this application-->
+  <link href="{% static 'admin/css/style.css' %}" rel="stylesheet">
+  <!-- We use those styles to show code examples, you should remove them in your application.-->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    // Shared ID
+    gtag('config', 'UA-118965717-3');
+    // Bootstrap ID
+    gtag('config', 'UA-118965717-5');
+  </script>
+   <link href="{% static 'admin/vendors/@coreui/chartjs/css/coreui-chartjs.css' %" rel="stylesheet">
+  
+ 
+   <script src="{% static 'htmx.min.js' %}"></script>
+   <script src="{% static 'alpine.min.js' %}" defer></script>
+   <script src="{% static '_hyperscript.min.js' %}" defer></script>
+
+<!-- end iyad script  -->
+<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" />
+</head>
+<body
+ x-data="{darkMode: localStorage.getItem('darkMode') === 'true',
+          collapse: localStorage.getItem('collapse') === 'true'
+         }"
+   x-bind:class="{ 'dark-mode': darkMode,
+              'sidebar-collapse':collapse}"
+  hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+
+
+class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Preloader -->
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="{{ user.company.logo.url }}" alt="Company logo" height="60" width="60">
+  </div>
+  {% include 'sidebar.html' %}
+  {% include 'navbar.html' %}
+
+  <!-- <body class="hold-transition sidebar-mini"> -->
+    <!-- <div class="wrapper"> -->
+
+     
+      <div class="toast-container position-fixed">
+      <div id="toast" class="toast align-items-center text-white bg-success border-0  " role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div id="toast-body" class="toast-body"></div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+
+
+      <div class="content-wrapper">
+            {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+
+        {% block content %}   {% endblock %}
+      </div>
+    <!-- </div> -->
+   <div id="modal" class="modal fade">
+          <div id="dialog" class="modal-dialog" hx-target="this">
+سك
+          </div>
+   </div>
+  <!-- </body> -->
+
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2014-2022 <a href="#">AdminLTE.io</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 3.1.0
+    </div>
+  </footer>
+
+<!-- CoreUI and necessary plugins-->
+<script src="{% static 'vendors/@coreui/coreui/js/coreui.bundle.min.js' %}"></script>
+<script src="{% static 'vendors/simplebar/js/simplebar.min.js' %}"></script>
+<!-- Plugins and scripts required by this view-->
+<script src="{% static 'vendors/chart.js/js/chart.min.js' %}"></script>
+<script src="{% static 'vendors/@coreui/chartjs/js/coreui-chartjs.js' %}"></script>
+<script src="{% static 'vendors/@coreui/utils/js/coreui-utils.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+ </div>
+<!-- ./wrapper -->
+<!-- jQuery -->
+
+<!-- <script src="{% static 'jquery-3.5.1.js' %}"></script>
+<script src="{% static 'jquery.dataTables.min.js' %}"></script> -->
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- DataTables  & Plugins -->
+<script src="{% static 'plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'plugins/jszip/jszip.min.js' %}"></script>
+<script src="{% static 'plugins/pdfmake/pdfmake.min.js' %}"></script>
+<script src="{% static 'plugins/pdfmake/vfs_fonts.js' %}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/buttons.html5.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/buttons.print.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
+<!-- AdminLTE App -->
+
+<script src="{% static 'dist/js/adminlte.min.js' %}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{% static 'dist/js/demo.js' %}"></script>
+<!-- iyad script important  -->
+<script src="{% static 'dialog.js' %}"></script>
+ <script src="{% static 'toast.js' %}"></script>
+
+ <!-- end iyad script -->
+<!-- Page specific script -->
+<script>
+  $(function () {
+    $("#table1").DataTable({
+      "responsive": true,
+      "lengthChange": true,
+      "autoWidth": true,
+      "paging": true,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    })
+    .buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+     });
+</script>
+</html>

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+    <!-- <div class="container px-3 " height="100%"> -->
+      <div class="px-5 my-5 text-center">
+        <h1>Employee list .</h1>
+        <p>Employee list .</p>
+      </div>
+      <button hx-get="{% url 'add_employee' %}" hx-target="#dialog" class="btn btn-primary mb-3">
+        Add a Employee
+      </button>
+
+      <div class="card-body">
+       <table id="employee" class="table table-bordered table-striped">
+        <thead>
+          <tr>
+          <th>name1</th>
+          <th>start_date</th>
+          <th>category</th>
+          <th>salary</th>
+          <th>salary_coin</th>
+          <th>phone</th>
+          <th>memo</th>
+          <th>author</th>
+          <th>edit</th>
+          
+          </tr>
+        </thead>
+        <tbody
+        hx-trigger="load, employeeListChanged from:body"
+        hx-get="{% url 'employee_list' %}"
+        hx-target="this"
+         >
+          <tr>
+            <td class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- </div> -->
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% for reservation in reservations %}
+<tr id="reservation-{{ reservation.pk }}" class="reservation-row "  >
+
+
+
+        <td>{{ reservation.title }}</td>
+        <td>{{ reservation.get_reservation_type_display }}</td>
+        <td>{{ reservation.Date|date:"Y-m-d"  }}</td>
+        <td>{{ reservation.PNR }}</td>
+        <td>{{ reservation.trip }}</td>
+        <td>{{ reservation.vendor }}</td>
+        <td>{{ reservation.customer }}</td>
+        <td>{{ reservation.pay_price }}</td>
+        <td>{{ reservation.pay_coin }}</td>
+        <td>{{ reservation.sell_price }}</td>
+        <td>{{ reservation.sell_coin }}</td>
+        <td>{{ reservation.get_status_display }}</td>
+        <td>{{ reservation.author  }}</td>
+  <td>
+    <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_reservation' pk=reservation.pk %}" hx-target="#dialog">Edit</button>
+  </td>
+</tr>
+{% endfor %}

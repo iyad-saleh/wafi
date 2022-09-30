@@ -1,0 +1,16 @@
+
+{% for ked in keds %}
+<tr id="ked-{{ ked.pk }}" class="ked-row">
+
+    <td>{{ ked.title  }}</td>
+    <td>{{ ked.updated_at|date:"Y-m-d"   }}</td>
+    <td>{{ ked.author  }}</td>
+    <td>
+    <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_ked' pk=ked.pk %}" hx-target="#dialog">Edit</button>
+  </td>
+</tr>
+{% endfor %}
+
+
+
+

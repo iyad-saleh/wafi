@@ -1,0 +1,30 @@
+{% load widget_tweaks %}
+{% with WIDGET_ERROR_CLASS='is-invalid' %}
+
+ {% load crispy_forms_tags %}
+
+<form
+       hx-post="{% url 'add_category' %}"
+       hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'
+       class="container mt-3 pt-3">
+<!-- <div class="modal-header">
+    <h5 class="modal-title">Add Employee Type</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+ -->
+ <div class="row gx-3 gy-2 align-items-center">
+<div class="col-sm-3">
+
+      <!-- <label for="{{ form.category.id_for_label }}" class="form-label">category</label> -->
+      <!-- {% render_field form.category class="form-control " placeholder="Manager" %} -->
+       {% crispy form %}
+</div>
+<div class="col-sm-3 mt-4">
+    <button type="submit" class="btn btn-primary">Add</button>
+  </div>
+
+      <!-- <div class="invalid-feedback">{{ form.category.errors|first }}</div> -->
+
+</div>
+</form>
+{% endwith %}

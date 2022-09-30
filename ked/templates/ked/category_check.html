@@ -1,0 +1,14 @@
+
+{% for cat in categorys %}
+<div class="form-check form-switch form-check-inline ">
+    <input type="checkbox"
+    class="form-check-input"
+    name="category"
+    value="{{ cat.id }}"
+    id="id_category_{{ cat.id }}">
+    <label for="id_category_{{ cat.id }}" class="form-check-label">
+        {{ cat.name }}
+    <i class="input-helper"></i></label>
+</div>
+
+{% endfor %}

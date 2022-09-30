@@ -1,0 +1,13 @@
+{% for expense in expenses %}
+<tr id="expense-{{ expense.pk }}" class="expense-row">
+
+    <td>{{ expense.account.name  }}</td>
+
+    <td>{{ expense.author  }}</td>
+
+
+  <td>
+    <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_expense' pk=expense.pk %}" hx-target="#dialog">Edit</button>
+  </td>
+</tr>
+{% endfor %}

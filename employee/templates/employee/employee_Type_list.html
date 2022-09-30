@@ -1,0 +1,14 @@
+{% for empType in empTypes %}
+<tr id="empType-{{ empType.pk }}" class="empType-row">
+
+    <td>{{ empType.category  }}</td>
+
+
+
+  <td>
+    <button class="btn btn-primary btn-sm"
+    hx-get="{% url 'edit_employee_Type' pk=empType.pk %}"
+    hx-target="#dialog">Edit</button>
+  </td>
+</tr>
+{% endfor %}

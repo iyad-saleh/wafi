@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+ <div class="container px-3 " height="100%">
+      <div class="px-5 my-5 text-center">
+        <h1>Users list .</h1>
+        <p>Users list .</p>
+      </div>
+
+      {% if user.is_superuser or user.is_MANAGER %}
+      <button
+              hx-get="{% url 'add_user' %}"
+              hx-target="#dialog"
+              class="btn btn-primary btn-rounded btn-fw my-3">
+        Add a User
+      </button>
+      {% endif %}
+
+
+<table class="table table-dark table-striped" >
+
+            <thead >
+                <tr>
+
+                    <th>username</th>
+                    <th>date_joined</th>
+                    <th>is_active</th>
+                    <th>is_MANAGER</th>
+                    <th>is_RESERVATION</th>
+                    <th>is_ACCOUNTANT</th>
+                    <th>is_CUSTOMER</th>
+                    <th></th>
+                </tr>
+            </thead>
+                <tbody>
+            {%  for u in user.company.myuser_set.all %}
+
+            <tr>
+               <td>{{ u.username }}</td>
+               <td>{{ u.date_joined|date:"Y-m-d" }}</td>
+              <td>{{ u.is_active }}</td>
+              <td>{{ u.is_MANAGER }}</td>
+              <td>{{ u.is_RESERVATION }}</td>
+              <td>{{ u.is_ACCOUNTANT }}</td>
+              <td>{{ u.is_CUSTOMER }}</td>
+              <td>
+              <a class="btn btn-primary btn-sm" href ="{% url 'profile' pk=u.pk %}" >Edit</a>
+            </td>
+            </tr>
+            {% empty %}
+            <tr><td  colspan="7" > No users in {{ company.name }}</td></tr>
+            {%  endfor %}
+         </tbody>
+        </table>
+{% endblock %}

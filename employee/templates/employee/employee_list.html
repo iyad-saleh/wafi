@@ -1,0 +1,22 @@
+
+{% for employee in employees %}
+<tr id="employee-{{ employee.pk }}" class="employee-row">
+
+    <td>{{ employee.account.name  }}</td>
+    <td>{{ employee.start_date  }}</td>
+    <td>
+        <!-- {{ employee.category.all }} -->
+{% for category in employee.category.all %}{{ category }}<br/>{% endfor %}
+    </td>
+    <td>{{ employee.salary  }}</td>
+    <td>{{ employee.salary_coin  }}</td>
+    <td>{{ employee.phone  }}</td>
+    <td>{{ employee.memo  }}</td>
+    <td>{{ employee.author  }}</td>
+
+
+  <td>
+    <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_employee' pk=employee.pk %}" hx-target="#dialog">Edit</button>
+  </td>
+</tr>
+{% endfor %}

@@ -1,0 +1,98 @@
+{% load widget_tweaks %}
+{% with WIDGET_ERROR_CLASS='is-invalid' %}
+<div id="add-company-form" >
+<form
+     hx-post="{{ request.path }}"
+     hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'
+     hx-encoding ="multipart/form-data"
+     class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title">Edit User</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+
+
+  <div class="modal-body">
+    <div class="mb-3">
+      <label for="{{ form.username.id_for_label }}" class="form-label">Name</label>
+      {% render_field form.username class="form-control" placeholder="Back to the Future II" %}
+      <div class="invalid-feedback">{{ form.username.errors|first }}</div>
+    </div>
+    <div class="mb-3">
+     {% if form.avatar  %}
+      <img class="img-thumbnail "
+           src="{{ form.avatar.url }}"
+           style="max-width: 100;">
+      {% else %}
+         <p>No photo</p>
+      {% endif %}
+
+      <input type="file" name="avatar" class="form-control" accept="image/*" id="id_logo">
+      <div class="invalid-feedback">{{ form.avatar.errors|first }}</div>
+    </div>
+    <div class="mb-3">
+      <label for="{{ form.first_name.id_for_label }}" class="form-label">first_name</label >
+      {% render_field form.first_name class="form-control" %}
+      <div class="invalid-feedback">{{ form.first_name.errors|first }}</div>
+    </div>
+    <div class="mb-3">
+      <label for="{{ form.last_name.id_for_label }}" class="form-label">last_name</label >
+      {% render_field form.last_name class="form-control" %}
+      <div class="invalid-feedback">{{ form.last_name.errors|first }}</div>
+    </div>
+    <div class="mb-3">
+      <label for="{{ form.password1.id_for_label }}" class="form-label">password1</label >
+      {% render_field form.password1 class="form-control" %}
+      <div class="invalid-feedback">{{ form.password1.errors|first }}</div>
+    </div>
+  <div class="mb-3">
+      <label for="{{ form.password2.id_for_label }}" class="form-label">password2</label >
+      {% render_field form.password2 class="form-control" %}
+      <div class="invalid-feedback">{{ form.password2.errors|first }}</div>
+    </div>
+    <div class="mb-3">
+      <label for="{{ form.is_MANAGER.id_for_label }}" class="form-label">is_MANAGER</label >
+      {% render_field form.is_MANAGER class="form-control" %}
+      <div class="invalid-feedback">{{ form.is_MANAGER.errors|first }}</div>
+    </div>
+   <div class="mb-3">
+      <label for="{{ form.is_RESERVATION.id_for_label }}" class="form-label">is_RESERVATION</label >
+      {% render_field form.is_RESERVATION class="form-control" %}
+      <div class="invalid-feedback">{{ form.is_RESERVATION.errors|first }}</div>
+    </div>
+   <div class="mb-3">
+      <label for="{{ form.is_ACCOUNTANT.id_for_label }}" class="form-label">is_ACCOUNTANT</label >
+      {% render_field form.is_ACCOUNTANT class="form-control" %}
+      <div class="invalid-feedback">{{ form.is_ACCOUNTANT.errors|first }}</div>
+    </div>
+   <div class="mb-3">
+      <label for="{{ form.is_CUSTOMER.id_for_label }}" class="form-label">is_CUSTOMER</label >
+      {% render_field form.is_CUSTOMER class="form-control" %}
+      <div class="invalid-feedback">{{ form.is_CUSTOMER.errors|first }}</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="{{ form.email.id_for_label }}" class="form-label">email</label >
+      {% render_field form.email class="form-control" %}
+      <div class="invalid-feedback">{{ form.email.errors|first }}</div>
+    </div>
+
+
+  </div>
+  <div class="modal-footer">
+    {% if company and user.is_superuser  %}
+
+    <button type="button" class="btn btn-danger" hx-post="{% url 'remove_company' pk=company.pk %}">Remove</button>
+    <span class="flex-grow-1"></span>
+    {% endif %}
+    <button type="button" class="btn btn-secondary"
+     _="on click add .d-none to #add-company-form then remove .d-none from #add-company-button then put '' into <input />'s value"
+
+    data-bs-dismiss="modal">
+      Cancel
+    </button>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </div>
+</form>
+  </div>
+{% endwith %}

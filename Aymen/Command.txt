@@ -1,0 +1,22 @@
+python manage.py runserver
+
+python manage.py migrate
+
+python manage.py makemigrations
+
+
+python manage.py makemigrations  blog users company customer box coin passport employee bus expense account trip reservation ked
+
+
+
+
+
+winpty python manage.py createsuperuser
+
+
+
+
+
+
+
+

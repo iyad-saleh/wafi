@@ -1,0 +1,82 @@
+{% extends 'guest/g_base.html' %}
+{% load i18n %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid page-header">
+    <div class="container">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+            <h3 class="display-4 text-white text-uppercase">TRANSPORT</h3>
+            <div class="d-inline-flex text-white">
+                <p class="m-0 text-uppercase"><a class="text-white" href="/guest/">Home</a></p>
+                <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                <p class="m-0 text-uppercase">TRANSPORT</p>
+            </div>
+        </div>
+    </div>
+</div>
+ <!-- Booking Start -->
+ <div class="container-fluid booking mt-5 pb-5 " >
+    <div class="container pb-5">
+        <div class="bg-light shadow" style="padding: 30px;">
+            <div class="row align-items-center" style="min-height: 60px;">
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="mb-3 mb-md-0">
+                                <select  required class="custom-select px-4"
+                                style="height: 47px;"
+                                name="fromLoc"
+                                hx-trigger="change"
+                                hx-get="{% url 'searchLocation' %}"
+                                hx-target="#To">
+                                <option  value="" selected  >From</option>
+                                {% for location in locations %}
+                                     <option value="{{location.id}}"> {{location}}</option>
+                                {%  endfor %}
+                        </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-3 mb-md-0">
+                                <div id="To" class="mb-3 mb-md-0">
+                                    {% include 'guest/locations.html' %}
+                               </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-3 mb-md-0">
+                                <div class="date" id="date2" data-target-input="nearest">
+                                    <input name="Date" type="date"
+                                           class="form-control p-4 datetimepicker-input"
+                                           placeholder="Travel Date" data-target="#date2"
+                                           data-toggle="datetimepicker"
+                                           value="{% now 'Y-m-d' %}"/>
+                               </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <input name="PassengerCount"
+                            required="true"
+                            type="number" min="1" max="60" class="form-control p-4"
+                            placeholder="Passenger Count" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-primary btn-block" type="submit" style="height: 47px; margin-top: -2px;">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Booking End -->
+
+
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+
+{% endblock content %}

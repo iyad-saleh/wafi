@@ -1,0 +1,2 @@
+[
+{"model": "users.MyUser","pk": 1,"fields": {"username": "root","email":"root@root.com","is_active":"True","is_staff":"True","is_superuser":"True"}}]

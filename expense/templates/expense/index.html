@@ -1,0 +1,38 @@
+   {% extends 'base.html' %}
+
+{% block content %}
+
+
+
+    <div class="container px-3 " height="100%">
+      <div class="px-5 my-5 text-center">
+        <h1>Expense list .</h1>
+        <p>Expense list .</p>
+      </div>
+      <!-- <button hx-get="{% url 'add_expense' %}" hx-target="#dialog" class="btn btn-primary mb-3">
+        Add a Expense
+      </button> --> <div   >
+       {% include 'expense/expense_Type_form.html' with accountForm=accountForm %}
+     </div>
+      <table class="table">
+        <thead>
+          <tr>
+
+          <th>name</th>
+          <th>author</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody hx-trigger="load, expenseListChanged from:body" hx-get="{% url 'expense_list' %}" hx-target="this">
+          <tr>
+            <td class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+{% endblock %}
+

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+  <div class="container-fluid px-5 my-5">
+      <div class="px-5 my-5 text-center">
+        <h1>Ked list .</h1>
+        <p>Ked list .</p>
+      </div>
+      <div  x-data="{ open: false }">
+        <button type="button"
+              class="btn btn-outline-primary btn-icon-text  mb-3"
+              @click="open = ! open" >
+          <span class="mdi mdi-chevron-double-down" x-show="!open"  >ADD NEW</span>
+          <span class="mdi mdi-chevron-double-up" x-show="open"  >Hide Form</span>
+        </button>
+
+
+
+<!-- Add Form  -->
+
+      <form
+            hx-post="{% url 'add_ked' %}"
+            hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'
+            class="modal-content"
+            x-show.transition.duration.2000ms="open"
+            hx-target='#kedList'
+            x-transition
+              >
+        <div class="modal-body container">
+          <div class="mb-3 row">
+            <div class="form-group col-md-4 mb-0">
+              {{  form.title|as_crispy_field }}
+            </div>
+          </div>
+      <div class="mb-3 row">
+
+           <div class="form-group col-md-3 mb-0 mx-5">
+          <button type="submit" class="btn btn-primary"
+           @click="open = ! open"
+
+          >Save</button>
+          </div>
+
+          <div class="form-group col-md-3 mb-0">
+          <button type="reset" value="Reset" class="btn btn-primary">Reset</button>
+          </div>
+
+
+        </div>
+        </div>
+
+      </form>
+
+</div>
+
+
+<!--  -->
+
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+          <th>Title</th>
+          <th>LastUpdate</th>
+          <th>author</th>
+          <th></th>
+          </tr>
+        </thead>
+        <tbody
+        hx-trigger="load, kedListChanged from:body"
+        hx-get="{% url 'ked_list' %}"
+        hx-target="this"
+          id="kedList"
+         >
+          <tr>
+            <td  class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+{% endblock %}

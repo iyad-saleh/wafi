@@ -1,0 +1,176 @@
+{% load i18n %}
+{% load static %}
+{% load aymen_extras %}
+<!-- Topbar  Start -->
+  <div class="container-fluid bg-light pt-3 d-none d-lg-block">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 text-center text-lg-left mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center ">
+                    <p><i class="fa fa-envelope mr-2"></i>اياد حسين الصالح</p>
+                    <p class="text-body px-3">|</p>
+                    <p><i class="fa fa-phone-alt mr-2"></i>00963-96-2222222</p>
+
+                </div>
+            </div>
+            <div class="col text-center text-lg-left">
+
+                <div class="d-inline-flex align-items-center">
+                    <h1 class="m-0 text-primary"><span class="text-dark">TRAVEL O</span>N line</h1>
+
+                </div>
+
+            </div>
+
+                <form action="#" method="post" class="language-picker__form"> {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ redirect_to }}">
+
+                    <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Select Language</a>
+                    <div class="dropdown-menu border-0 rounded-0 m-0">
+                       {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% for lang in LANGUAGES %}
+
+                        <a  class="dropdown-item" href="/{{lang.0}}/">
+                      {% with "img/flag/"|addstr:lang.0|addstr:".svg" as static_svg %}
+                            <img class="w-50 h-50"
+                            src="{% static static_svg %}"
+                            alt="{{lang.0}}" >
+                            {% endwith %}  {{lang.1}}
+                        </a>
+                        {% endfor %}
+
+                    </div>
+                </div>
+
+                </form>
+              </div>
+
+
+    </div>
+</div>
+
+<!-- Topbar End -->
+
+
+<!-- Navbar Start -->
+<div class="container-fluid position-relative nav-bar p-0">
+    <div class="container-lg position-relative p-0 px-lg-0" style="z-index: 9;">
+        <nav class=" navbar-expand-xl bg-light navbar-light shadow-lg">
+             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-6" id="navbarCollapse">
+                <div class="navbar-nav ml-9 py-6 ">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger
+                        {% if navbar == 'home' %} active {% endif %}"
+                        href="{% url 'home' %}">
+                        Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger
+                        {% if navbar == 'trip' %} active {% endif %}"
+                        href="{% url 'trip' %}">
+                        Trip
+                    </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger
+
+                        {% if navbar == 'flight' %} active {% endif %}"
+                        href="{% url 'flight' %}">
+                        Flight
+                    </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger
+                        {% if navbar == 'transport' %} active {% endif %}" href="{% url 'transport' %}">
+                        Transport
+
+                        </a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger
+                        {% if navbar == 'sea' %} active {% endif %}"
+                        href="{% url 'sea' %}" >
+                        Ferry
+                    </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger
+                        {% if navbar == 'visa' %} active {% endif %}"
+                        href="{% url 'visa' %}">
+                        Visa
+                    </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger
+                        {% if navbar == 'hotel' %} active {% endif %}"
+                        href="{% url 'hotel' %}">
+                        Hotel
+                    </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger
+                        {% if navbar == 'insurance' %} active {% endif %}"
+                        href="{% url 'insurance' %}">
+                        Insurance
+                    </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger
+                        {% if navbar == 'document' %} active {% endif %}"
+                        href="{% url 'document' %}">
+                        Travel Document
+                    </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger
+                        {% if navbar == 'shipping' %} active {% endif %}"
+                        href="{% url 'shipping' %}">
+                        Shipping
+                    </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger
+                        {% if navbar == 'about' %} active {% endif %}"
+                        href="{% url 'about' %}">
+                        About us
+                    </a>
+                    </li>
+
+
+                    {% if user.is_authenticated %}
+
+                    {% if user.is_superuser or user.is_staff or  user.is_MANAGER or user.is_RESERVATION or user.is_ACCOUNTANT  or user.is_CUSTOMER %}
+
+                      <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger"
+                        href="{% url 'dashboard' %}">dashboard</a>
+                      </li>
+
+                   {% endif %}
+
+                     <li class="nav-item">
+                        <a href="{% url 'logout' %}" class="nav-link ">
+                          <button  class="btn btn-primary rounded " >Sign Out</button>
+                            <!-- <i class="fas fa-sign-out-alt nav-icon"></i> -->
+                        </a>
+                      </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a href="{% url 'login' %}" class="nav-link ">
+                            <button  class="btn btn-primary rounded" >Sign In</button>
+                          <!-- <i class="fas fa-sign-in-alt nav-icon"></i> -->
+                        </a>
+                      </li>
+
+                    {% endif %}
+
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
