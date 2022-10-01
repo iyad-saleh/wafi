@@ -11,7 +11,6 @@ from customer.models import Customer
 from ked.models import Ked, Journal
 from account.models import Account
 
-from django.views.decorators.clickjacking import xframe_options_sameorigin
 # from django.contrib.auth.decorators import user_passes_test
 # is_MANAGER
 # is_RESERVATION
@@ -19,15 +18,15 @@ from django.views.decorators.clickjacking import xframe_options_sameorigin
 # is_CUSTOMER
 # @user_passes_test(lambda u: u.is_superuser)
 
-@xframe_options_sameorigin
+@login_required
 def index(request):
     if request.user.is_MANAGER or request.user.is_RESERVATION:
         company = request.user.company
-        form = ReservationForm()
-        form.fields['customer'].queryset = Customer.objects.filter(client=True).filter(company=company)
-        form.fields['vendor'].queryset = Customer.objects.filter(supplier=True).filter(company=company)
+        # form = ReservationForm()
+        # form.fields['customer'].queryset = Customer.objects.filter(client=True).filter(company=company)
+        # form.fields['vendor'].queryset   = Customer.objects.filter(supplier=True).filter(company=company)
 
-        return render(request, 'reservation/index.html',{'form': form,})
+        return render(request, 'reservation/index.html')
     return HttpResponse(
         status=403,
         headers={
@@ -40,10 +39,24 @@ def index(request):
 # @user_passes_test(lambda u: u.is_superuser)
 def reservation_list(request):
     company = request.user.company
-    reservations = Reservation.objects.filter(company=company).order_by('-id')
+    reservations = Reservation.objects.filter(company=company)
     return render(request, 'reservation/reservation_list.html', {
         'reservations':reservations
     })
+
+
+# def reservation_trip(request):
+#     company = request.user.company
+#     form = ReservationForm()
+#     form.fields['customer'].queryset = Customer.objects.filter(client=True).filter(company=company)
+#     form.fields['vendor'].queryset   = Customer.objects.filter(supplier=True).filter(company=company)
+#     reservations = Reservation.objects.filter(company=company).filter(reservation_type='10')
+#     return render(request, 'reservation/reservation_trip.html', {
+#         'reservations':reservations
+#     })
+
+
+
 
 # @user_passes_test(lambda u: u.is_superuser)
 def add_reservation(request):

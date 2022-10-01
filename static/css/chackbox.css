@@ -1,0 +1,155 @@
+
+#customerch {
+    display: none;
+  }
+  .chcust {
+    background-image: url(../../../static/img/ch_img/icons8-inquiry-96.png);
+    background-position: left center;
+    background-size: auto 100%;
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+  }
+  #customerch:checked + .chcust {
+    background-image: url(../../../static/img/ch_img/icons8-inquiry-96color.png);
+  }
+
+  
+  #bacch {
+    display: none;
+  }
+  .chbac {
+    background-image: url(../../../static/img/ch_img/icons8-suitcase-100.png);
+    background-position: left center;
+    background-size: auto 100%;
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+  }
+  #bacch:checked + .chbac {
+    background-image: url(../../../static/img/ch_img/icons8-suitcase-96.png);
+  }
+
+
+
+  #airch {
+    display: none;
+  }
+  .chair {
+    background-image: url(../../../static/img/ch_img/icons8-airplane-64.png);
+    background-position: left center;
+    background-size: auto 100%;
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+  }
+  #airch:checked + .chair {
+    background-image: url(../../../static/img/ch_img/icons8-airplane-64c.png);
+  }
+
+
+  #tranch {
+    display: none;
+  }
+  .chtran {
+    background-image: url(../../../static/img/ch_img/icons8-bus-100.png);
+    background-position: left center;
+    background-size: auto 100%;
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+  }
+  #tranch:checked + .chtran {
+    background-image: url(../../../static/img/ch_img/icons8-bus-96.png);
+  }
+
+  #seach {
+    display: none;
+  }
+  .chsea {
+    background-image: url(../../../static/img/ch_img/icons8-water-transportation-100.png);
+    background-position: left center;
+    background-size: auto 100%;
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+  }
+  #seach:checked + .chsea {
+    background-image: url(../../../static/img/ch_img/icons8-water-transportation-96.png);
+  }
+
+  #visach {
+    display: none;
+  }
+  .chvisa {
+    background-image: url(../../../static/img/ch_img/icons8-travel-visa-96\(1\).png);
+    background-position: left center;
+    background-size: auto 100%;
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+  }
+  #visach:checked + .chvisa {
+    background-image: url(../../../static/img/ch_img/icons8-travel-visa-96.png);
+   
+  }
+
+
+  #hotelch {
+    display: none;
+  }
+  .chhotel {
+    background-image: url(../../../static/img/ch_img/icons8-hotel-bed-96\(1\).png);
+    background-position: left center;
+    background-size: auto 100%;
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+  }
+  #hotelch:checked + .chhotel {
+    background-image: url(../../../static/img/ch_img/icons8-hotel-bed-96.png);
+  }
+
+  #insurancech {
+    display: none;
+  }
+  .chinsurance {
+    background-image: url(../../../static/img/ch_img/icons8-health-checkup-100.png);
+    background-position: left center;
+    background-size: auto 100%;
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+  }
+  #insurancech:checked + .chinsurance {
+    background-image: url(../../../static/img/ch_img/icons8-health-checkup-96.png);
+  }
+
+  #docch {
+    display: none;
+  }
+  .chdoc {
+    background-image: url(../../../static/img/ch_img/icons8-passport-100.png);
+    background-position: left center;
+    background-size: auto 100%;
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+  }
+  #docch:checked + .chdoc {
+    background-image: url(../../../static/img/ch_img/icons8-passport-96.png);
+  }
+  #shch {
+    display: none;
+  }
+  .chsh {
+    background-image: url(../../../static/img/ch_img/icons8-in-transit-100.png);
+    background-position: left center;
+    background-size: auto 100%;
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+  }
+  #shch:checked + .chsh {
+    background-image: url(../../../static/img/ch_img/icons8-in-transit-96.png);
+  }

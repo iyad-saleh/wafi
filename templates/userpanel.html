@@ -16,7 +16,10 @@
 				<div class="collapse navbar-collapse" id="WafiAdminNavbar">
 					<ul class="navbar-nav">
 						<li class="nav-item dropdown">
-							<a class="nav-link   {% if navbar == 'home' %} active-page {% endif %}" href="{% url 'dashboard' %}" id="dashboardsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<a class="nav-link
+							{% if navbar == 'home' %} active-page {% endif %}"
+							href="{% url 'dashboard' %}"
+						>
 								<i class="icon-home nav-icon"  ></i>
 								الرئيسية
 							</a>

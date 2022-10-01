@@ -11,13 +11,12 @@
     <!-- Icomoon Font Icons css -->
     <link rel="stylesheet" href="{% static 'fonts/style.css' %}">
     <link href="{% static 'vendor/datatables/buttons.bs.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/chackbox.css' %}" rel="stylesheet" />
+
+
 
 {% endblock stylesheets %}
-
-
-
   {% block content %}
-
       <div  x-data="{ open: false }">
         <button type="button"
               class="btn btn-outline-primary btn-icon-text  mb-3"
@@ -55,105 +54,51 @@
                 <div class="form-group col-md-4 mb-0">
                   {{  form.tradeRecord|as_crispy_field  }}
               </div>
+              <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">
+                <div class="card">
+                  <div class="card-header">
+                    <div class="card-title">
+                      تصنيف الشركة
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="custom-btn-group" style=" justify-content:space-between;">
+              <input id="customerch"  name="client" type="checkbox">
+              <label for="customerch" class="chcust" ></label>
 
+              <input id="bacch" name="backagecompany" type="checkbox">
+              <label for="bacch" class="chbac"></label>
 
-              <div class="form-group col-md-8 mb-0">
-                <div class="card-header">
-                  <div class="card-title " >تصنيف الشركة</div>
-                </div>
-                <div class="row gutters">
-                  <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"> -->
-                    <!-- <div class="card"> -->
-                        <div class="form-group col-md-4 mb-0">
-                             <div class="card-body">
-                             <div class="custom-control custom-switch">
-                                  <input type="checkbox" class="custom-control-input"
+              <input id="airch"  name="aircompany" type="checkbox">
+              <label for="airch" class="chair"></label>
 
-                                  name="client"
-                                  id="customSwitch1">
-                                  <label class="custom-control-label" for="customSwitch1">زبون</label>
-                              </div>
-                             <div class="mb-3"></div>
-                             <div class="custom-control custom-switch">
-                                  <input type="checkbox" class="custom-control-input"
+              <input id="tranch"  name="transportcompany" type="checkbox" >
+              <label for="tranch" class="chtran" ></label>
 
-                                  name="aircompany"
-                                  id="customSwitch2">
-                                  <label class="custom-control-label" for="customSwitch2">شركة طيران</label>
-                             </div>
-                             <div class="mb-3"></div>
-                             <div class="custom-control custom-switch">
-                                  <input type="checkbox" class="custom-control-input"
+              <input id="seach"  name="seacompany" type="checkbox" >
+              <label for="seach" class="chsea" ></label>
 
-                                  name="transportcompany"
-                                  id="customSwitch3">
-                                  <label class="custom-control-label" for="customSwitch3">شركة نقل بري</label>
-                             </div>
-                             <div class="mb-3"></div>
-                             <div class="custom-control custom-switch">
-                                  <input type="checkbox" class="custom-control-input"
+              <input id="visach" name="visacompany" type="checkbox" >
+              <label for="visach" class="chvisa" ></label>
 
-                                  name="seacompany"
-                                  id="customSwitch4">
-                                  <label class="custom-control-label" for="customSwitch4">شركة نقل بحري</label>
-                              </div>
-                              <div class="mb-3"></div>
-                              <div class="custom-control custom-switch">
-                                   <input type="checkbox" class="custom-control-input"
+              <input id="hotelch"  name="hotelcompany" type="checkbox" >
+              <label for="hotelch" class="chhotel" ></label>
 
-                                   name="visacompany"
-                                   id="customSwitch5">
-                                   <label class="custom-control-label" for="customSwitch5">تأشيرات</label>
-                               </div>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-4 mb-0">
-                             <div class="card">
-                              <div class="custom-control custom-switch">
-                                   <input type="checkbox" class="custom-control-input"
+              <input id="insurancech"  name="insurancecompany" type="checkbox" >
+              <label for="insurancech" class="chinsurance" ></label>
 
-                                   name="hotelcompany"
-                                   id="customSwitch6">
-                                   <label class="custom-control-label" for="customSwitch6">فنادق</label>
-                              </div>
-                              <div class="mb-3"></div>
-                              <div class="custom-control custom-switch">
-                                   <input type="checkbox" class="custom-control-input"
+              <input id="docch"  name="documentcompany" type="checkbox" >
+              <label for="docch" class="chdoc" ></label>
 
-                                   name="sheapcompany"
-                                   id="customSwitch7">
-                                   <label class="custom-control-label" for="customSwitch7">الرحلات</label>
-                              </div>
-                              <div class="mb-3"></div>
-                              <div class="custom-control custom-switch">
-                                   <input type="checkbox" class="custom-control-input"
-
-                                   name="insurancecompany"
-                                   id="customSwitch8">
-                                   <label class="custom-control-label" for="customSwitch8">شركة التأمين الصحي</label>
-                              </div>
-                              <div class="mb-3"></div>
-                              <div class="custom-control custom-switch">
-                                   <input type="checkbox" class="custom-control-input"
-
-                                   name="documentcompany"
-                                   id="customSwitch9">
-                                   <label class="custom-control-label" for="customSwitch9">شركة مستندات السفر </label>
-                              </div>
-                              <div class="mb-3"></div>
-                              <div class="custom-control custom-switch">
-                                   <input type="checkbox" class="custom-control-input"
-
-                                   name="backagecompany"
-                                   id="customSwitch10">
-                                   <label class="custom-control-label" for="customSwitch10">شركة شحن </label>
-                              </div>
-                            </div>
-                        </div>
-                    <!-- </div> -->
-                  <!-- </div> -->
+              <input id="shch"  name="sheapcompany" type="checkbox" >
+              <label for="shch" class="chsh" ></label>
+                    </div>
+                  </div>
                 </div>
               </div>
+
+
+
               <div class="mb-3 row"></div>
               <div class="form-group col-md-3 mb-0 mx-5">
               <button type="submit" class="btn btn-primary" @click="open = ! open">Save</button>
@@ -233,9 +178,10 @@
   $(function () {
     var table = $("#table1").DataTable({
       "responsive": true,
-      // "lengthChange": true,
-        fixedHeader: true,
+      "lengthChange": true,
+
       "autoWidth": false,
+       "lengthMenu": [ 5,10, 25, 50, 75, 100 ],
       "columnDefs": [
     { "width": "5%", "targets": 0 }
                ],

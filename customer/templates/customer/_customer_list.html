@@ -1,0 +1,75 @@
+
+{% for customer in customers %}
+<tr id="customer-{{ customer.pk }}" class="customer-row">
+
+    <td>{{ forloop.counter }}</td>
+
+    <td>{{ customer.account.name  }}</td>
+    <td>
+<div class="avatar sm" >
+        <img class="rounded"
+        src="{{ customer.logo.url }}">
+</div>
+    </td>
+    <td>
+
+
+{% if  customer.client %}
+<span class="badge badge-pill badge-primary mb-1"> client </span>
+
+{% endif %}
+{% if  customer.aircompany %}
+<span class="badge badge-pill badge-secondary mb-1"> aircompany</span>
+
+{% endif %}
+{% if  customer.transportcompany %}
+<span class="badge badge-pill badge-success mb-1"> transportcompany </span>
+
+{% endif %}
+{% if  customer.seacompany %}
+<span class="badge badge-pill badge-danger mb-1"> seacompany </span>
+
+{% endif %}
+{% if  customer.visacompany %}
+<span class="badge badge-pill badge-warning mb-1"> visacompany </span>
+
+{% endif %}
+{% if  customer.backagecompany %}
+<span class="badge badge-pill badge-info mb-1"> backagecompany
+    </span>
+{% endif %}
+{% if  customer.hotelcompany %}
+<span class="badge badge-pill badge-light mb-1"> hotelcompany
+    </span>
+{% endif %}
+{% if  customer.insurancecompany %}
+<span class="badge badge-pill badge-dark mb-1"> insurancecompany
+    </span>
+{% endif %}
+{% if  customer.documentcompany %}
+<span class="badge badge-primary mb-1"> documentcompany
+    </span>
+{% endif %}
+{% if  customer.sheapcompany %}
+<span class="badge badge-secondary mb-1"> sheapcompany
+    </span>
+{% endif %}
+    </td>
+    <td>{{ customer.address|truncatechars:7  }}</td>
+    <td>{{ customer.phoneNumber1|truncatechars:7  }}</td>
+    <td>{{ customer.tradeRecord|truncatechars:7  }}</td>
+    <td>{{ customer.email|truncatechars:7  }}</td>
+    <td>{{ customer.webSite|truncatechars:7  }}</td>
+    <td>{{ customer.updated_at|date:"Y-m-d"   }}</td>
+    <td>{{ customer.author  }}</td>
+
+    <td>
+        <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_customer' pk=customer.pk %}" hx-target="#dialog">Edit</button>
+    </td>
+
+</tr>
+{% endfor %}
+
+
+
+

@@ -1,0 +1,16 @@
+
+
+#trigger1 {
+    display: none;
+  }
+  .checker1 {
+    background-image: url(../../../static/img/icons8-hotel-bed-96.png);
+    background-position: left center;
+    background-size: auto 100%;
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+  }
+  #trigger1:checked + .checker1 {
+    background-image: url(../../../static/img/icons8-hotel-bed-926.png);
+  }

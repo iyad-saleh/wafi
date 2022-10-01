@@ -1,5 +1,21 @@
 {% extends 'base.html' %}
+  {% load static %}
 {% load crispy_forms_tags %}
+
+{% block title %} Reservation{% endblock %}
+{% block stylesheets %}
+
+    <link rel="stylesheet" href="{% static 'vendor/datatables/dataTables.bs4.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendor/datatables/dataTables.bs4-custom.css' %}" />
+    <!-- Icomoon Font Icons css -->
+    <link rel="stylesheet" href="{% static 'fonts/style.css' %}">
+    <link href="{% static 'vendor/datatables/buttons.bs.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/chackbox.css' %}" rel="stylesheet" />
+
+
+
+{% endblock stylesheets %}
+
 {% block content %}
 
 
@@ -12,8 +28,8 @@
   </symbol>
 </svg>
 <div class="container "  >
-  <h1>Reservation list .</h1>
-    <div  x-data="{ open: false }">
+  <h1>Reservation list</h1>
+    <!-- <div  x-data="{ open: false }">
 
 
 
@@ -29,14 +45,122 @@
 
 
 
-        <form
-        hx-post="{% url 'add_reservation' %}"
-        hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'
-        class="modal-content"
-         x-show.transition.duration.2000ms="open"
-          @click.outside="open = false"
-          x-transition
+
+   </div> -->
+
+
+
+
+      <div class="table-container mb-2 mx-auto"  id="example1_wrapper">
+        <div class="t-header"> Reservation</div>
+           <div class="table-responsive">
+            <table id="table1" class="table custom-table ">
+
+            <thead>
+          <tr   >
+          <th>title</th>
+          <th>reservation_type</th>
+          <th>Date</th>
+          <th>PNR</th>
+          <th>trip</th>
+          <th>vendor</th>
+          <th>customer</th>
+          <th>pay_price</th>
+          <th>pay_coin</th>
+          <th>sell_price</th>
+          <th>sell_coin</th>
+          <th>status</th>
+          <th>author</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody
+        hx-trigger="load, reservationListChanged from:body"
+        hx-get="{% url 'reservation_list' %}"
+        hx-target="this"
+
         >
+          <tr  >
+            <td class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+
+
+
+
+{% endblock %}
+{% block javascripts %}
+
+<!-- Data Tables -->
+    <script src="{% static 'vendor/datatables/dataTables.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/dataTables.bootstrap.min.js' %}"></script>
+
+    <!-- Custom Data tables -->
+    <script src="{% static 'vendor/datatables/custom/custom-datatables.js' %}"></script>
+    <script src="{% static 'vendor/datatables/custom/fixedHeader.js' %}"></script>
+
+    <!-- Download / CSV / Copy / Print -->
+    <script src="{% static 'vendor/datatables/buttons.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/jszip.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/pdfmake.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/vfs_fonts.js' %}"></script>
+    <script src="{% static 'vendor/datatables/html5.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/buttons.print.min.js' %}"></script>
+
+
+
+<script>
+  $(function () {
+    var table = $("#table1").DataTable({
+      "responsive": true,
+      "lengthChange": true,
+
+      "autoWidth": false,
+       "lengthMenu": [ 5,10, 25, 50, 75, 100 ],
+      "columnDefs": [
+    { "width": "5%", "targets": 0 }
+               ],
+     dom: 'Bflrtp',
+      "paging": true,
+      "searching": true,
+      // "ordering": true,
+      "bInfo": true,
+      "bSort": true,
+      "fixedHeader": true,
+      "iDisplayLength": 10,
+     buttons: [
+      'copyHtml5',
+      'excelHtml5',
+      'csvHtml5',
+      'pdfHtml5',
+      'print'
+    ],
+    });
+
+
+});
+</script>
+
+
+{% endblock javascripts %}
+
+
+
+
+<!--
+      <form
+          hx-post="{% url 'add_reservation' %}"
+          hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'
+          class="modal-content"
+           x-show.transition.duration.2000ms="open"
+            @click.outside="open = false"
+            x-transition
+          >
          <div class="modal-body container">
             <div class="mb-3 row">
               <div class="form-group col-md-3 mb-0">
@@ -93,51 +217,6 @@
            ADD
          </button>
           </div>
-        </form>
-   </div>
-    <!--   <button hx-get="{% url 'add_reservation' %}" hx-target="#dialog" class="btn btn-primary mb-3">
-        Add a Reservation
-      </button> -->
-
-
-
-      <table class="table" id="MyTable">
-        <thead>
-          <tr>
-          <th>title</th>
-          <th>reservation_type</th>
-          <th>Date</th>
-          <th>PNR</th>
-          <th>trip</th>
-          <th>vendor</th>
-          <th>customer</th>
-          <th>pay_price</th>
-          <th>pay_coin</th>
-          <th>sell_price</th>
-          <th>sell_coin</th>
-          <th>status</th>
-          <th>author</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody
-        hx-trigger="load, reservationListChanged from:body"
-        hx-get="{% url 'reservation_list' %}"
-        hx-target="this"
-
-        >
-          <tr  >
-            <td class="spinner-border" role="status">
-              <span class="visually-hidden">Loading...</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-
-
-
-{% endblock %}
+        </form> -->
 
 
