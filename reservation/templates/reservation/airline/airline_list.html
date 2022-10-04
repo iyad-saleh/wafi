@@ -1,0 +1,30 @@
+{% for reservation in reservations %}
+<tr id="reservation-{{ reservation.pk }}" class="reservation-row "  >
+
+        <td> reservation.title</td>
+        <td> reservation.Date</td>
+        <td> reservation.supplier</td>
+        <td> reservation.customer</td>
+        <td> reservation.pay_price</td>
+        <td> reservation.pay_coin</td>
+        <td> reservation.sell_price</td>
+        <td> reservation.sell_coin</td>
+        <td> reservation.status</td>
+        <td> reservation.PNR</td>
+        <td> reservation.departure_date</td>
+        <td> reservation.airline_company</td>
+        <td> reservation.flight_no</td>
+        <td> reservation.departure</td>
+        <td> reservation.arrival</td>
+        <td> reservation.roundtrip</td>
+        <td> reservation.passport</td>
+        <td> reservation.flight_type</td>
+        <td> reservation.return_date</td>
+
+  <td>
+    <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_airline' pk=reservation.pk %}" hx-target="#dialog">Edit</button>
+  </td>
+</tr>
+{% empty %}
+            <tr><td  colspan="7" > No reservation </td></tr>
+{%  endfor %}

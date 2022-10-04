@@ -25,7 +25,7 @@ class Customer(BaseModel, SoftDeleteModel):
     hotelcompany    = models.BooleanField(default=False)
     insurancecompany    = models.BooleanField(default=False)
     documentcompany    = models.BooleanField(default=False)
-    sheapcompany    = models.BooleanField(default=False)
+    shippingcompany    = models.BooleanField(default=False)
     logo = models.ImageField(default='default.jpg', upload_to='Customer_pics', blank=True, null=True)
     address = models.CharField(max_length=500, blank=True, null=True)
     phoneNumber1 = models.CharField( max_length = 25, unique = True, blank=True, null=True)

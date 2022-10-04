@@ -17,7 +17,7 @@
 
 {% endblock stylesheets %}
   {% block content %}
-      <div  x-data="{ open: false }">
+      <div  x-data="{ open: false }"   class="container">
         <button type="button"
               class="btn btn-outline-primary btn-icon-text  mb-3"
               @click="open = ! open" >
@@ -32,28 +32,36 @@
                 hx-target='#customerList'
                 x-transition>
             <div class="modal-body container ">
-              <div class="mb-4 row">
-                <div class="form-group col-md-4 mb-0">
+              <div class="row gutters">
+                <div class="form-group col-md-3 mb-0">
                   {{  accountForm.name|as_crispy_field }}
                 </div>
-              <div class="form-group col-md-4 mb-0">
-                  {{  form.email|as_crispy_field }}
+                <div class="form-group col-md-3 mb-0">
+                    {{  form.email|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-2 mb-0">
+                        {{  form.logo|as_crispy_field  }}
+                </div>
+                <div class="preview col-md-3 mb-0   avatar md">
+                    <p>No logo</p>
+                </div>
               </div>
-            <div class="form-group col-md-4 mb-0">
-                    {{  form.logo|as_crispy_field  }}
-            </div>
-            <div class="form-group col-md-4 mb-0">
+            <div class="row gutters">
+            <div class="form-group col-md-3 mb-0">
               {{  form.address|as_crispy_field  }}
               </div>
-              <div class="form-group col-md-4 mb-0">
+              <div class="form-group col-md-3 mb-0">
                 {{  form.phoneNumber1|as_crispy_field  }}
                 </div>
-                <div class="form-group col-md-4 mb-0">
+                <div class="form-group col-md-3 mb-0">
                   {{  form.webSite|as_crispy_field }}
                 </div>
-                <div class="form-group col-md-4 mb-0">
+                <div class="form-group col-md-3 mb-0">
                   {{  form.tradeRecord|as_crispy_field  }}
               </div>
+
+            </div>
+              <div class="row gutters">
               <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">
                 <div class="card">
                   <div class="card-header">
@@ -90,16 +98,17 @@
               <input id="docch"  name="documentcompany" type="checkbox" >
               <label for="docch" class="chdoc" ></label>
 
-              <input id="shch"  name="sheapcompany" type="checkbox" >
+              <input id="shch"  name="shippingcompany" type="checkbox" >
               <label for="shch" class="chsh" ></label>
                     </div>
                   </div>
                 </div>
               </div>
+              </div>
 
 
 
-              <div class="mb-3 row"></div>
+               <div class="row gutters">
               <div class="form-group col-md-3 mb-0 mx-5">
               <button type="submit" class="btn btn-primary" @click="open = ! open">Save</button>
               </div>
@@ -205,6 +214,77 @@
 
 });
 </script>
+  <script>
+    const input = document.querySelector('input[type=file]');
+    const preview = document.querySelector('.preview');
+    // input.style.opacity = 0;
 
+    input.addEventListener("change", updateImageDisplay);
+
+    function updateImageDisplay() {
+
+      while(preview.firstChild) {
+        preview.removeChild(preview.firstChild);
+      }
+
+      const curFiles = input.files;
+      if(curFiles.length === 0) {
+        const para = document.createElement('p');
+        para.textContent = 'No logo';
+        preview.appendChild(para);
+      } else {
+        // const list = document.createElement('ol');
+        // preview.appendChild(list);
+
+        for(const file of curFiles) {
+          // const listItem = document.createElement('li');
+          // const para = document.createElement('p');
+
+          if(validFileType(file)) {
+            // para.textContent = `File name ${file.name}, file size ${returnFileSize(file.size)}.`;
+            const image = document.createElement('img');
+            image.src = URL.createObjectURL(file);
+            image.classList.add("half-circle");
+            image.style.cssText ="width: 30%";
+            preview.appendChild(image);
+            // listItem.appendChild(para);
+          } else {
+            // para.textContent = `File name ${file.name}: Not a valid file type. Update your selection.`;
+            // listItem.appendChild(para);
+          }
+
+          // list.appendChild(listItem);
+        }
+      }
+    }
+
+// https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types
+    const fileTypes = [
+        'image/apng',
+        'image/bmp',
+        'image/gif',
+        'image/jpeg',
+        'image/pjpeg',
+        'image/png',
+        'image/svg+xml',
+        'image/tiff',
+        'image/webp',
+        `image/x-icon`
+    ];
+
+    function validFileType(file) {
+      return fileTypes.includes(file.type);
+    }
+
+    function returnFileSize(number) {
+      if(number < 1024) {
+        return number + 'bytes';
+      } else if(number > 1024 && number < 1048576) {
+        return (number/1024).toFixed(1) + 'KB';
+      } else if(number > 1048576) {
+        return (number/1048576).toFixed(1) + 'MB';
+      }
+    }
+  </script>
 
 {% endblock javascripts %}

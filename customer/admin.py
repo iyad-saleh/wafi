@@ -25,7 +25,7 @@ class CustomerAdmin(admin.ModelAdmin):
                 'hotelcompany',
                 'insurancecompany',
                 'documentcompany',
-                'sheapcompany',
+                'shippingcompany',
                 'author',
                 )
     list_filter = (

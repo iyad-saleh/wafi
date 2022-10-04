@@ -23,17 +23,13 @@
          {{  form.email|as_crispy_field }}
      </div>
       <div class="form-group col-md-3 mb-0">
-         <input type="file" name="logo" class="form-control" accept="image/*" id="id_logo">
+         <input  type="file" name="logo" class="form-control" accept="image/*" id="id_logo">
      </div>
-    <div class="form-group col-md-3 mb-0 avatar xxl">
-      {% if customer.logo  %}
-      <img class="half-circle" src="{{ customer.logo.url }}"  >
-      {% else %}
-         <p>No photo</p>
-      {% endif %}
+    <div class="form-group col-md-1 mb-0 updatepreview avatar md">
+         {% if customer.logo  %}
+            <img class="half-circle" src="{{ customer.logo.url }}"  >
+         {% endif %}
     </div>
-
-
     </div>
 
     <div class="mb-3 row">
@@ -113,7 +109,7 @@
                               <div class="mb-3"></div>
                               <div class="custom-control custom-switch">
                                    <input type="checkbox" class="custom-control-input"
-                                   name="sheapcompany" {% if form.sheapcompany.value %} checked  {% endif %}
+                                   name="shippingcompany" {% if form.shippingcompany.value %} checked  {% endif %}
 
                                    id="customSwitch17">
                                    <label class="custom-control-label" for="customSwitch17">الرحلات</label>

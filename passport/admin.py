@@ -1,32 +1,44 @@
 from django.contrib import admin
 
-from .models import Passport
+from .models import Passport, Passenger
 from import_export.admin import ImportExportModelAdmin
 
 
+
+@admin.register(Passenger)
+class PassengerAdmin(ImportExportModelAdmin):
+
+    list_display = ( 'id',
+                    'first_name',
+                    'last_name',
+                    'father_name',
+                    'mother_name',
+                    'birth_date',
+                    'birth_place',
+                    'national_number',
+                    'nationality',
+                    'age',
+                    'img',
+                    'gender',
+                    'phone',
+                    'mobile',
+                    'email',
+                    'author',)
 
 @admin.register(Passport)
 class PassportAdmin(ImportExportModelAdmin):
 
     list_display = ( 'id',
-            'first_name',
-            'last_name',
-            'father_name',
-            'mother_name',
-            'birth_date',
-            'birth_place',
+
             'passport_number',
             'issue_date',
             'issue_end',
-            'national_number',
             'photo',
-            'nationality',
-            'sex',
             'issue_place',
             'author',
+
                 )
     list_filter = (
-                'nationality',
                 'author',
                 )
 

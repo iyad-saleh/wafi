@@ -1,5 +1,5 @@
 ﻿/*
-	Common 
+	Common
 */
 
 .wizard,
@@ -73,7 +73,7 @@
 	width: auto;
 }
 
-.wizard > .steps > ul > li , 
+.wizard > .steps > ul > li ,
 .wizard > .actions > ul > li {
 	float: left;
 }
@@ -121,7 +121,7 @@
 	background: #ffffff;
 	display: block;
 	margin: 0;
-	min-height: 100px;
+	min-height: 200px;
 	overflow: hidden;
 	position: relative;
 	width: auto;

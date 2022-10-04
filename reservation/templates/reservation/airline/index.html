@@ -1,0 +1,333 @@
+{% extends 'base.html' %}
+  {% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %} Airline {% endblock %}
+{% block stylesheets %}
+
+    <link rel="stylesheet" href="{% static 'vendor/wizard/jquery.steps.css' %}" />
+
+
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="container "  >
+  <h1>Airline Reservation list</h1>
+    <div  x-data="{ open: false }">
+
+
+
+
+        <div  x-data="{ open: false }">
+          <button type="button"
+                class="btn btn-outline-primary btn-icon-text  mb-3"
+                @click="open = ! open" >
+            <span class="mdi mdi-chevron-double-down" x-show="!open"  >سجل جديد</span>
+            <span class="mdi mdi-chevron-double-up" x-show="open"  >اخفاء</span>
+          </button>
+
+<!-- Row start -->
+          <div class="row gutters"  x-show="open">
+
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <form hx-encoding ="multipart/form-data"
+                hx-post="{% url 'add_customer' %}"
+                hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'
+                class="modal-content"
+                x-show.transition.duration.2000ms="open"
+                hx-target='#customerList'
+                x-transition>
+              <div id="example-form">
+
+                <h3> Status</h3>
+                  <section>
+                    <div class="row gutters">
+                      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+                        <div class="form-group">
+
+                        {{ form.airline_company|as_crispy_field }}
+                      </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+                      <div class="form-group">
+
+                        {{ form.title|as_crispy_field }}
+                      </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+                      <div class="form-group">
+
+                        {{ form.Date|as_crispy_field }}
+                      </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+                      <div class="form-group">
+
+                        {{ form.status|as_crispy_field }}
+                      </div>
+                    </div>
+
+                   </div>
+                   </section>
+                  <h3> Supplier& Customer</h3>
+                  <section>
+                    <div class="row gutters">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                      <div class="form-group">
+
+                        {{ form.supplier|as_crispy_field }}
+                      </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                      <div class="form-group">
+
+                        {{ form.pay_price|as_crispy_field }}
+                      </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                      <div class="form-group">
+
+                        {{ form.pay_coin|as_crispy_field }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row gutters">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                      <div class="form-group">
+
+                        {{ form.customer|as_crispy_field }}
+                      </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                      <div class="form-group">
+
+                        {{ form.sell_price|as_crispy_field }}
+                      </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                      <div class="form-group">
+
+                        {{ form.sell_coin|as_crispy_field }}
+                      </div>
+                    </div>
+
+                  </div>
+
+                </section>
+
+
+                <h3> flight Information</h3>
+                  <section>
+                   <div class="row gutters">
+                     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+                       <div class="form-group">
+
+                        {{ form.flight_no|as_crispy_field }}
+                       </div>
+                      </div>
+                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                      <div class="form-group">
+
+                        {{ form.PNR|as_crispy_field }}
+                      </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+                      <div class="form-group">
+
+                        {{ form.flight_type|as_crispy_field }}
+                      </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-12">
+                      <div class="form-group">
+
+                        {{ form.roundtrip|as_crispy_field }}
+                      </div>
+                  </div>
+                  </div>
+                   <div class="row gutters">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+                      <div class="form-group">
+
+                        {{ form.departure|as_crispy_field }}
+                      </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+                      <div class="form-group">
+
+                        {{ form.departure_date|as_crispy_field }}
+                      </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+                      <div class="form-group">
+
+                        {{ form.arrival|as_crispy_field }}
+                      </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+                      <div class="form-group">
+
+                        {{ form.return_date|as_crispy_field }}
+                      </div>
+                    </div>
+
+                    </div>
+                </section>
+                <h3> Passenger Information</h3>
+                  <section>
+                    <div class="row gutters">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+                      <div class="form-group">
+
+                        {{ form.passport|as_crispy_field }}
+                      </div>
+                    </div>
+                    </div>
+                </section>
+
+
+              </div>
+          </form>
+            </div>
+          </div>
+          <!-- Row end -->
+
+
+   </div>
+
+
+
+
+      <div class="table-container mb-2 mx-auto"  id="example1_wrapper">
+        <div class="t-header"> Reservation</div>
+           <div class="table-responsive">
+            <table id="table1" class="table custom-table ">
+
+            <thead>
+          <tr   >
+            <th> title</th>
+            <th> Date</th>
+            <th> supplier</th>
+            <th> customer</th>
+            <th> pay_price</th>
+            <th> pay_coin</th>
+            <th> sell_price</th>
+            <th> sell_coin</th>
+            <th> status</th>
+            <th> PNR</th>
+            <th> departure_date</th>
+            <th> airline_company</th>
+            <th> flight_no</th>
+            <th> departure</th>
+            <th> arrival</th>
+            <th> roundtrip</th>
+            <th> passport</th>
+            <th> flight_type</th>
+            <th> return_date</th>
+            <th>author</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody
+        hx-trigger="load, airlineListChanged from:body"
+        hx-get="{% url 'airline_list' %}"
+        hx-target="this"
+
+        >
+          <tr  >
+            <td class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+
+
+
+
+{% endblock %}
+{% block javascripts %}
+
+<!-- Steps wizard JS -->
+    <script src="{% static 'vendor/wizard/jquery.steps.min.js' %}"></script>
+    <script src="{% static 'vendor/wizard/jquery.steps.custom.js' %}"></script>
+
+
+{% endblock javascripts %}
+
+
+
+
+<!--
+      <form
+          hx-post="{% url 'add_reservation' %}"
+          hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'
+          class="modal-content"
+           x-show.transition.duration.2000ms="open"
+            @click.outside="open = false"
+            x-transition
+          >
+         <div class="modal-body container">
+            <div class="mb-3 row">
+              <div class="form-group col-md-3 mb-0">
+                {{  form.title|as_crispy_field }}
+              </div>
+            <div class="form-group col-md-3 mb-0">
+               {{  form.reservation_type|as_crispy_field  }}
+            </div>
+            <div class="form-group col-md-3 mb-0">
+               {{  form.PNR|as_crispy_field  }}
+              </div>
+              <div class="form-group col-md-3 mb-0">
+               {{  form.Date|as_crispy_field  }}
+              </div>
+            </div>
+
+            <div class="mb-3 row">
+             <div class="form-group col-md-3 mb-0">
+                 {{  form.trip|as_crispy_field }}
+             </div>
+             <div class="form-group col-md-3 mb-0">
+                {{  form.vendor|as_crispy_field  }}
+             </div>
+
+             <div class="form-group col-md-3 mb-0">
+                 {{  form.customer|as_crispy_field }}
+             </div>
+             <div class="form-group col-md-3 mb-0">
+                {{  form.status|as_crispy_field  }}
+             </div>
+
+            </div>
+            <div class="mb-3 row">
+               <div class="form-group col-md-3 mb-0">
+                {{  form.pay_price|as_crispy_field  }}
+             </div>
+             <div class="form-group col-md-3 mb-0">
+                 {{  form.pay_coin|as_crispy_field }}
+             </div>
+             <div class="form-group col-md-3 mb-0">
+                {{  form.sell_price|as_crispy_field  }}
+             </div>
+
+             <div class="form-group col-md-3 mb-0">
+                 {{  form.sell_coin|as_crispy_field }}
+             </div>
+
+            </div>
+
+         <button
+             type="submit"
+             class="btn btn-primary"
+             @click="open = ! open">
+           ADD
+         </button>
+          </div>
+        </form> -->
+
+
