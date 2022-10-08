@@ -1,168 +1,233 @@
 {% load static %}
 {% load crispy_forms_tags %}
-<div class="container">
-  <form
-    hx-post="{{ request.path }}"
-    hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'
-    hx-encoding ="multipart/form-data"
-    class="modal-content">
-    <div class="modal-header" >
-      <h5 class="modal-title ml-0">Edit Customer</h5>
-      <button type="button" style="margin-left: 0px;"  class="close" data-dismiss="modal" aria-label="Close">
-               &times;
-     </button>
+<div
 
-    </div>
+{% if not customer %}
+    x-data="{ open: false ,
+    updateImageDisplay() {
+                         while($refs.preview.firstChild) {
+                          $refs.preview.removeChild($refs.preview.firstChild);
+                           }
+                         const curFiles = $refs.input.files;
+                         if(curFiles.length === 0) {
+                              const para = document.createElement('p');
+                              para.textContent = 'No logo';
+                              $refs.preview.appendChild(para);
+                          } else {
+                             for(const file of curFiles) {
+                                if(validFileType(file)) {
+                                  const image = document.createElement('img');
+                                  image.src = URL.createObjectURL(file);
+                                  image.classList.add('half-circle');
+                                   $refs.preview.appendChild(image);
+                                 }
+                           }
+                          }
+                          }
 
-  <div class="modal-body container">
-    <div class="mb-3 row">
-      <div class="form-group col-md-3 mb-0">
-        {{  accountForm.name|as_crispy_field }}
-      </div>
-       <div class="form-group col-md-3 mb-0">
-         {{  form.email|as_crispy_field }}
-     </div>
-      <div class="form-group col-md-3 mb-0">
-         <input  type="file" name="logo" class="form-control" accept="image/*" id="id_logo">
-     </div>
-    <div class="form-group col-md-1 mb-0 updatepreview avatar md">
-         {% if customer.logo  %}
-            <img class="half-circle" src="{{ customer.logo.url }}"  >
-         {% endif %}
-    </div>
-    </div>
 
-    <div class="mb-3 row">
-      <div class="form-group col-md-4 mb-0">
-       {{  form.address|as_crispy_field  }}
-      </div>
-      <div class="form-group col-md-4 mb-0">
-       {{  form.phoneNumber1|as_crispy_field  }}
-      </div>
-     <div class="form-group col-md-4 mb-0">
-        {{  form.tradeRecord|as_crispy_field  }}
-     </div>
-   </div>
-    <div class="mb-3 row">
+  }"
+{% else %}
+  x-data="{open:true ,
+    updateImageDisplay() {
+                         while($refs.preview.firstChild) {
+                          $refs.preview.removeChild($refs.preview.firstChild);
+                           }
+                         const curFiles = $refs.input.files;
+                         if(curFiles.length === 0) {
+                              const para = document.createElement('p');
+                              para.textContent = 'No logo';
+                              $refs.preview.appendChild(para);
+                          } else {
+                             for(const file of curFiles) {
+                                if(validFileType(file)) {
+                                  const image = document.createElement('img');
+                                  image.src = URL.createObjectURL(file);
+                                  image.classList.add('half-circle');
+                                   $refs.preview.appendChild(image);
+                                 }
+                           }
+                          }
+                          }
 
-    </div>
-    <div class="mb-3 row gutters">
+}"
+{% endif %}
 
-     <div class="form-group col-md-4 mb-0">
-        {{  form.webSite|as_crispy_field }}
-     </div>
 
-                  <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"> -->
-                    <!-- <div class="card"> -->
-                        <div class="form-group col-md-3 mb-0">
-                             <div class="card">
-                             <div class="custom-control custom-switch">
-                                  <input type="checkbox"
-                                      name="client" {% if form.client.value %} checked  {% endif %}
+   class="container"  id="customerform">
 
-                                   class="custom-control-input" id="customSwitch11">
-                                  <label class="custom-control-label" for="customSwitch11">زبون</label>
-                              </div>
-                             <div class="mb-3"></div>
-                             <div class="custom-control custom-switch">
-                                  <input type="checkbox" class="custom-control-input"
-                                  name="aircompany" {% if form.aircompany.value %} checked  {% endif %}
+        <form hx-encoding ="multipart/form-data"
+                id="form"
+                {% if not customer %}
+                    hx-post="{% url 'add_customer' %}"
+                {% else %}
+                  hx-post="{% url 'edit_customer' pk=customer.pk %}"
+                {% endif %}
 
-                                  id="customSwitch12">
-                                  <label class="custom-control-label" for="customSwitch12">شركة طيران</label>
-                             </div>
-                             <div class="mb-3"></div>
-                             <div class="custom-control custom-switch">
-                                  <input type="checkbox" class="custom-control-input"
-                                  name="transportcompany" {% if form.transportcompany.value %} checked  {% endif %}
+                hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'
+                class="modal-content"
+                hx-target='#customerList'
+                x-transition>
+                 <div class="container " >
+                  <div class="row gutters">
+                    <div class="form-group col-md-2 my-2 ">
+                     <button
+                      class="btn btn-outline-primary btn-icon-text  mx-3"
+                      @click="open = ! open" type="reset">
+                      <span  x-show="!open"  >سجل جديد</span>
+                      <span   x-show="open"  >اخفاء</span>
+                    </button>
+                  </div>
+                  </div>
 
-                                  id="customSwitch13">
-                                  <label class="custom-control-label" for="customSwitch13">شركة نقل بري</label>
-                             </div>
-                             <div class="mb-3"></div>
-                             <div class="custom-control custom-switch">
-                                  <input type="checkbox" class="custom-control-input"
-                                    name="seacompany" {% if form.seacompany.value %} checked  {% endif %}
+            <div class="modal-body container "
+                            x-show.transition.duration.2000ms="open"
 
-                                  id="customSwitch14">
-                                  <label class="custom-control-label" for="customSwitch14">شركة نقل بحري</label>
-                              </div>
-                              <div class="mb-3"></div>
-                              <div class="custom-control custom-switch">
-                                   <input type="checkbox" class="custom-control-input"
-                                   name="visacompany" {% if form.visacompany.value %} checked  {% endif %}
-
-                                   id="customSwitch15">
-                                   <label class="custom-control-label" for="customSwitch15">تأشيرات</label>
-                               </div>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-3 mb-0">
-                             <div class="card">
-                              <div class="custom-control custom-switch">
-                                   <input type="checkbox" class="custom-control-input"
-                                   name="hotelcompany" {% if form.hotelcompany.value %} checked  {% endif %}
-
-                                   id="customSwitch16">
-                                   <label class="custom-control-label" for="customSwitch16">فنادق</label>
-                              </div>
-                              <div class="mb-3"></div>
-                              <div class="custom-control custom-switch">
-                                   <input type="checkbox" class="custom-control-input"
-                                   name="shippingcompany" {% if form.shippingcompany.value %} checked  {% endif %}
-
-                                   id="customSwitch17">
-                                   <label class="custom-control-label" for="customSwitch17">الرحلات</label>
-                              </div>
-                              <div class="mb-3"></div>
-                              <div class="custom-control custom-switch">
-                                   <input type="checkbox" class="custom-control-input"
-                                   name="insurancecompany" {% if form.insurancecompany.value %} checked  {% endif %}
-
-                                   id="customSwitch18">
-                                   <label class="custom-control-label" for="customSwitch18">شركة التأمين الصحي</label>
-                              </div>
-                              <div class="mb-3"></div>
-                              <div class="custom-control custom-switch">
-                                   <input type="checkbox" class="custom-control-input"
-                                  name="documentcompany" {% if form.documentcompany.value %} checked  {% endif %}
-
-                                   id="customSwitch19">
-                                   <label class="custom-control-label" for="customSwitch19">شركة مستندات السفر </label>
-                              </div>
-                              <div class="mb-3"></div>
-                              <div class="custom-control custom-switch">
-                                   <input type="checkbox" class="custom-control-input"
-                                    name="backagecompany" {% if form.backagecompany.value %} checked  {% endif %}
-
-                                   id="customSwitch20">
-                                   <label class="custom-control-label" for="customSwitch20">شركة شحن </label>
-                              </div>
-                            </div>
-                        </div>
-                    <!-- </div> -->
-                  <!-- </div> -->
+            >
+              <div class="row gutters">
+                <div class="form-group col-md-4 mb-0">
+                  {{  accountForm.name|as_crispy_field }}
                 </div>
+                <div class="form-group col-md-4 mb-0">
+                  {{  form.email|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-4 mb-0">
+                  <div class="row gutters" >
+                    <div class="form-group col-md-8 " style="padding-top: 1.3rem;">
+                      <input  type="file" name="logo" x-ref="input"
+                       x-on:change.debounce="updateImageDisplay($event)"
+                      class="form-control" accept="image/*" id="id_logo">
 
-  </div>
+                   </div>
+                   <div x-ref="preview"
+                   class="col-md-2 mb-0 avatar md" style="width:36px;">
+                     {% if customer.logo  %}
+                       <img class="half-circle" src="{{ customer.logo.url }}"  >
+                      {% else %}
+                        <img class="half-circle" src="{% static 'img/default.jpg' %}" >
+                    {% endif %}
+                   </div>
+                  </div>
+               </div>
+            </div>
+            <div class="row gutters">
+              <div class="form-group col-md-2 mb-0">
+                {{  form.phoneNumber1|as_crispy_field  }}
+                </div>
+              <div class="form-group col-md-2 mb-0">
+                {{  form.phoneNumber2|as_crispy_field  }}
+                </div>
+                <div class="form-group col-md-2 mb-0">
+                  {{  form.webSite|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-3 mb-0">
+                  {{  form.address|as_crispy_field  }}
+                  </div>
+                <div class="form-group col-md-3 mb-0">
+                  {{  form.tradeRecord|as_crispy_field  }}
+              </div>
 
-  <div class="modal-footer">
-    {% if customer %}
-    <button type="button" class="btn btn-danger"
-             hx-confirm="Are you sure you wish to delete {{ customer.account.name }}?"
-             hx-post="{% url 'remove_customer' pk=customer.pk %}">
-      Remove
-    </button>
-    <span class="flex-grow-1"></span>
-    {% endif %}
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">
-      Cancel
-    </button>
-    <button type="submit" class="btn btn-primary">Save</button>
-  </div>
-</form>
+            </div>
+              <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="card-title">
+                        تصنيف الشركة
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="custom-btn-group" style=" justify-content:space-between;">
+                        <div class="item">
+                         <input id="customerch"  name="client"
+                         {% if form.client.value %} checked  {% endif %}
+                         type="checkbox">
+                         <label for="customerch" class="chcust" ></label>
+                          <p>زبون</p>
+                        </div>
 
-</div>
+                        <div class="item">
+                         <input id="bacch" name="backagecompany"
+                         {% if form.backagecompany.value %} checked  {% endif %}
+                         type="checkbox">
+                         <label for="bacch" class="chbac"></label>
+                          <p>رحلات</p>
+                        </div>
+                        <div class="item">
+                         <input id="airch"  name="aircompany"
+                         {% if form.aircompany.value %} checked  {% endif %}
+                         type="checkbox">
+                         <label for="airch" class="chair"></label>
+                          <p>نقل جوي</p>
+                        </div>
+                        <div class="item ">
+                          <input id="tranch"  name="transportcompany"
+                          {% if form.transportcompany.value %} checked  {% endif %}
+                          type="checkbox" >
+                          <label for="tranch" class="chtran" ></label>
+                           <p>نقل بري</p>
+                        </div>
+                        <div class="item">
+                         <input id="seach"  name="seacompany"
+                         {% if form.seacompany.value %} checked  {% endif %}
+                         type="checkbox" >
+                          <label for="seach" class="chsea" ></label>
+                          <p>نقل بحري</p>
+                        </div>
+                        <div class="item">
+                          <input id="visach" name="visacompany"
+                          {% if form.visacompany.value %} checked  {% endif %}
+                          type="checkbox" >
+                          <label for="visach" class="chvisa" ></label>
+                          <p> تأشيرات</p>
+                        </div>
+                        <div class="item">
+                          <input id="hotelch"  name="hotelcompany"
+                          {% if form.hotelcompany.value %} checked  {% endif %}
+                          type="checkbox" >
+                          <label for="hotelch" class="chhotel" ></label>
+                          <p>فنادق</p>
+                        </div>
+                        <div class="item">
+                          <input id="insurancech"  name="insurancecompany"
+                          {% if form.insurancecompany.value %} checked  {% endif %}
+                          type="checkbox" >
+                          <label for="insurancech" class="chinsurance" ></label>
+                          <p>تأمين صحي</p>
+                        </div>
+                        <div class="item">
+                          <input id="docch"  name="documentcompany"
+                          {% if form.documentcompany.value %} checked  {% endif %}
+                          type="checkbox" >
+                          <label for="docch" class="chdoc" ></label>
+                          <p>وثائق سفر</p>
+                        </div>
+                        <div class="item">
+                          <input id="shch"  name="shippingcompany"
+                          {% if form.shippingcompany.value %} checked  {% endif %}
+                          type="checkbox" >
+                          <label for="shch" class="chsh" ></label>
+                          <p>شحن</p>
+                        </div>
+                    </div>
+                  </div><!--  card-body -->
+                </div>  <!-- card -->
+              </div>  <!-- col -->
+              </div>   <!-- row gutters -->
+              <div class="row gutters">
+                <div class="col-xl-6 col-lg-6 col-md-3 col-sm-3 col-3">
+
+                  <div class="custom-btn-group" style=" justify-content:space-between;">
+                     <button type="submit" class="btn btn-primary" >Save</button>
+                     <!-- <button type="reset" class="btn btn-primary" >Reset</button> -->
+                      <input type="reset"  class="btn btn-primary"  value="Reset">
+                  </div>
+                </div>
+               </div>
+            </div>
+            </div>
 
 
 
+        </form>
+      </div>

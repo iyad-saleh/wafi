@@ -13,115 +13,11 @@
     <link href="{% static 'vendor/datatables/buttons.bs.css' %}" rel="stylesheet" />
     <link href="{% static 'css/chackbox.css' %}" rel="stylesheet" />
 
-
-
 {% endblock stylesheets %}
   {% block content %}
-      <div  x-data="{ open: false }"   class="container">
-        <button type="button"
-              class="btn btn-outline-primary btn-icon-text  mb-3"
-              @click="open = ! open" >
-          <span class="mdi mdi-chevron-double-down" x-show="!open"  >سجل جديد</span>
-          <span class="mdi mdi-chevron-double-up" x-show="open"  >اخفاء</span>
-        </button>
-        <form hx-encoding ="multipart/form-data"
-                hx-post="{% url 'add_customer' %}"
-                hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'
-                class="modal-content"
-                x-show.transition.duration.2000ms="open"
-                hx-target='#customerList'
-                x-transition>
-            <div class="modal-body container ">
-              <div class="row gutters">
-                <div class="form-group col-md-3 mb-0">
-                  {{  accountForm.name|as_crispy_field }}
-                </div>
-                <div class="form-group col-md-3 mb-0">
-                    {{  form.email|as_crispy_field }}
-                </div>
-                <div class="form-group col-md-2 mb-0">
-                        {{  form.logo|as_crispy_field  }}
-                </div>
-                <div class="preview col-md-3 mb-0   avatar md">
-                    <p>No logo</p>
-                </div>
-              </div>
-            <div class="row gutters">
-            <div class="form-group col-md-3 mb-0">
-              {{  form.address|as_crispy_field  }}
-              </div>
-              <div class="form-group col-md-3 mb-0">
-                {{  form.phoneNumber1|as_crispy_field  }}
-                </div>
-                <div class="form-group col-md-3 mb-0">
-                  {{  form.webSite|as_crispy_field }}
-                </div>
-                <div class="form-group col-md-3 mb-0">
-                  {{  form.tradeRecord|as_crispy_field  }}
-              </div>
+      {% include 'customer/customer_form.html' %}
 
-            </div>
-              <div class="row gutters">
-              <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">
-                <div class="card">
-                  <div class="card-header">
-                    <div class="card-title">
-                      تصنيف الشركة
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <div class="custom-btn-group" style=" justify-content:space-between;">
-              <input id="customerch"  name="client" type="checkbox">
-              <label for="customerch" class="chcust" ></label>
-
-              <input id="bacch" name="backagecompany" type="checkbox">
-              <label for="bacch" class="chbac"></label>
-
-              <input id="airch"  name="aircompany" type="checkbox">
-              <label for="airch" class="chair"></label>
-
-              <input id="tranch"  name="transportcompany" type="checkbox" >
-              <label for="tranch" class="chtran" ></label>
-
-              <input id="seach"  name="seacompany" type="checkbox" >
-              <label for="seach" class="chsea" ></label>
-
-              <input id="visach" name="visacompany" type="checkbox" >
-              <label for="visach" class="chvisa" ></label>
-
-              <input id="hotelch"  name="hotelcompany" type="checkbox" >
-              <label for="hotelch" class="chhotel" ></label>
-
-              <input id="insurancech"  name="insurancecompany" type="checkbox" >
-              <label for="insurancech" class="chinsurance" ></label>
-
-              <input id="docch"  name="documentcompany" type="checkbox" >
-              <label for="docch" class="chdoc" ></label>
-
-              <input id="shch"  name="shippingcompany" type="checkbox" >
-              <label for="shch" class="chsh" ></label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              </div>
-
-
-
-               <div class="row gutters">
-              <div class="form-group col-md-3 mb-0 mx-5">
-              <button type="submit" class="btn btn-primary" @click="open = ! open">Save</button>
-              </div>
-              <div class="form-group col-md-3 mb-0">
-              <button type="reset" value="Reset" class="btn btn-primary">Reset</button>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-
-
-      <div class="table-container mb-2 mx-auto"  id="example1_wrapper">
+      <div class="table-container my-2 mx-auto"  id="example1_wrapper">
         <div class="t-header"> Customers</div>
            <div class="table-responsive">
             <table id="table1" class="table custom-table ">
@@ -140,7 +36,7 @@
           <th style="padding-right: 0px;">web</th>
           <th style="padding-right: 0px;">Update</th>
           <th style="padding-right: 0px;">author</th>
-          <th style="padding-right: 0px;">Edit</th>
+          <th style="padding-right: 0px;">action</th>
 
           </tr>
         </thead>
@@ -200,7 +96,7 @@
       // "ordering": true,
       "bInfo": true,
       "bSort": true,
-      "fixedHeader": true,
+      // "fixedHeader": true,
       "iDisplayLength": 10,
      buttons: [
       'copyHtml5',
@@ -214,50 +110,8 @@
 
 });
 </script>
-  <script>
-    const input = document.querySelector('input[type=file]');
-    const preview = document.querySelector('.preview');
-    // input.style.opacity = 0;
 
-    input.addEventListener("change", updateImageDisplay);
-
-    function updateImageDisplay() {
-
-      while(preview.firstChild) {
-        preview.removeChild(preview.firstChild);
-      }
-
-      const curFiles = input.files;
-      if(curFiles.length === 0) {
-        const para = document.createElement('p');
-        para.textContent = 'No logo';
-        preview.appendChild(para);
-      } else {
-        // const list = document.createElement('ol');
-        // preview.appendChild(list);
-
-        for(const file of curFiles) {
-          // const listItem = document.createElement('li');
-          // const para = document.createElement('p');
-
-          if(validFileType(file)) {
-            // para.textContent = `File name ${file.name}, file size ${returnFileSize(file.size)}.`;
-            const image = document.createElement('img');
-            image.src = URL.createObjectURL(file);
-            image.classList.add("half-circle");
-            image.style.cssText ="width: 30%";
-            preview.appendChild(image);
-            // listItem.appendChild(para);
-          } else {
-            // para.textContent = `File name ${file.name}: Not a valid file type. Update your selection.`;
-            // listItem.appendChild(para);
-          }
-
-          // list.appendChild(listItem);
-        }
-      }
-    }
-
+<script type="text/javascript">
 // https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types
     const fileTypes = [
         'image/apng',

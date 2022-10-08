@@ -19,7 +19,7 @@ from django.contrib.auth.decorators import user_passes_test
 @login_required
 def index(request):
     company = request.user.company
-    customers = Customer.objects.filter(company=company)
+    customers = Customer.objects.filter(company=company).order_by('-id')
     if hasattr( request.user  ,'is_MANAGER' ) :
         accountForm = AccountForm()
         form = CustomerForm()
@@ -36,7 +36,7 @@ def index(request):
 @login_required
 def customer_list(request):
     company = request.user.company
-    customers = Customer.objects.filter(company=company)
+    customers = Customer.objects.filter(company=company).order_by('-id')
     return render(request, 'customer/customer_list.html', {
         'customers':customers
     })
@@ -107,7 +107,7 @@ def edit_customer(request, pk):
             account.author=request.user
             account.account_type='20'
             account.save()
-
+            print("form",form )
             customer = form.save(commit=False)
             customer.author=request.user
             customer.company=request.user.company

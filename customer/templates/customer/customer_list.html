@@ -56,11 +56,17 @@
     <td>{{ customer.webSite|truncatechars:7  }}</td>
     <td>{{ customer.updated_at|date:"Y-m-d"   }}</td>
     <td>{{ customer.author  }}</td>
-
     <td>
+        <div class="td-actions">
+            <!-- <button class="btn btn-info btn-rounded btn-sm">Edit</button> -->
+            <!-- <button class="btn btn-secondary btn-rounded btn-sm">Remove</button> -->
+        <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_customer' pk=customer.pk %}" hx-target="#customerform" hx-swap="outerHTML" >Edit</button>
+        </div>
+    </td>
+    <!-- <td>
         <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_customer' pk=customer.pk %}" hx-target="#dialog">Edit</button>
     </td>
-
+ -->
 </tr>
 {% endfor %}
 
