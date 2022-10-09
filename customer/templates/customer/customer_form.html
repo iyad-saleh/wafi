@@ -1,51 +1,11 @@
 {% load static %}
 {% load crispy_forms_tags %}
-<div hx-trigger=" customerListChanged from:body" hx-target="this" id="customerform" {% if not customer %} x-data="{ open: false ,
-                 updateImageDisplay() {
-                         while($refs.preview.firstChild) {
-                          $refs.preview.removeChild($refs.preview.firstChild);
-                           }
-                         const curFiles = $refs.input.files;
-                         if(curFiles.length === 0) {
-                              const para = document.createElement('p');
-                              para.textContent = 'No logo';
-                              $refs.preview.appendChild(para);
-                          } else {
-                             for(const file of curFiles) {
-                                if(validFileType(file)) {
-                                  const image = document.createElement('img');
-                                  image.src = URL.createObjectURL(file);
-                                  image.classList.add('half-circle');
-                                   $refs.preview.appendChild(image);
-                                 }
-                           }
-                          }
-                          }
-
-
-  }" {% else %} x-data="{open:true ,
-         updateImageDisplay() {
-                         while($refs.preview.firstChild) {
-                          $refs.preview.removeChild($refs.preview.firstChild);
-                           }
-                         const curFiles = $refs.input.files;
-                         if(curFiles.length === 0) {
-                              const para = document.createElement('p');
-                              para.textContent = 'No logo';
-                              $refs.preview.appendChild(para);
-                          } else {
-                             for(const file of curFiles) {
-                                if(validFileType(file)) {
-                                  const image = document.createElement('img');
-                                  image.src = URL.createObjectURL(file);
-                                  image.classList.add('half-circle');
-                                   $refs.preview.appendChild(image);
-                                 }
-                           }
-                          }
-                          }
-
-         }" {% endif %} class="container" id="customerform">
+<div hx-trigger=" customerListChanged from:body" hx-target="this" id="customerform"
+   {% if not customer %}
+        x-data="{ open: false ,src:'{% static 'img/default.jpg' %}' }"
+   {% else %}
+        x-data="{open:true ,src:'{{ customer.logo.url }}' }"
+  {% endif %} class="container" id="customerform">
     <div class="container ">
         <div class="row gutters">
             <div class="form-group col-md-2 my-2 ">
@@ -69,15 +29,11 @@
                 </div>
                 <div class="form-group col-md-4 mb-0">
                     <div class="row gutters">
-                        <div class="form-group col-md-8 " style="padding-top: 1.3rem;">
-                            <input type="file" name="logo" x-ref="input" x-on:change.debounce="updateImageDisplay($event)" class="form-control" accept="image/*" id="id_logo">
-                        </div>
-                        <div x-ref="preview" class="col-md-2 mb-0 avatar md" style="width:36px;">
-                            {% if customer.logo %}
-                            <img class="half-circle" src="{{ customer.logo.url }}">
-                            {% else %}
-                            <img class="half-circle" src="{% static 'img/default.jpg' %}">
-                            {% endif %}
+                        <div class="form-group col-md-8 " >
+                            <img class="half-circle" style="width: 60px;" :src="src">
+                            <label for="id_logo"><span>Change</span>
+                            <input type="file" name="logo" class="hidden" style="display: none;" accept="image/*" id="id_logo" @change="src = URL.createObjectURL($event.target.files[0])">
+                          </label>
                         </div>
                     </div>
                 </div>

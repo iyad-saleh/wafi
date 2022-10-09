@@ -16,6 +16,9 @@
 
                           for(const file of curFiles) {
                             const listItem = document.createElement('span');
+
+                            listItem.classList.add('badge');
+                            listItem.classList.add('badge-light');
                             listItem.classList.add('col-md-1');
                             $refs.preview.appendChild(listItem);
 
@@ -165,7 +168,7 @@
                             {% if passport.photo.image %}
                             <img class="half-circle col" src="{{ passport.photo.image.url }}">
                             {% else %}
-                            <img class="half-circle col " src="{% static 'img/default.jpg' %}">
+                            <img class="half-circle  " src="{% static 'img/default.jpg' %}" style="width: 60px;">
                             {% endif %}
                         </div>
                     </div>
