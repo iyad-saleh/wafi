@@ -5,30 +5,33 @@ from django.http import HttpResponse
 from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404
 
-from .models import Passport
-from .forms import PassportForm
+from .models import Passport, Passenger
+from .forms import PassportForm, PassengerForm, PhotoForm
 from django.contrib.auth.decorators import user_passes_test
 # is_MANAGER
 # is_RESERVATION
 # is_ACCOUNTANT
 # is_CUSTOMER
-# @user_passes_test(lambda u: u.is_MANAGER)
-# def index(request):
-#     form = PassportForm()
-#     if request.user.is_MANAGER or request.user.is_RESERVATION or request.user.is_CUSTOMER:
-#         return render(request, 'passport/index_Type.html',{'form':form})
+@login_required
+def index(request):
+    form = PassportForm()
+    photoform = PhotoForm()
+    passports = Passport.objects.all().order_by('-id')
+    if request.user.is_MANAGER or request.user.is_RESERVATION or request.user.is_CUSTOMER:
+        return render(request, 'passport/index.html',{'form':form,'photoform':photoform, 'passports':passports})
 
 
-# # @user_passes_test(lambda u: u.is_MANAGER)
-# def passport_list(request):
-#     if request.user.is_MANAGER or request.user.is_RESERVATION or request.user.is_CUSTOMER:
-#         passports = Passport.objects.all()
-#         return render(request, 'passport/passport_list.html', {
-#             'passports':passports
-#         })
+@login_required
+def passport_list(request):
+    if request.user.is_MANAGER or request.user.is_RESERVATION or request.user.is_CUSTOMER:
+        passports = Passport.objects.all().order_by('-id')
+        return render(request, 'passport/passport_list.html', {
+            'passports':passports
+        })
 
 # # @user_passes_test(lambda u: u.is_superuser)
-# def add_passport(request):
+def add_passport(request):
+    pass
 #     if not request.user.is_MANAGER:
 #         return HttpResponse(
 #         status=403,
@@ -68,7 +71,8 @@ from django.contrib.auth.decorators import user_passes_test
 #     })
 
 # # @user_passes_test(lambda u: u.is_superuser)
-# def edit_passport(request, pk):
+def edit_passport(request, pk):
+    pass
 #     passport = get_object_or_404(Passport, pk=pk)
 
 #     if request.method == "POST":
@@ -97,7 +101,8 @@ from django.contrib.auth.decorators import user_passes_test
 
 # # @user_passes_test(lambda u: u.is_superuser)
 # @ require_POST
-# def remove_passport(request, pk):
+def remove_passport(request, pk):
+    pass
 #     passport = get_object_or_404(Passport, pk=pk)
 #     return HttpResponse(
 #         status=204,

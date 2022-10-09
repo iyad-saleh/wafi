@@ -1,41 +1,74 @@
-    <div class="container ">
-      <div class="px-5 my-5 text-center">
-        <h1>Passport list .</h1>
-        <p>Passport list .</p>
-      </div>
-      <button hx-get="{% url 'add_passport' %}" hx-target="#dialog" class="btn btn-primary mb-3">
-        Add a Passport
-      </button>
-      <table class="table">
-        <thead>
-          <tr>
-
-            <th>first_name</th>
-            <th>last_name</th>
-            <th>father_name</th>
-            <th>mother_name</th>
-            <th>birth_date</th>
-            <th>birth_place</th>
-            <th>passport_number</th>
-            <th>issue_date</th>
-            <th>issue_end</th>
-            <th>national_number</th>
-            <th>photo</th>
-            <th>nationality</th>
-            <th>sex</th>
-            <th>issue_place</th>
-            <th>author</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody hx-trigger="load, passportListChanged from:body" hx-get="{% url 'passport_list' %}" hx-target="this">
-          <tr>
-            <td class="spinner-border" role="status">
-              <span class="visually-hidden">Loading...</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} Passport{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'vendor/wizard/jquery.steps.css' %}" />
+{% endblock stylesheets %}
+{% block content %}
+{% include 'passport/passport_form.html' %}
+<div class="table-container my-2 mx-auto" id="example1_wrapper">
+    <div class="t-header"> Passport</div>
+    <div class="table-responsive">
+        <table id="table1" class="table custom-table ">
+            <thead>
+                <tr>
+                    <th>first_name</th>
+                    <th>last_name</th>
+                    <th>father_name</th>
+                    <th>mother_name</th>
+                    <th>birth_date</th>
+                    <th>birth_place</th>
+                    <th>national_number</th>
+                    <th>nationality</th>
+                    <th>img</th>
+                    <th>gender</th>
+                    <th>phone</th>
+                    <th>mobile</th>
+                    <th>email</th>
+                    <th style="padding-right: 0px;">Update</th>
+                    <th style="padding-right: 0px;">author</th>
+                    <th style="padding-right: 0px;">action</th>
+                </tr>
+            </thead>
+            <tbody hx-trigger=" customerListChanged from:body" hx-get="{% url 'passport_list' %}" hx-target="this" id="passportList">
+                {% include 'passport/passport_list.html' %}
+            </tbody>
+        </table>
     </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+<script type="text/javascript">
+// https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types
+const fileTypes = [
+    'image/apng',
+    'image/bmp',
+    'image/gif',
+    'image/jpeg',
+    'image/pjpeg',
+    'image/png',
+    'image/svg+xml',
+    'image/tiff',
+    'image/webp',
+    `image/x-icon`
+];
 
+function validFileType(file) {
+    return fileTypes.includes(file.type);
+}
+
+function returnFileSize(number) {
+    if (number < 1024) {
+        return number + 'bytes';
+    } else if (number > 1024 && number < 1048576) {
+        return (number / 1024).toFixed(1) + 'KB';
+    } else if (number > 1048576) {
+        return (number / 1048576).toFixed(1) + 'MB';
+    }
+}
+</script>
+<!-- Steps wizard JS -->
+<script src="{% static 'vendor/wizard/jquery.steps.min.js' %}"></script>
+<script src="{% static 'vendor/wizard/jquery.steps.custom.js' %}"></script>
+{% endblock javascripts %}

@@ -9,33 +9,41 @@ from import_export.admin import ImportExportModelAdmin
 class PassengerAdmin(ImportExportModelAdmin):
 
     list_display = ( 'id',
-                    'first_name',
-                    'last_name',
-                    'father_name',
-                    'mother_name',
-                    'birth_date',
-                    'birth_place',
-                    'national_number',
-                    'nationality',
-                    'age',
-                    'img',
-                    'gender',
-                    'phone',
-                    'mobile',
-                    'email',
+                 'first_name',
+                 'last_name',
+                 'father_name',
+                 'mother_name',
+                 'birth_date',
+                 'birth_place',
+                 'national_number',
+                 'nationality',
+                  'gender',
+                 'phone',
+                 'mobile',
+                 'email',
+
                     'author',)
 
 @admin.register(Passport)
 class PassportAdmin(ImportExportModelAdmin):
 
     list_display = ( 'id',
-
-            'passport_number',
-            'issue_date',
-            'issue_end',
-            'photo',
-            'issue_place',
-            'author',
+                'first_name',
+                 'last_name',
+                 'father_name',
+                 'mother_name',
+                 'birth_date',
+                 'birth_place',
+                 'national_number',
+                 'nationality',
+                  'gender',
+                 'phone',
+                 'mobile',
+                'email',
+                'passport_number',
+                'issue_date',
+                'issue_end',
+                 'issue_place',
 
                 )
     list_filter = (
