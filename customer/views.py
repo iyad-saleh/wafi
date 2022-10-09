@@ -107,7 +107,7 @@ def edit_customer(request, pk):
             account.author=request.user
             account.account_type='20'
             account.save()
-            print("form",form )
+            # print("form",form )
             customer = form.save(commit=False)
             customer.author=request.user
             customer.company=request.user.company
