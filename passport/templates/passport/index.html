@@ -17,21 +17,16 @@
                     <th>last_name</th>
                     <th>father_name</th>
                     <th>mother_name</th>
-                    <th>birth_date</th>
-                    <th>birth_place</th>
-                    <th>national_number</th>
+                    <th>birth</th>
+                    <th>passport</th>
+                    <th>issue_date</th>
                     <th>nationality</th>
-                    <th>img</th>
                     <th>gender</th>
                     <th>phone</th>
-                    <th>mobile</th>
-                    <th>email</th>
-                    <th style="padding-right: 0px;">Update</th>
-                    <th style="padding-right: 0px;">author</th>
                     <th style="padding-right: 0px;">action</th>
                 </tr>
             </thead>
-            <tbody hx-trigger=" customerListChanged from:body" hx-get="{% url 'passport_list' %}" hx-target="this" id="passportList">
+            <tbody hx-trigger=" passportListChanged from:body" hx-get="{% url 'passport_list' %}" hx-target="this" id="passportList">
                 {% include 'passport/passport_list.html' %}
             </tbody>
         </table>

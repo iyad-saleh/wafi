@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Passport, Passenger
+from .models import Passport, Passenger, Photo
 from import_export.admin import ImportExportModelAdmin
 
 
@@ -62,5 +62,12 @@ class PassportAdmin(ImportExportModelAdmin):
     #     return "\n".join([p.category for p in obj.category.all()])
     # def get_memo(self, obj):
     #     return obj.memo[:10]+'...'
+
+
+@admin.register(Photo)
+class PhotoAdmin(ImportExportModelAdmin):
+    list_display = ( 'id',
+                    'image',
+                    'passport')
 
 

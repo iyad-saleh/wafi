@@ -27,7 +27,6 @@ class Passport(Passenger):
     passport_number= models.CharField(max_length=255,unique=True)
     issue_date= models.DateField()
     issue_end= models.DateField()
-    photo = models.ImageField(default='default.jpg', upload_to='passport_pics', blank=True, null=True)
     issue_place = models.CharField(max_length=255)
 
     def __str__(self):

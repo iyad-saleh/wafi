@@ -1,24 +1,6 @@
 {% load static %}
 {% load crispy_forms_tags %}
-<div {% if not passport %}
-
-x-data="{ open: false ,
-first_name:'',
-last_name:'',
-father_name:'',
-mother_name:'',
-nationality:'',
-gender:'',
-birth_date:'',
-birth_place:'',
-national_number:'',
-phone:'',
-mobile:'',
-email:'',
-passport_number:'',
-issue_date:'',
-issue_end:'',
-issue_place:'',
+<div {% if not passport %} x-data="{ open: false ,
 
 
     updateImageDisplay() {
@@ -90,140 +72,113 @@ issue_place:'',
                       }
 
 }" {% endif %} class="container" id="passportform">
-    <form hx-encoding="multipart/form-data" id="form" {% if not passport %} hx-post="{% url 'add_passport' %}" {% else %} hx-post="{% url 'edit_passport' pk=passport.pk %}" {% endif %} hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}' class="modal-content" hx-target='#passportList' x-transition>
-        <div class="container ">
-            <div class="row gutters">
-                <div class="form-group col-md-2 my-2 ">
-                    <button class="btn btn-outline-primary btn-icon-text  mx-3" @click="open = ! open" type="reset">
-                        <span x-show="!open">سجل جديد</span>
-                        <span x-show="open">اخفاء</span>
-                    </button>
-                </div>
-            </div>
-            <div class="modal-body container " x-show.transition.duration.2000ms="open">
-                <div id="example-form">
-                    <h3> passenger Info</h3>
-                    <section>
-                        <div class="row gutters">
-                            <div class="form-group col-md-4 mb-0">
-                                {{ form.first_name|as_crispy_field }}
-                            </div>
-                            <div class="form-group col-md-4 mb-0">
-                                {{ form.last_name|as_crispy_field }}
-                            </div>
-                            <div class="form-group col-md-4 mb-0">
-                                {{ form.father_name|as_crispy_field }}
-                            </div>
-                            <div class="form-group col-md-4 mb-0">
-                                {{ form.mother_name|as_crispy_field }}
-                            </div>
-                            <div class="form-group col-md-4 mb-0">
-                                {{ form.nationality|as_crispy_field }}
-                            </div>
-                            <div class="form-group col-md-4 mb-0">
-                                {{ form.gender|as_crispy_field }}
-                            </div>
-                        </div>
-                    </section>
-                    <h3> passenger Date</h3>
-                    <section>
-                        <div class="row gutters">
-                            <div class="form-group col-md-4 mb-0">
-                                {{ form.birth_date|as_crispy_field }}
-                            </div>
-                            <div class="form-group col-md-4 mb-0">
-                                {{ form.birth_place|as_crispy_field }}
-                            </div>
-                            <div class="form-group col-md-4 mb-0">
-                                {{ form.national_number|as_crispy_field }}
-                            </div>
-                        </div>
-                    </section>
-                    <h3> passenger contact</h3>
-                    <section>
-                        <div class="row gutters">
-                            <div class="form-group col-md-4 mb-0">
-                                {{ form.phone|as_crispy_field }}
-                            </div>
-                            <div class="form-group col-md-4 mb-0">
-                                {{ form.mobile|as_crispy_field }}
-                            </div>
-                            <div class="form-group col-md-4 mb-0">
-                                {{ form.email|as_crispy_field }}
-                            </div>
-                        </div>
-                    </section>
-                    <h3> Passport Info</h3>
-                    <section>
-                        <div class="row gutters">
-                            <div class="form-group col-md-3 mb-0">
-                                {{ form.passport_number|as_crispy_field }}
-                            </div>
-                            <div class="form-group col-md-3 mb-0">
-                                {{ form.issue_date|as_crispy_field }}
-                            </div>
-                            <div class="form-group col-md-3 mb-0">
-                                {{ form.issue_end|as_crispy_field }}
-                            </div>
-                            <div class="form-group col-md-3 mb-0">
-                                {{ form.issue_place|as_crispy_field }}
-                            </div>
-                        </div>
-                    </section>
-                    <h3> Passport image</h3>
-                    <section>
-                        <div class="row gutters">
-                            <div class="form-group col-md-2 " style="padding-top: 1.3rem;">
-                                <input type="file" multiple name="image" x-ref="input" x-on:change.debounce="updateImageDisplay($event)" class="form-control" accept="image/*" id="id_logo">
-                            </div>
-                            <div x-ref="preview" class="form-group col-md-10 row gutters " style=" justify-content:space-between;flex-direction: row;">
-                                {% if passport.photo.image %}
-                                <img class="half-circle col" src="{{ passport.photo.image.url }}">
-                                {% else %}
-                                <img class="half-circle col " src="{% static 'img/default.jpg' %}">
-                                {% endif %}
-                            </div>
-                        </div>
-                    </section>
-                    <h3> Save</h3>
-                    <section>
-                        <div class="row gutters">
-
-                            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
-                               <div class="row gutters">
-                                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-                                  <p>first_name:<span x-text="first_name"></span></p>
-                                  <p>last_name:<span x-text="last_name"></span></p>
-                                  <p>father_name:<span x-text="father_name"></span></p>
-                                  <p>mother_name:<span x-text="mother_name"></span></p>
-                                  <p>nationality:<span x-text="nationality"></span></p>
-                                  <p>gender:<span x-text="gender"></span></p>
-                                  <p>birth_date:<span x-text="birth_date"></span></p>
-                                  <p>birth_place:<span x-text="birth_place"></span></p>
-                                </div>
-                                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-                                  <p>national_number:<span x-text="national_number"></span></p>
-                                  <p>phone:<span x-text="phone"></span></p>
-                                  <p>mobile:<span x-text="mobile"></span></p>
-                                  <p>email:<span x-text="email"></span></p>
-                                  <p>passport_number:<span x-text="passport_number"></span></p>
-                                  <p>issue_date:<span x-text="issue_date"></span></p>
-                                  <p>issue_end:<span x-text="issue_end"></span></p>
-                                  <p>issue_place:<span x-text="issue_place"></span></p>
-                                </div>
-                              </div>
-
-                             <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-                                <div class="custom-btn-group" >
-                                    <button type="submit" class="btn btn-primary">Save</button>
-                                    <!-- <button type="reset" class="btn btn-primary" >Reset</button> -->
-                                    <input type="reset" class="btn btn-primary" value="Reset">
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
+    <div class="container ">
+        <div class="row gutters">
+            <div class="form-group col-md-2 my-2 ">
+                <button x-show="!open" class="btn btn-outline-primary btn-icon-text  mx-3" @click="open = ! open">
+                    <span>سجل جديد</span>
+                </button>
+                <button class="btn btn-outline-primary btn-icon-text  mx-3" x-show="open" hx-get="{% url 'add_passport' %}" hx-target='#passportform'>
+                    <span>اخفاء</span>
+                </button>
             </div>
         </div>
+    </div>
+    <form hx-encoding="multipart/form-data" id="form" {% if not passport %} hx-post="{% url 'add_passport' %}" {% else %} hx-post="{% url 'edit_passport' pk=passport.pk %}" {% endif %} hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}' class="modal-content" hx-target='#passportList' x-transition>
+        <div class="modal-body container " x-show.transition.duration.2000ms="open">
+            <div id="example-form">
+                <h3> passenger Info</h3>
+                <section>
+                    <div class="row gutters">
+                        <div class="form-group col-md-4 mb-0">
+                            {{ form.first_name|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-4 mb-0">
+                            {{ form.last_name|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-4 mb-0">
+                            {{ form.father_name|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-4 mb-0">
+                            {{ form.mother_name|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-4 mb-0">
+                            {{ form.nationality|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-4 mb-0">
+                            {{ form.gender|as_crispy_field }}
+                        </div>
+                    </div>
+                </section>
+                <h3> passenger Date</h3>
+                <section>
+                    <div class="row gutters">
+                        <div class="form-group col-md-4 mb-0">
+                            {{ form.birth_date|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-4 mb-0">
+                            {{ form.birth_place|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-4 mb-0">
+                            {{ form.national_number|as_crispy_field }}
+                        </div>
+                    </div>
+                </section>
+                <h3> passenger contact</h3>
+                <section>
+                    <div class="row gutters">
+                        <div class="form-group col-md-4 mb-0">
+                            {{ form.phone|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-4 mb-0">
+                            {{ form.mobile|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-4 mb-0">
+                            {{ form.email|as_crispy_field }}
+                        </div>
+                    </div>
+                </section>
+                <h3> Passport Info</h3>
+                <section>
+                    <div class="row gutters">
+                        <div class="form-group col-md-3 mb-0">
+                            {{ form.passport_number|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-3 mb-0">
+                            {{ form.issue_date|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-3 mb-0">
+                            {{ form.issue_end|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-3 mb-0">
+                            {{ form.issue_place|as_crispy_field }}
+                        </div>
+                    </div>
+                </section>
+                <h3> Passport image</h3>
+                <section>
+                    <div class="row gutters">
+                        <div class="form-group col-md-2 " style="padding-top: 1.3rem;">
+                            <input type="file" multiple name="images" x-ref="input" x-on:change.debounce="updateImageDisplay($event)" class="form-control" accept="image/*" id="id_logo">
+                        </div>
+                        <div x-ref="preview" class="form-group col-md-10 row gutters " style=" justify-content:space-between;flex-direction: row;">
+                            {% if passport.photo.image %}
+                            <img class="half-circle col" src="{{ passport.photo.image.url }}">
+                            {% else %}
+                            <img class="half-circle col " src="{% static 'img/default.jpg' %}">
+                            {% endif %}
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="row gutters">
+
+                        <div class="custom-btn-group">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                            <!-- <button type="reset" class="btn btn-primary" >Reset</button> -->
+                            <input type="reset" class="btn btn-primary" value="Reset">
+                        </div>
+
+            </div>
     </form>
 </div>
