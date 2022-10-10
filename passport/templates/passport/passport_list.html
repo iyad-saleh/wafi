@@ -14,7 +14,7 @@
 
 
   <td>
-    <!-- <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_passport' pk=passport.pk %}" hx-target="#dialog">Edit</button> -->
+    <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_passport' pk=passport.pk %}" hx-target="#passportform" hx-swap="outerHTML">Edit</button>
   </td>
 </tr>
 {% endfor %}

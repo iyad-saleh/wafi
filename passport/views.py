@@ -8,6 +8,9 @@ from django.shortcuts import get_object_or_404
 from .models import Passport, Passenger, Photo
 from .forms import PassportForm, PassengerForm, PhotoFormSet
 from django.contrib.auth.decorators import user_passes_test
+
+from django.core.paginator import Paginator
+
 # is_MANAGER
 # is_RESERVATION
 # is_ACCOUNTANT
@@ -16,9 +19,22 @@ from django.contrib.auth.decorators import user_passes_test
 def index(request):
     form = PassportForm()
     photoform =PhotoFormSet()
-    passports = Passport.objects.all().order_by('-id')
+    passport_list = Passport.objects.all().order_by('-id')
+    paginator = Paginator(passport_list, 5)
+    page = request.GET.get('page', 1)
+    try:
+        passports = paginator.page(page)
+    except PageNotAnInteger:
+        passports = paginator.page(1)
+    except EmptyPage:
+        passports = paginator.page(paginator.num_pages)
+
     if request.user.is_MANAGER or request.user.is_RESERVATION or request.user.is_CUSTOMER:
-        return render(request, 'passport/index.html',{'form':form,'photoform':photoform ,'passports':passports})
+        return render(request, 'passport/index.html',
+            {'form':form,
+            'photoform':photoform ,
+            'passports':passports,
+            'page': page})
 
 
 @login_required
@@ -42,7 +58,7 @@ def add_passport(request):
             })
         })
     if request.method == "POST":
-        form = PassportForm(request.POST)
+        form = PassportForm(request.POST,request.FILES)
         photoform= PhotoFormSet(request.POST,request.FILES)
         if form.is_valid()and photoform.is_valid() :
             passport = form.save(commit=False)
@@ -83,9 +99,11 @@ def add_passport(request):
 @login_required
 def edit_passport(request, pk):
     passport = get_object_or_404(Passport, pk=pk)
-    images = get_object_or_404(Photo , pk = passport.pk)
+    if passport :
+        images = passport.photos.all()
+        # print('xxxxxxxxxxx',images)
     if request.method == "POST":
-        form = PassportForm(request.POST, instance=passport)
+        form = PassportForm(request.POST,request.FILES, instance=passport)
         photoform = PhotoFormSet(request.POST,request.FILES)
         # print(request.FILES, 'form.is_valid')
 
@@ -107,30 +125,33 @@ def edit_passport(request, pk):
                         "passportListChanged": None,
                         "showMessage": f"passport :{passport} updated."
                     })
-                }
-            )
+                })
+
+        else:
+
+            return render(request, 'passport/passport_form.html', {
+                                    'form': form,'photoform':photoform})
+
     else:
         form = PassportForm(instance=passport)
-        accountForm = PhotoFormSet(instance=account)
+        photoform = PhotoFormSet()
         # print('form   :  ',form)
     return render(request, 'passport/passport_form.html', {
-        'form': form,'accountForm':accountForm,
-        'passport': passport,
+        'form': form,'photoform':photoform,
+        'passport': passport,'images':images
     })
 
 @login_required
 @ require_POST
 def remove_passport(request, pk):
     passport = get_object_or_404(Passport, pk=pk)
-    account = get_object_or_404(Account , pk = passport.account.pk)
-    account.soft_delete()
     passport.soft_delete()
     return HttpResponse(
         status=204,
         headers={
             'HX-Trigger': json.dumps({
                 "passportListChanged": None,
-                "showMessage": f"{passport.account.name} deleted."
+                "showMessage": f"{passport} deleted."
             })
         })
 

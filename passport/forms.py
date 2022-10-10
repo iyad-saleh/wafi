@@ -16,7 +16,7 @@ class  PassengerForm(forms.ModelForm):
         fields = ['first_name','last_name','father_name',
                    'mother_name','birth_date','birth_place',
                    'national_number','nationality',
-                    'gender','phone','mobile','email',]
+                    'gender','phone','mobile','email','avatar']
         widgets = {
     #         'name': forms.TextInput(attrs={'class': 'form-control'}),
           'birth_date': DateInput(attrs={'type': 'date'}, format='%Y-%m-%d'),
@@ -33,7 +33,7 @@ class PassportForm(forms.ModelForm):
                    'national_number','nationality',
                     'gender','phone','mobile','email',
                     'passport_number','issue_date',
-                    'issue_end', 'issue_place']
+                    'issue_end', 'issue_place','avatar']
         widgets = {
     #         'name': forms.TextInput(attrs={'class': 'form-control'}),
           'birth_date': DateInput(attrs={'type': 'date'}, format='%Y-%m-%d'),
@@ -49,9 +49,9 @@ PhotoFormSet= inlineformset_factory(Passport,  # parent form
                                       # how many inline-forms are sent to the template by default
                                        extra=4)
 
-# class PhotoForm(forms.ModelForm):
+class PhotoForm(forms.ModelForm):
 
 
-#     class Meta:
-#         model = Photo
-#         fields=['image',]
+    class Meta:
+        model = Photo
+        fields=['image',]
