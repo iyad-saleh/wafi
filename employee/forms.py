@@ -9,7 +9,7 @@ from crispy_forms.layout import Layout, Submit, Row, Column
 class EmployeeForm(forms.ModelForm):
     category= forms.ModelMultipleChoiceField(
         queryset=EmployeeType.objects.all(),
-        widget=forms.CheckboxSelectMultiple()
+        # widget=forms.CheckboxSelectMultiple()
     )
     #             choices=[(obj,obj) for obj in EmployeeType.objects.all()] )
     # salary_coin= forms.ChoiceField(

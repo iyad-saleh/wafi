@@ -8,7 +8,10 @@
 {% block content %}
 <div class="container">
     <H3>Passports list</H3>
+    <div class="container">
     {% include 'passport/passport_form.html' %}
+
+    </div>
     <div class="table-container my-2 mx-auto" id="example1_wrapper">
         <div class="t-header"> Passport</div>
         <div class="table-responsive">
@@ -37,35 +40,7 @@
 </div>
 {% endblock %}
 {% block javascripts %}
-<script type="text/javascript">
-// https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types
-const fileTypes = [
-    'image/apng',
-    'image/bmp',
-    'image/gif',
-    'image/jpeg',
-    'image/pjpeg',
-    'image/png',
-    'image/svg+xml',
-    'image/tiff',
-    'image/webp',
-    `image/x-icon`
-];
 
-function validFileType(file) {
-    return fileTypes.includes(file.type);
-}
-
-function returnFileSize(number) {
-    if (number < 1024) {
-        return number + 'bytes';
-    } else if (number > 1024 && number < 1048576) {
-        return (number / 1024).toFixed(1) + 'KB';
-    } else if (number > 1048576) {
-        return (number / 1048576).toFixed(1) + 'MB';
-    }
-}
-</script>
 <!-- Steps wizard JS -->
 <script src="{% static 'vendor/wizard/jquery.steps.min.js' %}"></script>
 <script src="{% static 'vendor/wizard/jquery.steps.custom.js' %}"></script>

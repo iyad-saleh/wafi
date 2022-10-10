@@ -41,4 +41,4 @@ class Photo(models.Model):
     image = models.ImageField(null=False, blank=False)
 
     def __str__(self):
-        return self.description
+        return self.passport.first_name+' '+ self.passport.last_name

@@ -17,7 +17,7 @@ from django.contrib.auth.decorators import user_passes_test
 @login_required
 def index(request):
     company = request.user.company
-    employees = Employee.objects.filter(company=company)
+    employees = Employee.objects.filter(company=company).order_by('-id')
 
     if hasattr( request.user  ,'is_MANAGER' ) :
         accountForm = AccountForm()
@@ -39,7 +39,7 @@ def index(request):
 @login_required
 def employee_list(request):
     company = request.user.company
-    emps = Employee.objects.filter(company=company)
+    emps = Employee.objects.filter(company=company).order_by('-id')
     return render(request, 'employee/employee_list.html', {
         'employees':emps
     })

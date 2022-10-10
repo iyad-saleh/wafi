@@ -6,7 +6,7 @@ from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404
 
 from .models import Passport, Passenger, Photo
-from .forms import PassportForm, PassengerForm, PhotoForm
+from .forms import PassportForm, PassengerForm, PhotoFormSet
 from django.contrib.auth.decorators import user_passes_test
 # is_MANAGER
 # is_RESERVATION
@@ -15,9 +15,10 @@ from django.contrib.auth.decorators import user_passes_test
 @login_required
 def index(request):
     form = PassportForm()
+    photoform =PhotoFormSet()
     passports = Passport.objects.all().order_by('-id')
     if request.user.is_MANAGER or request.user.is_RESERVATION or request.user.is_CUSTOMER:
-        return render(request, 'passport/index.html',{'form':form, 'passports':passports})
+        return render(request, 'passport/index.html',{'form':form,'photoform':photoform ,'passports':passports})
 
 
 @login_required
@@ -42,20 +43,24 @@ def add_passport(request):
         })
     if request.method == "POST":
         form = PassportForm(request.POST)
-        if form.is_valid() :
+        photoform= PhotoFormSet(request.POST,request.FILES)
+        if form.is_valid()and photoform.is_valid() :
             passport = form.save(commit=False)
             passport.author=request.user
             passport.company=request.user.company
 
             passport.save()
-            images = request.FILES.getlist('images')
-            for image in images:
-                photo = Photo.objects.create(
-                    passport=passport,
-                    image=image,
-                )
-
-            # print(category)
+            # images = request.FILES.getlist('images')
+            # for image in images:
+            #     photo = Photo.objects.create(
+            #         passport=passport,
+            #         image=image,
+            #     )
+            photos = photoform.save(commit=False)
+            for photo in photos:
+                photo.passport=passport
+                # print(photos)
+                photo.save()
             return HttpResponse(
                 status=204,
                 headers={
@@ -66,50 +71,47 @@ def add_passport(request):
                 })
         else:
             return render(request, 'passport/passport_form.html', {
-        'form': form
+        'form': form,'photoform':photoform
     })
     else:
         form = PassportForm()
+        photoform= PhotoFormSet()
     return render(request, 'passport/passport_form.html', {
-        'form': form
+        'form': form,'photoform':photoform
     })
 
 @login_required
 def edit_passport(request, pk):
     passport = get_object_or_404(Passport, pk=pk)
-    images = get_object_or_404(Photo , pk = passport.account.pk)
+    images = get_object_or_404(Photo , pk = passport.pk)
     if request.method == "POST":
-        form = PassportForm(request.POST,request.FILES, instance=passport)
-        photoform = PassportForm(request.POST, instance=account)
+        form = PassportForm(request.POST, instance=passport)
+        photoform = PhotoFormSet(request.POST,request.FILES)
         # print(request.FILES, 'form.is_valid')
 
-        if form.is_valid()and accountForm.is_valid():
-            account = accountForm.save(commit=False)
-            account.company=request.user.company
-            account.author=request.user
-            account.account_type='20'
-            account.save()
-            # print("form",form )
+        if form.is_valid()and photoform.is_valid():
             passport = form.save(commit=False)
             passport.author=request.user
             passport.company=request.user.company
-            passport.account=account
-
             passport.save()
-
+            photos = photoform.save(commit=False)
+            for photo in photos:
+                photo.passport=passport
+                # print(photos)
+                photo.save()
 
             return HttpResponse(
                 status=204,
                 headers={
                     'HX-Trigger': json.dumps({
                         "passportListChanged": None,
-                        "showMessage": f"{passport.account.name} updated."
+                        "showMessage": f"passport :{passport} updated."
                     })
                 }
             )
     else:
         form = PassportForm(instance=passport)
-        accountForm = AccountForm(instance=account)
+        accountForm = PhotoFormSet(instance=account)
         # print('form   :  ',form)
     return render(request, 'passport/passport_form.html', {
         'form': form,'accountForm':accountForm,

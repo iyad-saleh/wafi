@@ -3,6 +3,7 @@ from .models import Passport, Passenger, Photo
 from django.forms import ModelForm, DateInput
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
+from django.forms.models import inlineformset_factory
 
 
 
@@ -40,10 +41,17 @@ class PassportForm(forms.ModelForm):
           'issue_end': DateInput(attrs={'type': 'date'}, format='%Y-%m-%d'),
         }
 
+PhotoFormSet= inlineformset_factory(Passport,  # parent form
+                                      Photo,  # inline-form
+                                      fields=['image',], # inline-form fields
+                                      # set to false because cant' delete an non-exsitant instance
+                                      can_delete=False,
+                                      # how many inline-forms are sent to the template by default
+                                       extra=4)
 
-class PhotoForm(forms.ModelForm):
+# class PhotoForm(forms.ModelForm):
 
 
-    class Meta:
-        model = Photo
-        fields=['image',]
+#     class Meta:
+#         model = Photo
+#         fields=['image',]

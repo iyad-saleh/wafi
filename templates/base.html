@@ -106,6 +106,27 @@
            {% endif %}
 
 
+          <div class="row gutters">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+              <div class="toast info" aria-live="assertive" aria-atomic="true"  id="toast">
+                <div class="toast-header" style="justify-content: space-between;">
+                  <i class="icon-layers"></i>
+                  <!-- <span class="title">Default Toast</span> -->
+                  <!-- <small>1 mins ago</small> -->
+                  <button type="button" class="close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="toast-body" id="toastbody">
+                  Hello, world! This is a toast message.
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
           <!-- Row starts -->
           <div class="row gutters">
                         {% block content %}   {% endblock %}
@@ -206,9 +227,18 @@
 
       </script>
 
+<script>
+      // $('.toast').toast('show')
+  const toastBody = document.getElementById("toastbody");
+  // const toast = new bootstrap.Toast(toastElement, { delay: 2000 })
 
+  htmx.on("showMessage", (e) => {
+    toastBody.innerText = e.detail.value
+    $('.toast').toast({ delay: 5000 });
+    $('.toast').toast('show');
+     });
 
-
+    </script>
   </body>
 
 </html>
