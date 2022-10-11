@@ -1,25 +1,25 @@
 {% for reservation in reservations %}
 <tr id="reservation-{{ reservation.pk }}" class="reservation-row "  >
 
-        <td> reservation.title</td>
-        <td> reservation.Date</td>
-        <td> reservation.supplier</td>
-        <td> reservation.customer</td>
-        <td> reservation.pay_price</td>
-        <td> reservation.pay_coin</td>
-        <td> reservation.sell_price</td>
-        <td> reservation.sell_coin</td>
-        <td> reservation.status</td>
-        <td> reservation.PNR</td>
-        <td> reservation.departure_date</td>
-        <td> reservation.airline_company</td>
-        <td> reservation.flight_no</td>
-        <td> reservation.departure</td>
-        <td> reservation.arrival</td>
-        <td> reservation.roundtrip</td>
-        <td> reservation.passport</td>
-        <td> reservation.flight_type</td>
-        <td> reservation.return_date</td>
+        <td>{{ reservation.title|truncatechars:10 }}</td>
+        <td>{{ reservation.Date|date:"Y-m-d" }}</td>
+        <td>{{ reservation.supplier|truncatechars:10 }}</td>
+        <td>{{ reservation.customer|truncatechars:10 }}</td>
+        <td>{{ reservation.pay_price }}</td>
+        <td>{{ reservation.pay_coin }}</td>
+        <td>{{ reservation.sell_price }}</td>
+        <td>{{ reservation.sell_coin }}</td>
+        <td>{{ reservation.status }}</td>
+        <td>{{ reservation.PNR|truncatechars:10 }}</td>
+        <td>{{ reservation.departure_date|date:"Y-m-d" }}</td>
+        <td>{{ reservation.airline_company|truncatechars:10 }}</td>
+        <td>{{ reservation.flight_no|truncatechars:10 }}</td>
+        <td>{{ reservation.departure|truncatechars:10 }}</td>
+        <td>{{ reservation.arrival|truncatechars:10 }}</td>
+        <td>{{ reservation.roundtrip }}</td>
+        <td>{{ reservation.passport }}</td>
+        <td>{{ reservation.flight_type }}</td>
+        <td>{{ reservation.return_date|date:"Y-m-d" }}</td>
 
   <td>
     <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_airline' pk=reservation.pk %}" hx-target="#dialog">Edit</button>

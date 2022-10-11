@@ -24,7 +24,7 @@ class AirlineReservationForm(forms.ModelForm):
 
     class Meta:
         model = Reservation_airline
-        fields = [
+        fields = ['passenger_num',
                 'title','Date','supplier',
                 'customer','pay_price',
                 'pay_coin','sell_price',
@@ -36,6 +36,8 @@ class AirlineReservationForm(forms.ModelForm):
                 ]
         widgets = {
             'Date': forms.DateTimeInput(format='%Y-%m-%dT%H:%M:%S', attrs={'type': 'datetime-local'}),
+            'return_date': forms.DateTimeInput(format='%Y-%m-%dT%H:%M:%S', attrs={'type': 'datetime-local'}),
+            'departure_date': forms.DateTimeInput(format='%Y-%m-%dT%H:%M:%S', attrs={'type': 'datetime-local'}),
         }
 
 

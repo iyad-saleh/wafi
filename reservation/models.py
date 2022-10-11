@@ -32,8 +32,8 @@ class Reservation_pack(Reservation):#tourist program
 
 
 class Reservation_airline(Reservation):
-    # passport = models.ForeignKey(Passport, null=True,blank=True, on_delete=models.SET_NULL  )
-    PNR   = models.PositiveIntegerField( null=True,blank=True)
+    passenger_num    = models.PositiveSmallIntegerField( null=True,blank=True)
+    PNR   = models.CharField(max_length=255, blank=True,null=True   )
     departure_date  = models.DateTimeField( blank=True,null=True ,help_text="تاريخ المغادرة " )
     airline_company   = models.CharField(max_length=255, blank=True,null=True   )
     flight_no        = models.CharField(max_length=300,blank=True,null=True)

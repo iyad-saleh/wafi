@@ -13,6 +13,7 @@ class BaseModel(models.Model):
     author      = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     class Meta:
         abstract = True
+        ordering = ['-updated_at']
 
 
 class SoftDeleteModel(models.Model):

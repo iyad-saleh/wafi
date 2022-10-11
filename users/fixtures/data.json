@@ -1,212 +1,435 @@
 [
-    {"model": "users.myuser",
-     "pk": 1,
-     "fields": {
-             "password": "pbkdf2_sha256$260000$9RVrQBF3vnGkWOeo5jckfQ$HThGPFRbKOGvrL6mMn0fQzjw3qHrPd7fP1wDbIttT5k=",
-             "email": "root@root.com",
-             "username": "root",
-             "date_joined": "2022-07-22T18:28:29.406Z",
-             "is_active": true,
-             "is_staff": true,
-              "is_superuser": true }
-    },
-    {"model": "users.myuser",
-         "pk": 2,
-         "fields": {
-                 "password": "pbkdf2_sha256$260000$9RVrQBF3vnGkWOeo5jckfQ$HThGPFRbKOGvrL6mMn0fQzjw3qHrPd7fP1wDbIttT5k=",
-                 "email": "staf@root.com",
-                 "username": "staf",
-                 "date_joined": "2022-07-22T18:28:29.406Z",
-                 "is_active": true,
-                 "is_staff": true
-                  }
-    },
-    {"model": "coin.coin",
-         "pk": 1,
-         "fields": {
-                    "short_title":"SYP",
-                    "long_title":"Syrian pound",
-                    "active":true
-                     }
-    },
-    {"model": "coin.coin",
-         "pk": 2,
-         "fields": {
-                    "short_title":"USD",
-                    "long_title":" United States dollar",
-                    "active":true
-                     }
-    },
-    {"model": "company.company",
-         "pk": 1,
-         "fields": {"name":"ST","create_at":"2022-07-22T18:28:29.406Z",
-         "update_at":"2022-07-22T18:28:29.406Z" }
-    },
-    {"model": "company.company",
-         "pk": 2,
-         "fields": {"name":"Ts","create_at":"2022-07-22T18:28:29.406Z",
-         "update_at":"2022-07-22T18:28:29.406Z" }
-    },
-    {"model": "users.profile",
-         "pk": 1,
-         "fields": {"user": 1,
-         "image": "default.jpg",
-          "phoneNumber": null,
-          "create_at": "2022-07-23T04:03:09.193Z",
-          "update_at": "2022-07-23T04:03:47.778Z"}
-        },
-        {"model": "users.profile",
-         "pk": 2,
-         "fields": {"user": 2,
-         "image": "default.jpg",
-         "phoneNumber": null,
-         "create_at": "2022-07-23T04:03:09.240Z",
-         "update_at": "2022-07-23T04:04:48.439Z"}
-        },
-    {"model": "users.myuser",
-      "pk": 3,
-       "fields": {
-       "password": "pbkdf2_sha256$260000$9RVrQBF3vnGkWOeo5jckfQ$HThGPFRbKOGvrL6mMn0fQzjw3qHrPd7fP1wDbIttT5k=",
-        "last_login": null,
-        "email": "man@root.com",
-         "username": "man",
+    {
+        "model": "users.myuser",
+        "pk": 1,
+        "fields":
+        {
+            "password": "pbkdf2_sha256$260000$9RVrQBF3vnGkWOeo5jckfQ$HThGPFRbKOGvrL6mMn0fQzjw3qHrPd7fP1wDbIttT5k=",
+            "email": "root@root.com",
+            "username": "root",
             "date_joined": "2022-07-22T18:28:29.406Z",
             "is_active": true,
-            "is_staff": false,
-            "is_superuser": false,
-             "is_MANAGER": true,
-             "is_RESERVATION": true,
-             "is_ACCOUNTANT": true,
-             "is_CUSTOMER": true,
-             "company": 1
-
-         }
-         },
-    {"model": "users.myuser",
-      "pk": 4,
-       "fields": {
-       "password": "pbkdf2_sha256$260000$9RVrQBF3vnGkWOeo5jckfQ$HThGPFRbKOGvrL6mMn0fQzjw3qHrPd7fP1wDbIttT5k=",
-        "last_login": null,
-        "email": "manTs@root.com",
-         "username": "manTs",
-            "date_joined": "2022-07-22T18:28:29.406Z",
-            "is_active": true,
-            "is_staff": false,
-            "is_superuser": false,
-             "is_MANAGER": true,
-             "is_RESERVATION": true,
-             "is_ACCOUNTANT": true,
-             "is_CUSTOMER": true,
-             "company": 2
-
-         }
-         },
-        {"model": "users.profile",
-         "pk": 3,
-         "fields": {"user": 3,
-         "image": "default.jpg",
-         "phoneNumber": null,
-         "create_at": "2022-07-23T04:03:09.240Z",
-         "update_at": "2022-07-23T04:04:48.439Z"}
-        },
-        {"model": "users.profile",
-         "pk": 4,
-         "fields": {"user": 4,
-         "image": "default.jpg",
-         "phoneNumber": null,
-         "create_at": "2022-07-23T04:03:09.240Z",
-         "update_at": "2022-07-23T04:04:48.439Z"}
+            "is_staff": true,
+            "is_superuser": true
         }
-           ,
+    },
+    {
+        "model": "users.myuser",
+        "pk": 2,
+        "fields":
+        {
+            "password": "pbkdf2_sha256$260000$9RVrQBF3vnGkWOeo5jckfQ$HThGPFRbKOGvrL6mMn0fQzjw3qHrPd7fP1wDbIttT5k=",
+            "email": "staf@root.com",
+            "username": "staf",
+            "date_joined": "2022-07-22T18:28:29.406Z",
+            "is_active": true,
+            "is_staff": true
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 1,
+        "fields":
+        {
+            "short_title": "SYP",
+            "long_title": "Syrian pound",
+            "active": true
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 2,
+        "fields":
+        {
+            "short_title": "USD",
+            "long_title": " United States dollar",
+            "active": true
+        }
+    },
+    {
+        "model": "company.company",
+        "pk": 1,
+        "fields":
+        {
+            "name": "ST",
+            "create_at": "2022-07-22T18:28:29.406Z",
+            "update_at": "2022-07-22T18:28:29.406Z"
+        }
+    },
+    {
+        "model": "company.company",
+        "pk": 2,
+        "fields":
+        {
+            "name": "Ts",
+            "create_at": "2022-07-22T18:28:29.406Z",
+            "update_at": "2022-07-22T18:28:29.406Z"
+        }
+    },
+    {
+        "model": "users.profile",
+        "pk": 1,
+        "fields":
+        {
+            "user": 1,
+            "image": "default.jpg",
+            "phoneNumber": null,
+            "create_at": "2022-07-23T04:03:09.193Z",
+            "update_at": "2022-07-23T04:03:47.778Z"
+        }
+    },
+    {
+        "model": "users.profile",
+        "pk": 2,
+        "fields":
+        {
+            "user": 2,
+            "image": "default.jpg",
+            "phoneNumber": null,
+            "create_at": "2022-07-23T04:03:09.240Z",
+            "update_at": "2022-07-23T04:04:48.439Z"
+        }
+    },
+    {
+        "model": "users.myuser",
+        "pk": 3,
+        "fields":
+        {
+            "password": "pbkdf2_sha256$260000$9RVrQBF3vnGkWOeo5jckfQ$HThGPFRbKOGvrL6mMn0fQzjw3qHrPd7fP1wDbIttT5k=",
+            "last_login": null,
+            "email": "man@root.com",
+            "username": "man",
+            "date_joined": "2022-07-22T18:28:29.406Z",
+            "is_active": true,
+            "is_staff": false,
+            "is_superuser": false,
+            "is_MANAGER": true,
+            "is_RESERVATION": true,
+            "is_ACCOUNTANT": true,
+            "is_CUSTOMER": true,
+            "company": 1
 
-         {"model": "account.account",
-         "pk": 1,
-         "fields":
-            {"company": 1,
-             "created_at": "2022-09-22T17:24:08.670Z",
-             "updated_at": "2022-09-22T17:31:32.942Z",
-             "author": 3,
-             "is_deleted": false,
-             "name": "aaaa",
-             "account_type": "20"}
-         },
-         {"model": "account.account",
-         "pk": 2,
-         "fields":
-            {"company": 1,
-             "created_at": "2022-09-22T17:24:08.670Z",
-             "updated_at": "2022-09-22T17:31:32.942Z",
-             "author": 3,
-             "is_deleted": false,
-             "name": "bbbb",
-             "account_type": "20"}
-         },
-         {"model": "account.account",
-         "pk": 3,
-         "fields":
-            {"company": 1,
-             "created_at": "2022-09-22T17:24:08.670Z",
-             "updated_at": "2022-09-22T17:31:32.942Z",
-             "author": 3,
-             "is_deleted": false,
-             "name": "cccc",
-             "account_type": "20"}
-         },
-        {"model": "customer.customer"
-        , "pk": 1
-        , "fields":
-        {"company": 1
-            , "created_at": "2022-09-22T17:24:09.089Z"
-        , "updated_at": "2022-09-22T17:31:33.098Z"
-        , "author": 3
-        , "is_deleted": false
-        , "account": 1
-        , "client": true
-        , "transportcompany": true
-        , "logo": "default.jpg"
-        , "address": "aaaa"
-        , "phoneNumber1": "12345678"
-        , "phoneNumber2": null
-        , "tradeRecord": "aaaa"
-        , "email": "aaaa@aaaa.com"
-    , "webSite": "https://www.aaaa.co.uk"}
+        }
     },
-        {"model": "customer.customer"
-        , "pk": 2
-        , "fields":
-        {"company": 1
-            , "created_at": "2022-09-22T17:24:09.089Z"
-        , "updated_at": "2022-09-22T17:31:33.098Z"
-        , "author": 3
-        , "is_deleted": false
-        , "account": 2
-        , "client": false
-        , "aircompany": true
-        , "logo": "default.jpg"
-        , "address": "bbbb"
-        , "phoneNumber1": "56781234"
-        , "phoneNumber2": null
-        , "tradeRecord": "bbbb"
-        , "email": "bbbb@bbbb.com"
-    , "webSite": "https://www.bbbb.co.uk"}
+    {
+        "model": "users.myuser",
+        "pk": 4,
+        "fields":
+        {
+            "password": "pbkdf2_sha256$260000$9RVrQBF3vnGkWOeo5jckfQ$HThGPFRbKOGvrL6mMn0fQzjw3qHrPd7fP1wDbIttT5k=",
+            "last_login": null,
+            "email": "manTs@root.com",
+            "username": "manTs",
+            "date_joined": "2022-07-22T18:28:29.406Z",
+            "is_active": true,
+            "is_staff": false,
+            "is_superuser": false,
+            "is_MANAGER": true,
+            "is_RESERVATION": true,
+            "is_ACCOUNTANT": true,
+            "is_CUSTOMER": true,
+            "company": 2
+
+        }
     },
-        {"model": "customer.customer"
-        , "pk": 3
-        , "fields":
-        {"company": 1
-            , "created_at": "2022-09-22T17:24:09.089Z"
-        , "updated_at": "2022-09-22T17:31:33.098Z"
-        , "author": 3
-        , "is_deleted": false
-        , "account": 3
-        , "client": true
-        , "visacompany": true
-        , "logo": "default.jpg"
-        , "address": "ncccc"
-        , "phoneNumber1": "10000008"
-        , "phoneNumber2": null
-        , "tradeRecord": "ccccc"
-        , "email": "ccccc@ccccc.com"
-    , "webSite": "https://www.ccccc.co.uk"}
+    {
+        "model": "users.profile",
+        "pk": 3,
+        "fields":
+        {
+            "user": 3,
+            "image": "default.jpg",
+            "phoneNumber": null,
+            "create_at": "2022-07-23T04:03:09.240Z",
+            "update_at": "2022-07-23T04:04:48.439Z"
+        }
+    },
+    {
+        "model": "users.profile",
+        "pk": 4,
+        "fields":
+        {
+            "user": 4,
+            "image": "default.jpg",
+            "phoneNumber": null,
+            "create_at": "2022-07-23T04:03:09.240Z",
+            "update_at": "2022-07-23T04:04:48.439Z"
+        }
+    },
+    {
+        "model": "account.account",
+        "pk": 1,
+        "fields":
+        {
+            "company": 1,
+            "created_at": "2022-09-22T17:24:08.670Z",
+            "updated_at": "2022-09-22T17:31:32.942Z",
+            "author": 3,
+            "is_deleted": false,
+            "name": "Visa ",
+            "account_type": "1"
+        }
+    },
+    {
+        "model": "account.account",
+        "pk": 2,
+        "fields":
+        {
+            "company": 1,
+            "created_at": "2022-09-22T17:24:08.670Z",
+            "updated_at": "2022-09-22T17:31:32.942Z",
+            "author": 3,
+            "is_deleted": false,
+            "name": "airline ticket ",
+            "account_type": "2"
+        }
+    },
+    {
+        "model": "account.account",
+        "pk": 3,
+        "fields":
+        {
+            "company": 1,
+            "created_at": "2022-09-22T17:24:08.670Z",
+            "updated_at": "2022-09-22T17:31:32.942Z",
+            "author": 3,
+            "is_deleted": false,
+            "name": "transport ticket ",
+            "account_type": "3"
+        }
+    },
+    {
+        "model": "account.account",
+        "pk": 4,
+        "fields":
+        {
+            "company": 1,
+            "created_at": "2022-09-22T17:24:08.670Z",
+            "updated_at": "2022-09-22T17:31:32.942Z",
+            "author": 3,
+            "is_deleted": false,
+            "name": "sea ticket",
+            "account_type": "4"
+        }
+    },
+    {
+        "model": "account.account",
+        "pk": 5,
+        "fields":
+        {
+            "company": 1,
+            "created_at": "2022-09-22T17:24:08.670Z",
+            "updated_at": "2022-09-22T17:31:32.942Z",
+            "author": 3,
+            "is_deleted": false,
+            "name": "shipping ",
+            "account_type": "5"
+        }
+    },
+    {
+        "model": "account.account",
+        "pk": 6,
+        "fields":
+        {
+            "company": 1,
+            "created_at": "2022-09-22T17:24:08.670Z",
+            "updated_at": "2022-09-22T17:31:32.942Z",
+            "author": 3,
+            "is_deleted": false,
+            "name": "hotel ticket",
+            "account_type": "6"
+        }
+    },
+    {
+        "model": "account.account",
+        "pk": 7,
+        "fields":
+        {
+            "company": 1,
+            "created_at": "2022-09-22T17:24:08.670Z",
+            "updated_at": "2022-09-22T17:31:32.942Z",
+            "author": 3,
+            "is_deleted": false,
+            "name": "document ",
+            "account_type": "7"
+        }
+    },
+    {
+        "model": "account.account",
+        "pk": 8,
+        "fields":
+        {
+            "company": 1,
+            "created_at": "2022-09-22T17:24:08.670Z",
+            "updated_at": "2022-09-22T17:31:32.942Z",
+            "author": 3,
+            "is_deleted": false,
+            "name": "commession ",
+            "account_type": "8"
+        }
+    },
+    {
+        "model": "account.account",
+        "pk": 9,
+        "fields":
+        {
+            "company": 1,
+            "created_at": "2022-09-22T17:24:08.670Z",
+            "updated_at": "2022-09-22T17:31:32.942Z",
+            "author": 3,
+            "is_deleted": false,
+            "name": "insurance ",
+            "account_type": "9"
+        }
+    },
+    {
+        "model": "account.account",
+        "pk": 10,
+        "fields":
+        {
+            "company": 1,
+            "created_at": "2022-09-22T17:24:08.670Z",
+            "updated_at": "2022-09-22T17:31:32.942Z",
+            "author": 3,
+            "is_deleted": false,
+            "name": "backage ",
+            "account_type": "10"
+        }
+    },
+    {
+        "model": "account.account",
+        "pk": 11,
+        "fields":
+        {
+            "company": 1,
+            "created_at": "2022-09-22T17:24:08.670Z",
+            "updated_at": "2022-09-22T17:31:32.942Z",
+            "author": 3,
+            "is_deleted": false,
+            "name": "Exchange ",
+            "account_type": "11"
+        }
+    },
+    {
+        "model": "account.account",
+        "pk": 12,
+        "fields":
+        {
+            "company": 1,
+            "created_at": "2022-09-22T17:24:08.670Z",
+            "updated_at": "2022-09-22T17:31:32.942Z",
+            "author": 3,
+            "is_deleted": false,
+            "name": "Assets ",
+            "account_type": "12"
+        }
+    },
+    {
+        "model": "account.account",
+        "pk": 13,
+        "fields":
+        {
+            "company": 1,
+            "created_at": "2022-09-22T17:24:08.670Z",
+            "updated_at": "2022-09-22T17:31:32.942Z",
+            "author": 3,
+            "is_deleted": false,
+            "name": "aaaa",
+            "account_type": "20"
+        }
+    },
+    {
+        "model": "account.account",
+        "pk": 14,
+        "fields":
+        {
+            "company": 1,
+            "created_at": "2022-09-22T17:24:08.670Z",
+            "updated_at": "2022-09-22T17:31:32.942Z",
+            "author": 3,
+            "is_deleted": false,
+            "name": "bbbb",
+            "account_type": "20"
+        }
+    },
+    {
+        "model": "account.account",
+        "pk": 15,
+        "fields":
+        {
+            "company": 1,
+            "created_at": "2022-09-22T17:24:08.670Z",
+            "updated_at": "2022-09-22T17:31:32.942Z",
+            "author": 3,
+            "is_deleted": false,
+            "name": "cccc",
+            "account_type": "20"
+        }
+    },
+    {
+        "model": "customer.customer",
+        "pk": 1,
+        "fields":
+        {
+            "company": 1,
+            "created_at": "2022-09-22T17:24:09.089Z",
+            "updated_at": "2022-09-22T17:31:33.098Z",
+            "author": 3,
+            "is_deleted": false,
+            "account": 13,
+            "client": true,
+            "transportcompany": true,
+            "logo": "default.jpg",
+            "address": "aaaa",
+            "phoneNumber1": "12345678",
+            "phoneNumber2": null,
+            "tradeRecord": "aaaa",
+            "email": "aaaa@aaaa.com",
+            "webSite": "https://www.aaaa.co.uk"
+        }
+    },
+    {
+        "model": "customer.customer",
+        "pk": 2,
+        "fields":
+        {
+            "company": 1,
+            "created_at": "2022-09-22T17:24:09.089Z",
+            "updated_at": "2022-09-22T17:31:33.098Z",
+            "author": 3,
+            "is_deleted": false,
+            "account": 14,
+            "client": false,
+            "aircompany": true,
+            "logo": "default.jpg",
+            "address": "bbbb",
+            "phoneNumber1": "56781234",
+            "phoneNumber2": null,
+            "tradeRecord": "bbbb",
+            "email": "bbbb@bbbb.com",
+            "webSite": "https://www.bbbb.co.uk"
+        }
+    },
+    {
+        "model": "customer.customer",
+        "pk": 3,
+        "fields":
+        {
+            "company": 1,
+            "created_at": "2022-09-22T17:24:09.089Z",
+            "updated_at": "2022-09-22T17:31:33.098Z",
+            "author": 3,
+            "is_deleted": false,
+            "account": 15,
+            "client": true,
+            "visacompany": true,
+            "logo": "default.jpg",
+            "address": "ncccc",
+            "phoneNumber1": "10000008",
+            "phoneNumber2": null,
+            "tradeRecord": "ccccc",
+            "email": "ccccc@ccccc.com",
+            "webSite": "https://www.ccccc.co.uk"
+        }
     }
 ]

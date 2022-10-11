@@ -21,5 +21,8 @@ django-admin makemessages --all
 django-admin compilemessages
 
 
+$ django-admin makemessages -l ar
+$ django-admin makemessages -l en
+
 { "keys": ["super+shift+h"], "command": "htmlprettify" }
 view.run_command("htmlprettify")

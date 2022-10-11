@@ -12,7 +12,8 @@ from .models import Account
 # is_RESERVATION
 # is_ACCOUNTANT
 # is_CUSTOMER
-# @user_passes_test(lambda u: u.is_superuser)
+
+@login_required
 def index(request):
     if request.user.is_MANAGER:
         return render(request, 'account/index.html')

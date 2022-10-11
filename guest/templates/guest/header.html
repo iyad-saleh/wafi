@@ -22,27 +22,22 @@
 
             </div>
 
-                <form action="#" method="post" class="language-picker__form"> {% csrf_token %}
+                <form action="{% url 'set_language' %}" method="post" class="language-picker__form"> {% csrf_token %}
                     <input type="hidden" name="next" value="{{ redirect_to }}">
 
-                    <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Select Language</a>
-                    <div class="dropdown-menu border-0 rounded-0 m-0">
+
+                    <select name="language">
                        {% get_current_language as LANGUAGE_CODE %}
                         {% get_available_languages as LANGUAGES %}
-                        {% for lang in LANGUAGES %}
-
-                        <a  class="dropdown-item" href="/{{lang.0}}/">
-                      {% with "img/flag/"|addstr:lang.0|addstr:".svg" as static_svg %}
-                            <img class="w-50 h-50"
-                            src="{% static static_svg %}"
-                            alt="{{lang.0}}" >
-                            {% endwith %}  {{lang.1}}
-                        </a>
+                       {%  get_language_info_list for LANGUAGES as languages %}
+                        {% for language in languages %}
+                        <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE  %} selected {% endif %}>{{language.name_local}}({{language.code}})</option>
                         {% endfor %}
 
-                    </div>
-                </div>
+
+
+                    </select>
+                    <input type="submit" name="submit">
 
                 </form>
               </div>
@@ -151,6 +146,7 @@
                         href="{% url 'dashboard' %}">dashboard</a>
                       </li>
 
+
                    {% endif %}
 
                      <li class="nav-item">
@@ -160,6 +156,10 @@
                         </a>
                       </li>
                     {% else %}
+                     <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger"
+                        href="#">dashboard</a>
+                      </li>
                     <li class="nav-item">
                         <a href="{% url 'login' %}" class="nav-link ">
                             <button  class="btn btn-primary rounded" >Sign In</button>

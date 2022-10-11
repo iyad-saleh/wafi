@@ -7,6 +7,8 @@ from django.shortcuts import get_object_or_404
 
 from .models import Reservation , Reservation_airline
 from .forms import ReservationForm ,AirlineReservationForm
+from passport.forms import PassportForm
+from passport.models import Passport
 from customer.models import Customer
 from ked.models import Ked, Journal
 from account.models import Account
@@ -164,10 +166,10 @@ def airline_index(request):
     if request.user.is_MANAGER or request.user.is_RESERVATION:
         company = request.user.company
         form = AirlineReservationForm()
+        reservations = Reservation_airline.objects.filter(company=company)
         form.fields['customer'].queryset = Customer.objects.filter(client=True).filter(company=company)
-        # form.fields['supplier'].queryset   = Customer.objects.filter(supplier=True).filter(company=company)
-
-        return render(request, 'reservation/airline/index.html',{'form':form})
+        return render(request, 'reservation/airline/index.html',
+                     {'form':form, 'reservations':reservations})
     return HttpResponse(
         status=403,
         headers={
@@ -192,7 +194,64 @@ def edit_airline(request,pk):
 
 def add_airline(request):
 
-    pass
+    if request.method == "POST":
+        # Passporform = PassportForm(request.POST)
+        form= AirlineReservationForm(request.POST,request.FILES)
+        if form.is_valid():#and Passporform.is_valid() :
+            airline = form.save(commit=False)
+            airline.author=request.user
+            airline.company=request.user.company
+            airlineAccount = Account.objects.filter(account_type='2').first()
+            # print(airlineAccount)
+            airline.save()
+            title = ''
+            if form.cleaned_data['title']:
+                title += form.cleaned_data['title']
+            title +=  str(airlineAccount)
+            ked = Ked.objects.create(
+                                  title = title,
+                                  author= request.user,
+                                  company =request.user.company )
+            journal = Journal.objects.create(
+                                    ked = ked ,
+                                    account_credit =airline.supplier.account ,
+                                    account_dept = airlineAccount,
+                                    dept =   airline.pay_price ,
+                                    credit = 0  ,
+                                    coin = airline.pay_coin   ,
+                                    memo = 'pay '+ str(airlineAccount) +' from '+str(airline.supplier.account)   ,
+                                    author= request.user,
+                                    company =request.user.company
+                )
+            journal = Journal.objects.create(
+                                    ked = ked ,
+                                    account_credit =airlineAccount ,
+                                    account_dept = airline.customer.account   ,
+                                    dept =   0 ,
+                                    credit = airline.sell_price   ,
+                                    coin = airline.sell_coin   ,
+                                    memo = 'sell '+str(airlineAccount)+' to '+str(airline.customer.account)   ,
+                                    author= request.user,
+                                    company =request.user.company
+                )
+            return HttpResponse(
+                status=204,
+                headers={
+                    'HX-Trigger': json.dumps({
+                        "airlineListChanged": None,
+                        "showMessage": f"airline reservation {airline.title} added."
+                    })
+                })
+        else:
+            return render(request, 'reservation/airline/airline_form.html', {
+        'form': form
+    })
+    else:
+        form = AirlineReservationForm()
+    return render(request, 'reservation/airline/airline_form.html', {
+        'form': form
+    })
+
 
 
 def remove_airline(request):

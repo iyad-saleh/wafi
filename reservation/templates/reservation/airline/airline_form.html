@@ -1,0 +1,166 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<div hx-trigger=" airlineListChanged from:body" hx-target="this" id="airlineform" {% if not reservation %} x-data="{ open: false  }" {% else %} x-data="{open:true }" {% endif %} class="container">
+    <div class="container ">
+        <div class="row gutters">
+            <div class="form-group col-md-2 my-2 ">
+                <button x-show="!open" class="btn btn-outline-primary btn-icon-text  mx-3" @click="open = ! open">
+                    <span>سجل جديد</span>
+                </button>
+                <button class="btn btn-outline-primary btn-icon-text  mx-3" x-show="open" hx-get="{% url 'add_airline' %}" hx-target='#airlineform'>
+                    <span>اخفاء</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <form hx-encoding="multipart/form-data" id="form" {% if not reservation %} hx-post="{% url 'add_airline' %}" {% else %} hx-post="{% url 'edit_airline' pk=reservation.pk %}" {% endif %} hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}' class="modal-content" hx-target='#airlineList' x-transition>
+         <div class="modal-body container " x-show="open" x-transition:enter.duration.1000ms x-transition:leave.duration.1000ms>
+        <div id="example-form" >
+            <h3> Status</h3>
+            <section>
+                <div class="row gutters">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                        <div class="form-group">
+                            {{ form.airline_company|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                        <div class="form-group">
+                            {{ form.title|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                        <div class="form-group">
+                            {{ form.Date|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row gutters">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                        <div class="form-group">
+                            {{ form.status|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                        <div class="form-group">
+                            {{ form.passenger_num|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <h3> Supplier& Customer</h3>
+            <section>
+                <div class="row gutters">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                        <div class="form-group">
+                            {{ form.supplier|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                        <div class="form-group">
+                            {{ form.pay_price|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-12">
+                        <div class="form-group">
+                            {{ form.pay_coin|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row gutters">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                        <div class="form-group">
+                            {{ form.customer|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                        <div class="form-group">
+                            {{ form.sell_price|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-12">
+                        <div class="form-group">
+                            {{ form.sell_coin|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <h3> flight Information</h3>
+            <section>
+                <div class="row gutters">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+                        <div class="form-group">
+                            {{ form.flight_no|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                        <div class="form-group">
+                            {{ form.PNR|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+                        <div class="form-group">
+                            {{ form.flight_type|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-12">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" name="roundtrip" class="custom-control-input" checked id="customSwitch3">
+                            <label class="custom-control-label" for="customSwitch3">round trip</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row gutters">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+                        <div class="form-group">
+                            {{ form.departure|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+                        <div class="form-group">
+                            {{ form.departure_date|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+                        <div class="form-group">
+                            {{ form.arrival|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+                        <div class="form-group">
+                            {{ form.return_date|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <h3> Passenger Information</h3>
+            <section>
+                <div class="row gutters">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+                        <div class="form-group">
+                            {{ form.passport|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+            <div class="row gutters">
+                <div class="col-xl-6 col-lg-6 col-md-3 col-sm-3 col-3">
+                    <div class="custom-btn-group" style=" justify-content:space-between;">
+                        <button type="submit" class="btn btn-primary" @click="open = ! open">Save</button>
+                        <!-- <button type="reset" class="btn btn-primary" >Reset</button> -->
+                        {% if reservation %}
+                  <button type="button" class="btn btn-danger"
+                  hx-confirm="Are you sure you wish to delete {{ reservation }}?" hx-post="{% url 'remove_airline' pk=reservation.pk %}"
+                  @click="open = ! open"
+                  >Remove</button>
+                        {% else %}
+                        <input type="reset" class="btn btn-primary" value="Reset">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            </div>
+    </form>
+</div>

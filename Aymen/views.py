@@ -5,7 +5,8 @@ import json
 from employee.models import Employee
 from customer.models import Customer
 from account.models import Account
-
+from django.utils import translation
+from django.http import HttpResponseRedirect
 
 
 def dashboard(request):
@@ -34,3 +35,11 @@ def dashboard(request):
                "customerListChanged": None,
             })
         })
+
+
+
+def set_language_from_url(request, user_language):
+    translation.activate(user_language)
+    request.session[translation.LANGUAGE_SESSION_KEY] = user_language
+    # I use HTTP_REFERER to direct them back to previous path
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

@@ -4,14 +4,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
 from users import views as user_views
-from .views import dashboard
+from .views import dashboard, set_language_from_url
 from django.views.generic import TemplateView
 
 urlpatterns =[
+    path('staff/', admin.site.urls),
+    path('i18n/', include('django.conf.urls.i18n')),
+    # path("set_language/<str:user_language>/", set_language_from_url, name="set_language_from_url"),
 
     path('', include('guest.urls')),
     path('users/', include('users.urls')),
-    path('staff/', admin.site.urls),
 
 
     path('blog', include('blog.urls')),

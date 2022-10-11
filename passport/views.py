@@ -9,7 +9,7 @@ from .models import Passport, Passenger, Photo
 from .forms import PassportForm, PassengerForm, PhotoFormSet
 from django.contrib.auth.decorators import user_passes_test
 
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # is_MANAGER
 # is_RESERVATION
@@ -20,7 +20,7 @@ def index(request):
     form = PassportForm()
     photoform =PhotoFormSet()
     passport_list = Passport.objects.all().order_by('-id')
-    paginator = Paginator(passport_list, 5)
+    paginator = Paginator(passport_list, 10)
     page = request.GET.get('page', 1)
     try:
         passports = paginator.page(page)
@@ -40,9 +40,19 @@ def index(request):
 @login_required
 def passport_list(request):
     if request.user.is_MANAGER or request.user.is_RESERVATION or request.user.is_CUSTOMER:
-        passports = Passport.objects.all().order_by('-id')
+
+        passport_list = Passport.objects.all().order_by('-id')
+        paginator = Paginator(passport_list, 10)
+        page = request.GET.get('page', 1)
+        try:
+            passports = paginator.page(page)
+        except PageNotAnInteger:
+            passports = paginator.page(1)
+        except EmptyPage:
+            passports = paginator.page(paginator.num_pages)
+
         return render(request, 'passport/passport_list.html', {
-            'passports':passports
+            'passports':passports, 'page': page
         })
 
 
