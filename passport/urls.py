@@ -9,5 +9,5 @@ urlpatterns = [
     path('passports/add', add_passport, name='add_passport'),
     path('passports/<int:pk>/remove', remove_passport, name='remove_passport'),
     path('passports/<int:pk>/edit', edit_passport, name='edit_passport'),
-
+    path('passports/<int:id>/photo/<int:pk>/remove', remove_photo, name='remove_photo'),
 ]

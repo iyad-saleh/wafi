@@ -4,6 +4,20 @@
 {% block title %} Passport List{% endblock %}
 {% block stylesheets %}
 <link rel="stylesheet" href="{% static 'vendor/wizard/jquery.steps.css' %}" />
+
+<style type="text/css">
+    .img-wrap {
+    position: relative;
+
+}
+.img-wrap .close {
+    position: absolute;
+    top: 2px;
+    /*right: 2px;*/
+    z-index: 100;
+
+}
+</style>
 {% endblock stylesheets %}
 {% block content %}
 <div class="container">

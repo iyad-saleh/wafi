@@ -98,6 +98,7 @@ def add_passport(request):
 
 @login_required
 def edit_passport(request, pk):
+
     passport = get_object_or_404(Passport, pk=pk)
     if passport :
         images = passport.photos.all()
@@ -154,5 +155,16 @@ def remove_passport(request, pk):
                 "showMessage": f"{passport} deleted."
             })
         })
+
+@login_required
+def remove_photo(request, id,pk):
+    passport = get_object_or_404(Passport, id=id)
+    if passport:
+        images = passport.photos.all()
+        photo = get_object_or_404(Photo, pk=pk)
+        photo.delete()
+        return render(request, 'passport/photoGallery.html', {
+        'images':images
+    })
 
 
