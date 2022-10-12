@@ -26,3 +26,17 @@ $ django-admin makemessages -l en
 
 { "keys": ["super+shift+h"], "command": "htmlprettify" }
 view.run_command("htmlprettify")
+
+
+
+from international.utility import *
+AddCurrency()
+
+addCountryfromWorldcities()
+
+addCities()
+
+
+AddCountrydetails()
+
+addAirport()

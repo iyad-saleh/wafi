@@ -12,6 +12,7 @@ from passport.models import Passport
 from customer.models import Customer
 from ked.models import Ked, Journal
 from account.models import Account
+from django.db.models import Q # new
 
 
 
@@ -167,7 +168,11 @@ def airline_index(request):
         company = request.user.company
         form = AirlineReservationForm()
         reservations = Reservation_airline.objects.filter(company=company)
-        form.fields['customer'].queryset = Customer.objects.filter(client=True).filter(company=company)
+        form.fields['customer'].queryset = Customer.objects.filter(
+                                Q(client=True)& Q(company=company)).distinct()
+        form.fields['supplier'].queryset = Customer.objects.filter(
+                                Q(company=company)&Q(aircompany=True)).distinct()
+
         return render(request, 'reservation/airline/index.html',
                      {'form':form, 'reservations':reservations})
     return HttpResponse(
@@ -193,14 +198,14 @@ def edit_airline(request,pk):
 
 
 def add_airline(request):
-
+    company = request.user.company
     if request.method == "POST":
         # Passporform = PassportForm(request.POST)
         form= AirlineReservationForm(request.POST,request.FILES)
         if form.is_valid():#and Passporform.is_valid() :
             airline = form.save(commit=False)
             airline.author=request.user
-            airline.company=request.user.company
+            airline.company=company
             airlineAccount = Account.objects.filter(account_type='2').first()
             # print(airlineAccount)
             airline.save()
@@ -211,7 +216,7 @@ def add_airline(request):
             ked = Ked.objects.create(
                                   title = title,
                                   author= request.user,
-                                  company =request.user.company )
+                                  company =company )
             journal = Journal.objects.create(
                                     ked = ked ,
                                     account_credit =airline.supplier.account ,
@@ -221,7 +226,7 @@ def add_airline(request):
                                     coin = airline.pay_coin   ,
                                     memo = 'pay '+ str(airlineAccount) +' from '+str(airline.supplier.account)   ,
                                     author= request.user,
-                                    company =request.user.company
+                                    company =company
                 )
             journal = Journal.objects.create(
                                     ked = ked ,
@@ -232,7 +237,7 @@ def add_airline(request):
                                     coin = airline.sell_coin   ,
                                     memo = 'sell '+str(airlineAccount)+' to '+str(airline.customer.account)   ,
                                     author= request.user,
-                                    company =request.user.company
+                                    company =company
                 )
             return HttpResponse(
                 status=204,
@@ -248,6 +253,10 @@ def add_airline(request):
     })
     else:
         form = AirlineReservationForm()
+        form.fields['customer'].queryset = Customer.objects.filter(
+                                Q(client=True)& Q(company=company)).distinct()
+        form.fields['supplier'].queryset = Customer.objects.filter(
+                                Q(company=company)&Q(aircompany=True)).distinct()
     return render(request, 'reservation/airline/airline_form.html', {
         'form': form
     })

@@ -25,7 +25,7 @@ def AddCurrency():
         short_title = item[1][:3]
         long_title = item[1][4:]
         try:
-            cc =Currency(id=id,short_title=short_title,long_title=long_title)
+            cc =Coin(id=id,short_title=short_title,long_title=long_title)
             cc.save()
         except Exception as e:
             print(item)

@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
     'translation_manager',
-
+    'international',
     'crispy_forms',
     'widget_tweaks',
     'import_export',
