@@ -1,0 +1,1157 @@
+[
+    {
+        "model": "coin.coin",
+        "pk": 1,
+        "fields":
+        {
+            "short_title": "SYP",
+            "long_title": "Syrian pound",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 2,
+        "fields":
+        {
+            "short_title": "USD",
+            "long_title": "United States dollar",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 3,
+        "fields":
+        {
+            "short_title": "EUR",
+            "long_title": "Euro",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 4,
+        "fields":
+        {
+            "short_title": "AED",
+            "long_title": "United Arab Emirates dirham",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 5,
+        "fields":
+        {
+            "short_title": "SAR",
+            "long_title": "Saudi riyal",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 6,
+        "fields":
+        {
+            "short_title": "EGP",
+            "long_title": "Egyptian pound",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 7,
+        "fields":
+        {
+            "short_title": "IQD",
+            "long_title": "Iraqi dinar",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 8,
+        "fields":
+        {
+            "short_title": "JOD",
+            "long_title": "Jordanian dinar",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 9,
+        "fields":
+        {
+            "short_title": "KWD",
+            "long_title": "Kuwaiti dinar",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 10,
+        "fields":
+        {
+            "short_title": "BHD",
+            "long_title": "Bahraini dinar",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 11,
+        "fields":
+        {
+            "short_title": "MAD",
+            "long_title": "Moroccan dirham",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 12,
+        "fields":
+        {
+            "short_title": "TND",
+            "long_title": "Tunisian dinar",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 13,
+        "fields":
+        {
+            "short_title": "QAR",
+            "long_title": "Qatari riyal",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 14,
+        "fields":
+        {
+            "short_title": "TRY",
+            "long_title": "Turkish lira",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 15,
+        "fields":
+        {
+            "short_title": "LYD",
+            "long_title": "Libyan dinar",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 16,
+        "fields":
+        {
+            "short_title": "RUB",
+            "long_title": "Russian Federation ruble",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 32,
+        "fields":
+        {
+            "short_title": "ARS",
+            "long_title": "Argentine peso",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 36,
+        "fields":
+        {
+            "short_title": "AUD",
+            "long_title": "Australian dollar",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 44,
+        "fields":
+        {
+            "short_title": "BSD",
+            "long_title": "Bahamian dollar",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 50,
+        "fields":
+        {
+            "short_title": "BDT",
+            "long_title": "Bangladeshi taka",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 51,
+        "fields":
+        {
+            "short_title": "AMD",
+            "long_title": "Armenian dram",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 52,
+        "fields":
+        {
+            "short_title": "BBD",
+            "long_title": "Barbados dollar",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 60,
+        "fields":
+        {
+            "short_title": "BMD",
+            "long_title": "Bermudian dollar",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 64,
+        "fields":
+        {
+            "short_title": "BTN",
+            "long_title": "Bhutanese ngultrum",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 68,
+        "fields":
+        {
+            "short_title": "BOB",
+            "long_title": "Boliviano",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 72,
+        "fields":
+        {
+            "short_title": "BWP",
+            "long_title": "Botswana pula",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 84,
+        "fields":
+        {
+            "short_title": "BZD",
+            "long_title": "Belize dollar",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 90,
+        "fields":
+        {
+            "short_title": "SBD",
+            "long_title": "Solomon Islands dollar",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 96,
+        "fields":
+        {
+            "short_title": "BND",
+            "long_title": "Brunei dollar",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 104,
+        "fields":
+        {
+            "short_title": "MMK",
+            "long_title": "Myanmar kyat",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 108,
+        "fields":
+        {
+            "short_title": "BIF",
+            "long_title": "Burundian franc",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 116,
+        "fields":
+        {
+            "short_title": "KHR",
+            "long_title": "Cambodian riel",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 124,
+        "fields":
+        {
+            "short_title": "CAD",
+            "long_title": "Canadian dollar",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 132,
+        "fields":
+        {
+            "short_title": "CVE",
+            "long_title": "Cape Verde escudo",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 136,
+        "fields":
+        {
+            "short_title": "KYD",
+            "long_title": "Cayman Islands dollar",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 144,
+        "fields":
+        {
+            "short_title": "LKR",
+            "long_title": "Sri Lankan rupee",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 152,
+        "fields":
+        {
+            "short_title": "CLP",
+            "long_title": "Chilean peso",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 156,
+        "fields":
+        {
+            "short_title": "CNY",
+            "long_title": "Renminbi (Chinese) yuan[8]",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 170,
+        "fields":
+        {
+            "short_title": "COP",
+            "long_title": "Colombian peso",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 174,
+        "fields":
+        {
+            "short_title": "KMF",
+            "long_title": "Comoro franc",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 188,
+        "fields":
+        {
+            "short_title": "CRC",
+            "long_title": "Costa Rican colon",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 191,
+        "fields":
+        {
+            "short_title": "HRK",
+            "long_title": "Croatian kuna",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 192,
+        "fields":
+        {
+            "short_title": "CUP",
+            "long_title": "Cuban peso",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 203,
+        "fields":
+        {
+            "short_title": "CZK",
+            "long_title": "Czech koruna",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 208,
+        "fields":
+        {
+            "short_title": "DKK",
+            "long_title": "Danish krone",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 214,
+        "fields":
+        {
+            "short_title": "DOP",
+            "long_title": "Dominican peso",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 222,
+        "fields":
+        {
+            "short_title": "SVC",
+            "long_title": "Salvadoran colón",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 230,
+        "fields":
+        {
+            "short_title": "ETB",
+            "long_title": "Ethiopian birr",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 232,
+        "fields":
+        {
+            "short_title": "ERN",
+            "long_title": "Eritrean nakfa",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 238,
+        "fields":
+        {
+            "short_title": "FKP",
+            "long_title": "Falkland Islands pound",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 242,
+        "fields":
+        {
+            "short_title": "FJD",
+            "long_title": "Fiji dollar",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 262,
+        "fields":
+        {
+            "short_title": "DJF",
+            "long_title": "Djiboutian franc",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 270,
+        "fields":
+        {
+            "short_title": "GMD",
+            "long_title": "Gambian dalasi",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 292,
+        "fields":
+        {
+            "short_title": "GIP",
+            "long_title": "Gibraltar pound",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 320,
+        "fields":
+        {
+            "short_title": "GTQ",
+            "long_title": "Guatemalan quetzal",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 324,
+        "fields":
+        {
+            "short_title": "GNF",
+            "long_title": "Guinean franc",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 328,
+        "fields":
+        {
+            "short_title": "GYD",
+            "long_title": "Guyanese dollar",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 332,
+        "fields":
+        {
+            "short_title": "HTG",
+            "long_title": "Haitian gourde",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 340,
+        "fields":
+        {
+            "short_title": "HNL",
+            "long_title": "Honduran lempira",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 344,
+        "fields":
+        {
+            "short_title": "HKD",
+            "long_title": "Hong Kong dollar",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 348,
+        "fields":
+        {
+            "short_title": "HUF",
+            "long_title": "Hungarian forint",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 352,
+        "fields":
+        {
+            "short_title": "ISK",
+            "long_title": "Icelandic króna",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 356,
+        "fields":
+        {
+            "short_title": "INR",
+            "long_title": "Indian rupee",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 360,
+        "fields":
+        {
+            "short_title": "IDR",
+            "long_title": "Indonesian rupiah",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 364,
+        "fields":
+        {
+            "short_title": "IRR",
+            "long_title": "Iranian rial",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 388,
+        "fields":
+        {
+            "short_title": "JMD",
+            "long_title": "Jamaican dollar",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 392,
+        "fields":
+        {
+            "short_title": "JPY",
+            "long_title": "Japanese yen",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 398,
+        "fields":
+        {
+            "short_title": "KZT",
+            "long_title": "Kazakhstani tenge",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 404,
+        "fields":
+        {
+            "short_title": "KES",
+            "long_title": "Kenyan shilling",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 408,
+        "fields":
+        {
+            "short_title": "KPW",
+            "long_title": "North Korean won",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 410,
+        "fields":
+        {
+            "short_title": "KRW",
+            "long_title": "South Korean won",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 417,
+        "fields":
+        {
+            "short_title": "KGS",
+            "long_title": "Kyrgyzstani som",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 418,
+        "fields":
+        {
+            "short_title": "LAK",
+            "long_title": "Lao kip",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 422,
+        "fields":
+        {
+            "short_title": "LBP",
+            "long_title": "Lebanese pound",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 426,
+        "fields":
+        {
+            "short_title": "LSL",
+            "long_title": "Lesotho loti",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 430,
+        "fields":
+        {
+            "short_title": "LRD",
+            "long_title": "Liberian dollar",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 446,
+        "fields":
+        {
+            "short_title": "MOP",
+            "long_title": "Macanese pataca",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 454,
+        "fields":
+        {
+            "short_title": "MWK",
+            "long_title": "Malawian kwacha",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 458,
+        "fields":
+        {
+            "short_title": "MYR",
+            "long_title": "Malaysian ringgit",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 462,
+        "fields":
+        {
+            "short_title": "MVR",
+            "long_title": "Maldivian rufiyaa",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 480,
+        "fields":
+        {
+            "short_title": "MUR",
+            "long_title": "Mauritian rupee",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 484,
+        "fields":
+        {
+            "short_title": "MXN",
+            "long_title": "Mexican peso",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 496,
+        "fields":
+        {
+            "short_title": "MNT",
+            "long_title": "Mongolian tögrög",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 498,
+        "fields":
+        {
+            "short_title": "MDL",
+            "long_title": "Moldovan leu",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 512,
+        "fields":
+        {
+            "short_title": "OMR",
+            "long_title": "Omani rial",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 516,
+        "fields":
+        {
+            "short_title": "NAD",
+            "long_title": "Namibian dollar",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 524,
+        "fields":
+        {
+            "short_title": "NPR",
+            "long_title": "Nepalese rupee",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 532,
+        "fields":
+        {
+            "short_title": "ANG",
+            "long_title": "Netherlands Antillean guilder",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 533,
+        "fields":
+        {
+            "short_title": "AWG",
+            "long_title": "Aruban florin",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 548,
+        "fields":
+        {
+            "short_title": "VUV",
+            "long_title": "Vanuatu vatu",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 554,
+        "fields":
+        {
+            "short_title": "NZD",
+            "long_title": "New Zealand dollar",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 558,
+        "fields":
+        {
+            "short_title": "NIO",
+            "long_title": "Nicaraguan córdoba",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 566,
+        "fields":
+        {
+            "short_title": "NGN",
+            "long_title": "Nigerian naira",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 578,
+        "fields":
+        {
+            "short_title": "NOK",
+            "long_title": "Norwegian krone",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 586,
+        "fields":
+        {
+            "short_title": "PKR",
+            "long_title": "Pakistani rupee",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 590,
+        "fields":
+        {
+            "short_title": "PAB",
+            "long_title": "Panamanian balboa",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 598,
+        "fields":
+        {
+            "short_title": "PGK",
+            "long_title": "Papua New Guinean kina",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 600,
+        "fields":
+        {
+            "short_title": "PYG",
+            "long_title": "Paraguayan guaraní",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 604,
+        "fields":
+        {
+            "short_title": "PEN",
+            "long_title": "Peruvian Sol",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 608,
+        "fields":
+        {
+            "short_title": "PHP",
+            "long_title": "Philippine piso[13]",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 646,
+        "fields":
+        {
+            "short_title": "RWF",
+            "long_title": "Rwandan franc",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 654,
+        "fields":
+        {
+            "short_title": "SHP",
+            "long_title": "Saint Helena pound",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 690,
+        "fields":
+        {
+            "short_title": "SCR",
+            "long_title": "Seychelles rupee",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 694,
+        "fields":
+        {
+            "short_title": "SLL",
+            "long_title": "Sierra Leonean leone",
+            "active": false,
+            "company": null
+        }
+    },
+    {
+        "model": "coin.coin",
+        "pk": 702,
+        "fields":
+        {
+            "short_title": "SGD",
+            "long_title": "Singapore dollar",
+            "active": false,
+            "company": null
+        }
+    }
+    ]

@@ -166,7 +166,7 @@ from django.db.models import Q # new
 def airline_index(request):
     if request.user.is_MANAGER or request.user.is_RESERVATION:
         company = request.user.company
-        form = AirlineReservationForm()
+        form = AirlineReservationForm(user=request.user)
         reservations = Reservation_airline.objects.filter(company=company)
         form.fields['customer'].queryset = Customer.objects.filter(
                                 Q(client=True)& Q(company=company)).distinct()
@@ -201,7 +201,7 @@ def add_airline(request):
     company = request.user.company
     if request.method == "POST":
         # Passporform = PassportForm(request.POST)
-        form= AirlineReservationForm(request.POST,request.FILES)
+        form= AirlineReservationForm( request.POST,request.FILES,user=request.user)
         if form.is_valid():#and Passporform.is_valid() :
             airline = form.save(commit=False)
             airline.author=request.user
@@ -252,7 +252,7 @@ def add_airline(request):
         'form': form
     })
     else:
-        form = AirlineReservationForm()
+        form = AirlineReservationForm(user=request.user)
         form.fields['customer'].queryset = Customer.objects.filter(
                                 Q(client=True)& Q(company=company)).distinct()
         form.fields['supplier'].queryset = Customer.objects.filter(

@@ -27,26 +27,6 @@
         }
     },
     {
-        "model": "coin.coin",
-        "pk": 1,
-        "fields":
-        {
-            "short_title": "SYP",
-            "long_title": "Syrian pound",
-            "active": true
-        }
-    },
-    {
-        "model": "coin.coin",
-        "pk": 2,
-        "fields":
-        {
-            "short_title": "USD",
-            "long_title": " United States dollar",
-            "active": true
-        }
-    },
-    {
         "model": "company.company",
         "pk": 1,
         "fields":

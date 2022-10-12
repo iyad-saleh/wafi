@@ -11,8 +11,7 @@ class Country(models.Model):
     currency_alphabetic = models.CharField(max_length=100, blank=True, null=True)
     currency_name       = models.CharField(max_length=100, blank=True, null=True)
     Arabic_Formal       = models.CharField(max_length=100, blank=True, null=True)
-    # Capital             = models.CharField(max_length=50, blank=True, null=True)
-    # Dial                = models.CharField(max_length=50, blank=True, null=True)
+
     class Meta:
         verbose_name_plural = 'Countries'
     def __str__(self):
@@ -26,14 +25,10 @@ class City(models.Model):
     id          = models.IntegerField(primary_key=True)
     city        = models.CharField(max_length=100, blank=True, null=True,help_text="الاسم المحلي")
     city_ascii  = models.CharField(max_length=100, blank=True, null=True,help_text="الاسم بالانكليزية")
-    # lat         = models.CharField(max_length=100, blank=True, null=True)
-    # lng         = models.CharField(max_length=100, blank=True, null=True)
     country     = models.ForeignKey(Country, on_delete=models.SET_NULL, blank=True, null=True)
     iso2        = models.CharField(max_length=100, blank=True, null=True)
     iso3        = models.CharField(max_length=100, blank=True, null=True)
-    # admin_name  = models.CharField(max_length=100, blank=True, null=True)
-    # capital     = models.CharField(max_length=100, blank=True, null=True)
-    # population  = models.CharField(max_length=100, blank=True, null=True)
+
     def __str__(self):
         return f'{self.city_ascii}'
 
@@ -44,15 +39,10 @@ class AirPort(models.Model):
     ident       =  models.CharField(max_length=10, blank=True, null=True)
     airport_type = models.CharField(max_length=100, blank=True, null=True)
     name         = models.CharField(max_length=300, blank=True, null=True)
-    # elevation_ft = models.CharField(max_length=100, blank=True, null=True)
-    # continent    = models.CharField(max_length=100, blank=True, null=True)
     iso_country  = models.ForeignKey(Country, on_delete=models.SET_NULL, blank=True, null=True)
     iso_region   = models.CharField(max_length=100, blank=True, null=True)
     municipality = models.ForeignKey(City, on_delete=models.SET_NULL, blank=True, null=True)
-    # gps_code     = models.CharField(max_length=100, blank=True, null=True)
     iata_code    = models.CharField(max_length=100, blank=True, null=True,help_text="رمز الاتحاد الدولي")
-    # local_code   = models.CharField(max_length=100, blank=True, null=True)
-    # coordinates  = models.CharField(max_length=100, blank=True, null=True)
     name_ar      = models.CharField(max_length=300, blank=True, null=True)
     def __str__(self):
         return f'{self.name}'

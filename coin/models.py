@@ -11,7 +11,7 @@ class Coin(models.Model):
     short_title  = models.CharField(max_length=100, blank=True, null=True,help_text="رمز مختصر ")
     long_title   = models.CharField(max_length=300, blank=True, null=True,help_text="الاسم كامل")
     active       = models.BooleanField(default=False,help_text="مستخدمة")#     الربح
-    company     = models.ForeignKey(Company, null=True,blank=True, on_delete=models.SET_NULL )
+    company     = models.ManyToManyField(Company,  related_name='coins' )
     class Meta:
         verbose_name_plural = 'CURRENCIES'
 

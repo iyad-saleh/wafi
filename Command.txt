@@ -5,7 +5,7 @@ python manage.py migrate
 python manage.py makemigrations
 
 
-python manage.py makemigrations account blog users company customer box coin passport employee bus expense  trip reservation ked
+python manage.py makemigrations account blog users company customer box coin passport employee bus expense  trip reservation ked international
 
 
 
@@ -28,8 +28,8 @@ $ django-admin makemessages -l en
 view.run_command("htmlprettify")
 
 
-
-from international.utility import *
+python manage.py shell
+from international.utilty import *
 AddCurrency()
 
 addCountryfromWorldcities()
