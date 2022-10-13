@@ -1,0 +1,29 @@
+{% for passport in passports %}
+
+<tr
+ id="passport-{{ passport.pk }}" class="passport-row">
+    <td><input type="checkbox" name="passport" value="{{ passport.pk }}"></td>
+    <td>{{ passport.first_name }}</td>
+    <td>{{ passport.last_name }}</td>
+    <td>{{ passport.father_name }}</td>
+    <td>{{ passport.mother_name }}</td>
+    <td>{{ passport.passport_number }}</td>
+    <td  style="padding: 0px;margin: 0px;justify-content: center;">
+                    <img class="rounded"
+                    src="{{ passport.avatar.url }}" style="width: 30px;">
+    </td>
+</tr
+>
+{% endfor %}
+{% if passports.has_next %}
+<tr id="load-more">
+    <td colspan="6" class="text-center">
+        <button class=" btn btn-primary"
+        hx-get="{% url 'passportList' %}?page={{  passports.next_page_number }} "
+        hx-target="#load-more"
+        hx-swap="outerHTML"
+        >load More</button>
+    </td>
+
+</tr>
+{% endif %}

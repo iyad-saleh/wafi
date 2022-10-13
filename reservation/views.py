@@ -13,6 +13,7 @@ from customer.models import Customer
 from ked.models import Ked, Journal
 from account.models import Account
 from django.db.models import Q # new
+from coin.models import Coin
 
 
 
@@ -165,16 +166,22 @@ from django.db.models import Q # new
 @login_required
 def airline_index(request):
     if request.user.is_MANAGER or request.user.is_RESERVATION:
+        # passports= Passport.objects.all()
         company = request.user.company
-        form = AirlineReservationForm(user=request.user)
+        form = AirlineReservationForm()
         reservations = Reservation_airline.objects.filter(company=company)
+        # for item in reservations:
+        #     print(item.passport.all())
         form.fields['customer'].queryset = Customer.objects.filter(
                                 Q(client=True)& Q(company=company)).distinct()
         form.fields['supplier'].queryset = Customer.objects.filter(
                                 Q(company=company)&Q(aircompany=True)).distinct()
-
+        form.fields['sell_coin'].queryset = Coin.objects.for_compnay(company).distinct()
+        form.fields['pay_coin'].queryset = Coin.objects.for_compnay(company).distinct()
         return render(request, 'reservation/airline/index.html',
-                     {'form':form, 'reservations':reservations})
+                     {'form':form, 'reservations':reservations,
+                     # 'passports':passports
+                     })
     return HttpResponse(
         status=403,
         headers={
@@ -199,16 +206,22 @@ def edit_airline(request,pk):
 
 def add_airline(request):
     company = request.user.company
+    # passports =Passport.objects.all()
     if request.method == "POST":
         # Passporform = PassportForm(request.POST)
-        form= AirlineReservationForm( request.POST,request.FILES,user=request.user)
+        form= AirlineReservationForm( request.POST,request.FILES)
         if form.is_valid():#and Passporform.is_valid() :
+            # for i in form:
+            #     print(i)
             airline = form.save(commit=False)
             airline.author=request.user
             airline.company=company
             airlineAccount = Account.objects.filter(account_type='2').first()
             # print(airlineAccount)
             airline.save()
+            airline_passports =form.cleaned_data['passport']
+            for airline_passport in airline_passports:
+                airline.passport.add(airline_passport)
             title = ''
             if form.cleaned_data['title']:
                 title += form.cleaned_data['title']
@@ -249,16 +262,19 @@ def add_airline(request):
                 })
         else:
             return render(request, 'reservation/airline/airline_form.html', {
-        'form': form
+        'form': form,#'passports':passports
     })
     else:
-        form = AirlineReservationForm(user=request.user)
+
+        form = AirlineReservationForm()
         form.fields['customer'].queryset = Customer.objects.filter(
                                 Q(client=True)& Q(company=company)).distinct()
         form.fields['supplier'].queryset = Customer.objects.filter(
                                 Q(company=company)&Q(aircompany=True)).distinct()
+        form.fields['sell_coin'].queryset = Coin.objects.for_compnay(company).distinct()
+        form.fields['pay_coin'].queryset = Coin.objects.for_compnay(company).distinct()
     return render(request, 'reservation/airline/airline_form.html', {
-        'form': form
+        'form': form,#'passports':passports
     })
 
 

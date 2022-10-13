@@ -2,6 +2,10 @@
 <tr id="reservation-{{ reservation.pk }}" class="reservation-row "  >
 
         <td>{{ reservation.title|truncatechars:10 }}</td>
+
+         <td>
+            {% for passport in reservation.passport.all %}{{ passport }}<br/>{% endfor %}
+         </td>
         <td>{{ reservation.Date|date:"Y-m-d" }}</td>
         <td>{{ reservation.supplier|truncatechars:10 }}</td>
         <td>{{ reservation.customer|truncatechars:10 }}</td>
@@ -17,7 +21,7 @@
         <td>{{ reservation.departure|truncatechars:10 }}</td>
         <td>{{ reservation.arrival|truncatechars:10 }}</td>
         <td>{{ reservation.roundtrip }}</td>
-        <td>{{ reservation.passport }}</td>
+
         <td>{{ reservation.flight_type }}</td>
         <td>{{ reservation.return_date|date:"Y-m-d" }}</td>
 

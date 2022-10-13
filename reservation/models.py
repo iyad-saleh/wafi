@@ -18,11 +18,12 @@ class Reservation(BaseModel, SoftDeleteModel):
     supplier   = models.ForeignKey(Customer, null=True,blank=True, on_delete=models.SET_NULL ,related_name='suppliersCompany')
     customer   = models.ForeignKey(Customer, null=True,blank=True, on_delete=models.SET_NULL ,related_name='CustomerCompany')
     pay_price  = models.PositiveIntegerField()
-    pay_coin   = models.ForeignKey(Coin, null=True,blank=True, on_delete=models.SET_NULL,related_name= 'payCoin' )
+    pay_coin   = models.ForeignKey(Coin, on_delete=models.CASCADE,related_name= 'payCoin' )
     sell_price = models.PositiveIntegerField()
-    sell_coin  = models.ForeignKey(Coin, null=True,blank=True, on_delete=models.SET_NULL ,related_name='sellCoin' )
+    sell_coin  = models.ForeignKey(Coin, on_delete=models.CASCADE ,related_name='sellCoin' )
     status     = models.CharField(max_length=2, choices=(('1','Active'),('2','Cancelled'),('3','pending'),), default=1)
-
+    def __str__(self):
+        return f'{self.title}'
 
 
 
@@ -44,7 +45,8 @@ class Reservation_airline(Reservation):
     flight_type= models.CharField(max_length=3, choices=(('1','Economy Class'),('2','Business Class'),('3','First Class'))  )
     return_date     = models.DateTimeField(  blank=True,null=True, help_text="تاريخ العودة ")
 
-
+    def __str__(self):
+        return f'{self.title}'
 
 
 

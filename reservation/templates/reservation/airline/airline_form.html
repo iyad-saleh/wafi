@@ -136,9 +136,52 @@
             <h3> Passenger Information</h3>
             <section>
                 <div class="row gutters">
-                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
-                        <div class="form-group">
-                            {{ form.passport|as_crispy_field }}
+
+
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-12 " style="padding-top: 0px;" >
+
+                        <div class="row gutters" style="padding-top: 0px;">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="card m-2" >
+                                        <input class="form-control" id="passportsearch" type="search"
+                                       name="search" placeholder="Search Passport..."
+                                       hx-get="{% url 'searchPassport' %}"
+                                       hx-trigger="keyup changed delay:500ms, search"
+                                       hx-target="#passports_list"
+                                       hx-indicator=".htmx-indicator">
+                                        <!-- <label for="passportsearch">Search Passport</label> -->
+                               </div>
+                         </div>
+                         </div>
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                        <p>Add passport</p>
+                         </div>
+                         </div>
+
+                    </div>
+                    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12">
+                        <div class="form-group" style="height:150px;overflow:auto;">
+                            <table id="table1" class="table table-bordered table-sm text-center" >
+                                <thead  >
+                                    <tr>
+                                        <th>Select</th>
+                                        <th>first_name</th>
+                                        <th>last_name</th>
+                                        <th>father_name</th>
+                                        <th>mother_name</th>
+                                        <th>Number</th>
+                                        <th>Avatar</th>
+                                    </tr>
+                                </thead>
+                                <tbody hx-trigger="load delay:1s"
+                                hx-get="{% url 'passportList' %}"
+                                hx-target="this" id="passports_list">
+
+                              {% include 'passport/passportlist.html' %}
+                                </tbody>
+                                </table>
                         </div>
                     </div>
                 </div>

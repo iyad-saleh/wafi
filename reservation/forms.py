@@ -1,8 +1,8 @@
 from django import forms
 from .models import Reservation, Reservation_airline
 from django.forms import ModelForm
+from passport.models import Passport
 from coin.models import Coin
-
 # 'title','Date','supplier','customer','pay_price','pay_coin','sell_price','sell_coin','status'
 class ReservationForm(forms.ModelForm):
 
@@ -21,9 +21,16 @@ class ReservationForm(forms.ModelForm):
 
 
 class AirlineReservationForm(forms.ModelForm):
+    # pay_coin = forms.ModelChoiceField(
+    #     queryset=Coin.objects.filter(active=True))
+    # sell_coin = forms.ModelChoiceField(
+    #     queryset=Coin.objects.filter(active=True))
+    #     widget=forms.CheckboxSelectMultiple
+    # )
 
     class Meta:
         model = Reservation_airline
+
         fields = ['passenger_num',
                 'title','Date','supplier',
                 'customer','pay_price',
@@ -39,11 +46,11 @@ class AirlineReservationForm(forms.ModelForm):
             'return_date': forms.DateTimeInput(format='%Y-%m-%dT%H:%M:%S', attrs={'type': 'datetime-local'}),
             'departure_date': forms.DateTimeInput(format='%Y-%m-%dT%H:%M:%S', attrs={'type': 'datetime-local'}),
         }
-    def __init__(self, user=None, **kwargs):
-        super(AirlineReservationForm, self).__init__(**kwargs)
-        if user:
-            self.fields['sell_coin'].queryset = Coin.objects.filter(company=user.company)
-            self.fields['pay_coin'].queryset = Coin.objects.filter(company=user.company)
+    # def __init__(self, user=None, **kwargs):
+    #     super(AirlineReservationForm, self).__init__(**kwargs)
+    #     if user:
+    #         self.fields['sell_coin'].queryset = Coin.objects.filter(company=user.company)
+    #         self.fields['pay_coin'].queryset = Coin.objects.filter(company=user.company)
 
 
 # class SubReservationForm(forms.ModelForm):

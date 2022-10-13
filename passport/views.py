@@ -10,7 +10,9 @@ from .forms import PassportForm, PassengerForm, PhotoFormSet
 from django.contrib.auth.decorators import user_passes_test
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.list import ListView
+from django.db.models import Q # new
 # is_MANAGER
 # is_RESERVATION
 # is_ACCOUNTANT
@@ -20,7 +22,7 @@ def index(request):
     form = PassportForm()
     photoform =PhotoFormSet()
     passport_list = Passport.objects.all().order_by('-id')
-    paginator = Paginator(passport_list, 10)
+    paginator = Paginator(passport_list, 5)
     page = request.GET.get('page', 1)
     try:
         passports = paginator.page(page)
@@ -37,12 +39,51 @@ def index(request):
             'page': page})
 
 
+
+@login_required
+def searchPassport(request):
+    search_text = request.GET.get('search')
+    passport_list = Passport.objects.filter(Q(first_name__icontains=search_text)
+                                    |Q(last_name__icontains=search_text)
+                                    |Q(passport_number__icontains=search_text)).distinct()
+    paginator = Paginator(passport_list, 5)
+    page = request.GET.get('page', 1)
+    try:
+        passports = paginator.page(page)
+    except PageNotAnInteger:
+        passports = paginator.page(1)
+    except EmptyPage:
+        passports = paginator.page(paginator.num_pages)
+
+    return render(request, 'passport/passportlist.html', {
+        'passports':passports, 'page': page
+    })
+
+@login_required
+def PassportList(request):
+    if request.user.is_MANAGER or request.user.is_RESERVATION or request.user.is_CUSTOMER:
+
+        passport_list = Passport.objects.all().order_by('-id')
+        paginator = Paginator(passport_list, 5)
+        page = request.GET.get('page', 1)
+        try:
+            passports = paginator.page(page)
+        except PageNotAnInteger:
+            passports = paginator.page(1)
+        except EmptyPage:
+            passports = paginator.page(paginator.num_pages)
+
+        return render(request, 'passport/passportlist.html', {
+            'passports':passports, 'page': page
+        })
+
+
 @login_required
 def passport_list(request):
     if request.user.is_MANAGER or request.user.is_RESERVATION or request.user.is_CUSTOMER:
 
         passport_list = Passport.objects.all().order_by('-id')
-        paginator = Paginator(passport_list, 10)
+        paginator = Paginator(passport_list, 5)
         page = request.GET.get('page', 1)
         try:
             passports = paginator.page(page)

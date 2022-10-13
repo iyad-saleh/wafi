@@ -2,7 +2,9 @@ from django.db import models
 from django.conf import settings
 from company.models import Company
 
-
+class CoinCompanyManager(models.Manager):
+    def for_compnay(self, company):
+        return super(CoinCompanyManager, self).get_queryset().filter(company=company).filter(active=True)
 
 class Coin(models.Model):
 
@@ -12,6 +14,7 @@ class Coin(models.Model):
     long_title   = models.CharField(max_length=300, blank=True, null=True,help_text="الاسم كامل")
     active       = models.BooleanField(default=False,help_text="مستخدمة")#     الربح
     company     = models.ManyToManyField(Company,  related_name='coins' )
+    objects = CoinCompanyManager()
     class Meta:
         verbose_name_plural = 'CURRENCIES'
 

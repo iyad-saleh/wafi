@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
-    'translation_manager',
+    # 'translation_manager',
     'international',
     'crispy_forms',
     'widget_tweaks',
