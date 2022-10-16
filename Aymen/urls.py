@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
@@ -12,11 +12,10 @@ urlpatterns =[
     path('i18n/', include('django.conf.urls.i18n')),
     # path("set_language/<str:user_language>/", set_language_from_url, name="set_language_from_url"),
 
-    path('', include('guest.urls')),
+    path('', include('blog.urls'),name='blog'),
     path('users/', include('users.urls')),
 
 
-    path('blog', include('blog.urls')),
     path('dashboard/', dashboard, name='dashboard'),
     path('account/', include('account.urls')),
     path('companys/', include('company.urls')),
@@ -28,7 +27,8 @@ urlpatterns =[
     path('trip/', include('trip.urls')),
     path('ked/', include('ked.urls')),
     path('box/', include('box.urls')),
-
+    re_path(r'^ckeditor/', include('ckeditor_uploader.urls')), # The CKEditor path
+    path('guest/', include('guest.urls')),
    ]
 
 

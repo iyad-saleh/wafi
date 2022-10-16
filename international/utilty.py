@@ -1,7 +1,7 @@
 from . import currencies
 from coin.models import Coin
 from .models import *
-
+from django.db.models import Q # new
 
 
 
@@ -18,54 +18,50 @@ def addAirport():
     for country in coutries:
         coutriesList[country.Alpha_2] = country
     city_list = {}
-    for citty in cities:
-        city_list[citty.city] = citty
+    for city in cities:
+        city_list[city.city] = city
     csv_data=csv.reader(inputFile, delimiter=',')
     next(csv_data)  # skip header
     #OSDI,large_airport,Damascus International Airport,2020,AS,SY,SY-DI,Damascus,OSDI,DAM,,"36.51559829711914, 33.4114990234375"
 
     for line in csv_data:
-        ident          = line[0]
-        if 'heliport'  in line[1]:
-            continue
-        if 'closed'  in line[1]:
-            continue
-        if 'balloonport'  in line[1]:
-            continue
-        if 'seaplane_base'  in line[1]:
-            continue
-        if 'small_airport'  in line[1]:
-            continue
+        try:
 
-        airport_type   = line[1]
-        name           = line[2]
-        # elevation_ft   = line[3]
-        # continent      = line[4]
-        country = coutriesList.get(line[5].strip(),None)
-        # print("country",country.id)
-        if not country:
-            country =Country(name_ar='',name_en='',Alpha_2=line[5].strip(),Alpha_3='',
-                                    currency_alphabetic='',currency_name='',
-                                    Arabic_Formal='')
-            print("create objects " , country ,   line[2])
-            country.save()
-        iso_country    = country
-        iso_region     = line[6]
-        city           = city_list.get(line[7].strip(),None)
-        if not city :
-            city = City.objects.filter(city_ascii = line[7].strip()).first()
-        if not city :
-            city = City(city=line[7].strip(),city_ascii=line[7].strip(),
-                country=country,iso2="",
-                iso3=line[9].strip(),id =City.objects.all().count() )
-            print("city objects " , country.name_en ,   line[7])
-            city.save()
-        municipality  = city
 
-        # gps_code       = line[8]
-        iata_code      = line[9]
-        # local_code     = line[10]
-        # coordinates    = line[11]
+            ident          = line[0]
+
+
+            airport_type   = line[1]
+            name           = line[2]
+            # elevation_ft   = line[3]
+            # continent      = line[4]
+            country = coutriesList.get(line[5].strip(),None)
+            # print("country",country.id)
+            if not country:
+                country =Country(name_ar='',name_en='',Alpha_2=line[5].strip(),Alpha_3='',
+                                        currency_alphabetic='',currency_name='',
+                                        Arabic_Formal='')
+                print("create objects " , country ,   line[2])
+                country.save()
+            iso_country    = country
+            iso_region     = line[6]
+            city           = city_list.get(line[7].strip(),None)
+            if not city :
+                city = City.objects.filter(city_ascii = line[7].strip()).first()
+            if not city :
+                city = City(city=line[7].strip(),city_ascii=line[7].strip(),
+                    country=country,iso2="",
+                    iso3=line[9].strip(),id =City.objects.all().count() )
+                print("city objects " , country.name_en ,   line[7])
+                city.save()
+            municipality  = city
+
+            # gps_code       = line[8]
+            iata_code      = line[9]
+            # local_code     = line[10]
+            # coordinates    = line[11]
+        except Exception as e:
+            continue
         try:
             airPort = AirPort(ident=ident,airport_type=airport_type,name=name,
                                 iso_country=iso_country,

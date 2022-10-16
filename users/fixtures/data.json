@@ -81,7 +81,7 @@
             "username": "man",
             "date_joined": "2022-07-22T18:28:29.406Z",
             "is_active": true,
-            "is_staff": false,
+            "is_staff": true,
             "is_superuser": false,
             "is_MANAGER": true,
             "is_RESERVATION": true,

@@ -1,7 +1,10 @@
-{% extends "base.html" %}
+{% extends 'guest/g_base.html' %}
+
+
+
 {% block content %}
   <article class="media content-section">
-    <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
+    <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}" style="width: 36px;">
     <div class="media-body">
       <div class="article-metadata">
         <a class="mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>
@@ -14,7 +17,7 @@
         {% endif %}
       </div>
       <h2 class="article-title">{{ object.title }}</h2>
-      <p class="article-content">{{ object.content }}</p>
+      <p class="article-content">{{ object.body|safe }}</p>
     </div>
   </article>
 {% endblock content %}

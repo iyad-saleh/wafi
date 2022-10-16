@@ -2,6 +2,9 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.conf import settings
 # from django.conf import settings
+from taggit.models import Tag
+from .forms import PostForm
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.views.generic import (
     ListView,
@@ -13,9 +16,43 @@ from django.views.generic import (
 from .models import Post
 
 
-def home(request):
+
+def tagged(request, slug):
+    tag = get_object_or_404(Tag, slug=slug)
+    # Filter posts by tag name
+    posts_list = Post.objects.filter(tags=tag)
+    tags = Post.tags.most_common()[:4]
+    paginator = Paginator(posts_list, 4)
+    page = request.GET.get('page', 1)
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
     context = {
-        'posts': Post.objects.all()
+        'posts':posts ,
+        'tags' :tags ,
+            'page': page
+    }
+    return render(request, 'blog/home.html', context)
+
+
+def home(request):
+    posts_list =Post.objects.all()
+    tags = Post.tags.most_common()[:4]
+    paginator = Paginator(posts_list, 4)
+    page = request.GET.get('page', 1)
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+    context = {
+        'posts':posts ,
+        'tags' :tags ,
+            'page': page
     }
     return render(request, 'blog/home.html', context)
 
@@ -45,7 +82,7 @@ class PostDetailView(DetailView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'content']
+    fields = ['title', 'body', 'tags','category']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -54,7 +91,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['title', 'content']
+    fields = ['title', 'body', 'tags','category']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
