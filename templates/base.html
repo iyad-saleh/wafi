@@ -1,5 +1,7 @@
 {% load static %}
 {% load i18n %}
+
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" >
   <!-- <html lang="ar" > -->
@@ -67,14 +69,26 @@
 <!-- ************************* Main container start ************************** -->
 			<div class="main-container">
 				<!-- Page header start -->
-        <div class="page-header">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item active" >{{navbar}} </li>
+        <div class="page-header row justify-content-start">
 
-            <li class="breadcrumb-item active" >{{submenu}} </li>
+        <div class=" d-flex col-6 ">
+            <nav aria-label="breadcrumb " class="first  d-md-flex" >
+                 <ol class="breadcrumb indigo lighten-6 first-1 shadow-lg mb-5  ">
+                    <li class="breadcrumb-item ">
+                      <a class="black-text active-2" href="{% url 'dashboard' %}">
+                        <span class="icon-home">HOME</span>
+                      </a>
+                    </li>
+                   {% block breadcrumbs %}
 
-          </ol>
-          <ul class="app-actions">
+                   {% endblock %}
+
+                </ol>
+            </nav>
+        </div>
+
+
+        <!--   <ul class="app-actions col-6">
             <li>
               <a href="#" id="reportrange">
                 <span class="range-text"></span>
@@ -91,12 +105,14 @@
                 <i class="icon-cloud_download"></i>
               </a>
             </li>
-          </ul>
+          </ul> -->
         </div>
 				<!-- Page header end -->
 
 				<!-- Content wrapper start -->
 				<div class="content-wrapper">
+          <div class="row gutters">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
             {% if messages %}
             {% for message in messages %}
               <div class="alert alert-{{ message.tags }}">
@@ -104,6 +120,8 @@
               </div>
            {% endfor %}
            {% endif %}
+         </div>
+         </div>
 
 
           <div class="row gutters">
@@ -118,7 +136,7 @@
                   </button>
                 </div>
                 <div class="toast-body" id="toastbody">
-                  Hello, world! This is a toast message.
+
                 </div>
               </div>
             </div>
@@ -129,7 +147,12 @@
 
           <!-- Row starts -->
           <div class="row gutters">
-                        {% block content %}   {% endblock %}
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                      {% block content %}
+
+
+                      {% endblock %}
+          </div>
           </div>
           <!-- Row end -->
 

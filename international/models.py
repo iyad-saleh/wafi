@@ -45,6 +45,6 @@ class AirPort(models.Model):
     iata_code    = models.CharField(max_length=100, blank=True, null=True,help_text="رمز الاتحاد الدولي")
     name_ar      = models.CharField(max_length=300, blank=True, null=True)
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.iata_code}  /{self.name} /{self.iso_country}'
 
 

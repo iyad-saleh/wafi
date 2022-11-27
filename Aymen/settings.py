@@ -70,8 +70,8 @@ INSTALLED_APPS = [
     'taggit',#pip install django-taggit
     'ckeditor',  #pip install django-ckeditor
     'ckeditor_uploader',
-    # 'adminlte',
-     # General use templates & template tags (should appear first)
+    'airline',
+      # General use templates & template tags (should appear first)
     # 'adminlte3',
      # Optional: Django admin theme (must be before django.contrib.admin)
     # 'adminlte3_theme',
@@ -91,6 +91,7 @@ MIDDLEWARE = [
 
 
 ]
+
 
 ROOT_URLCONF = 'Aymen.urls'
 

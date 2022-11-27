@@ -1,7 +1,7 @@
 {% load static %}
 {% load i18n %}
 <!-- Container fluid start -->
-<div class="container-fluid">
+<div class="container-fluid"  id="mainNave">
     <!-- Navigation start -->
     <nav class="navbar navbar-expand-lg custom-navbar">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#WafiAdminNavbar" aria-controls="WafiAdminNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,7 +74,7 @@
                             <a class="dropdown-item text-center" href="cards.html">الرحلات</a>
                         </li>
                         <li>
-                            <a class="dropdown-item text-center" href="pricing.html">النقل الجوي</a>
+                            <a class="dropdown-item text-center" href="{% url 'airline' %}">النقل الجوي</a>
                         </li>
                         <li>
                             <a class="dropdown-item text-center" href="faq.html">النقل البري</a>

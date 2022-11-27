@@ -1,0 +1,13 @@
+{% for airline in airlines %}
+<div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 col-12">
+    <div class="doc-block">
+        <div class="doc-icon">
+            <img src="{{ airline.logo.url }}" alt="Doc Icon" />
+        </div>
+        <div class="doc-title">{{ airline.name }}</div>
+        <a class="btn btn-primary btn-lg" href="{% url 'flight_index' airline_pk=airline.pk %}" >View Flight</a>
+    </div>
+</div>
+
+
+{% endfor %}

@@ -1,0 +1,71 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<div hx-trigger=" airlineListChanged from:body" hx-target="this" id="airlineform"
+   {% if not airline %}
+        x-data="{ open: false ,src:'{% static 'img/default.jpg' %}' }"
+   {% else %}
+        x-data="{open:true ,src:'{{ airline.logo.url }}' }"
+  {% endif %} class="container" >
+    <div class="container ">
+        <div class="row gutters">
+            <div class="form-group col-md-2 my-2 ">
+                <button x-show="!open" class="btn btn-outline-primary btn-icon-text  mx-3" @click="open = ! open">
+                    <span>سجل جديد</span>
+                </button>
+                <button class="btn btn-outline-primary btn-icon-text  mx-3" x-show="open" hx-get="{% url 'add_airline' %}" hx-target='#airlineform'>
+                    <span>اخفاء</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <form
+         hx-encoding="multipart/form-data"
+         id="form"
+        {% if not airline %}
+             hx-post="{% url 'add_airline' %}"
+        {% else %}
+             hx-post="{% url 'edit_airline' pk=airline.pk %}"
+        {% endif %}
+        hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'
+        class="modal-content"
+        hx-target='#airlineList'
+        x-transition>
+
+        <div class="modal-body container " x-show="open" x-transition:enter.duration.1000ms x-transition:leave.duration.1000ms>
+            <div class="row gutters">
+                <div class="form-group col-md-4 mb-0">
+                    {{ form.name|as_crispy_field }}
+                </div>
+
+                <div class="form-group col-md-4 mb-0">
+                    <div class="row gutters">
+                        <div class="form-group col-md-8 " >
+                            <img class="half-circle" style="width: 60px;" :src="src">
+                            <label for="id_logo"><span>Change</span>
+                            <input type="file" name="logo" class="hidden" style="display: none;" accept="image/*" id="id_logo" @change="src = URL.createObjectURL($event.target.files[0])">
+                          </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row gutters">
+                <div class="col-xl-6 col-lg-6 col-md-3 col-sm-3 col-3">
+                    <div class="custom-btn-group" style=" justify-content:space-between;">
+                        <button type="submit" class="btn btn-primary" @click="open = ! open">Save</button>
+                        <!-- <button type="reset" class="btn btn-primary" >Reset</button> -->
+                        {% if airline %}
+                  <button type="button" class="btn btn-danger"
+                  hx-confirm="Are you sure you wish to delete {{ airline.name }}?" hx-post="{% url 'remove_airline' pk=airline.pk %}"
+                  @click="open = ! open"
+                  >Remove</button>
+                        {% else %}
+                        <input type="reset" class="btn btn-primary" value="Reset">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>
+</div>

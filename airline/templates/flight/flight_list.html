@@ -1,0 +1,11 @@
+{% for flight in flights %}
+<div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 col-12">
+    <div class="doc-block">
+        <div class="doc-icon">
+            <img src="{{ airline.logo.url }}" alt="Doc Icon" />
+        </div>
+        <div class="doc-title">{{ flight.flightNo }}</div>
+        <a class="btn btn-primary btn-lg" href="{% url 'schedule_index' airline_pk=airline.pk flight_pk=flight.pk %}">Schedule</a>
+    </div>
+</div>
+{% endfor %}

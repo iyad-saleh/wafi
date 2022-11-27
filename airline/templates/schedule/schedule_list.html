@@ -1,0 +1,24 @@
+{% for schedule in schedules %}
+<tr id="schedule-{{ schedule.pk }}" class="schedule-row">
+
+    <td>{{ forloop.counter }}</td>
+
+    <td>{{ schedule.origin  }}</td>
+    <td>{{ schedule.destination  }}</td>
+    <td>{{ schedule.departueTime  }}</td>
+    <td>{{ schedule.arrivalTime  }}</td>
+    <td>{{ schedule.duration  }}</td>
+    <td>{{ schedule.remarks  }}</td>
+    <td>{{ schedule.status  }}</td>
+    <td>{{ schedule..updated_at|date:"Y-m-d"    }}</td>
+    <td>{{ schedule.author  }}</td>
+    <td>action</td>
+{% endfor %}
+
+
+
+
+
+
+
+

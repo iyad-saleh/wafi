@@ -1,0 +1,63 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<div hx-trigger=" flightListChanged from:body" hx-target="this" id="flightform"
+   {% if not flight %}
+        x-data="{ open: false  }"
+   {% else %}
+        x-data="{open:true  }"
+  {% endif %} class="container" >
+    <div class="container ">
+        <div class="row gutters justify-content-between">
+            <div class="form-group col-md-2 my-2 ">
+                <button x-show="!open" class="btn btn-outline-primary btn-icon-text  mx-3" @click="open = ! open">
+                    <span>سجل جديد</span>
+                </button>
+                <button class="btn btn-outline-primary btn-icon-text  mx-3" x-show="open" hx-get="{% url 'add_flight' airline_pk=airline.pk %}" hx-target='#flightform'>
+                    <span>اخفاء</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+    <form
+
+         id="form"
+        {% if not flight %}
+             hx-post="{% url 'add_flight' airline_pk=airline.pk %}"
+        {% else %}
+             hx-post="{% url 'edit_flight' airline_pk=airline.pk pk=flight.pk %}"
+        {% endif %}
+        hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'
+        class="modal-content"
+        hx-target='#flightList'
+        x-transition>
+
+        <div class="modal-body container " x-show="open" x-transition:enter.duration.1000ms x-transition:leave.duration.1000ms>
+            <div class="row gutters">
+                <div class="form-group col-md-4 mb-0">
+                    {{ form.flightNo|as_crispy_field }}
+                </div>
+
+
+            </div>
+
+
+            <div class="row gutters">
+                <div class="col-xl-6 col-lg-6 col-md-3 col-sm-3 col-3">
+                    <div class="custom-btn-group" style=" justify-content:space-between;">
+                        <button type="submit" class="btn btn-primary" @click="open = ! open">Save</button>
+                        <!-- <button type="reset" class="btn btn-primary" >Reset</button> -->
+                        {% if flight %}
+                  <button type="button" class="btn btn-danger"
+                  hx-confirm="Are you sure you wish to delete {{ flight.name }}?" hx-post="{% url 'remove_flight' airline_pk=airline.pk pk=flight.pk %}"
+                  @click="open = ! open"
+                  >Remove</button>
+                        {% else %}
+                        <input type="reset" class="btn btn-primary" value="Reset">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>
+</div>
