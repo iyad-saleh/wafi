@@ -7,6 +7,8 @@ from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404
 import json
 from django.urls import reverse
+from international.models import AirPort
+
 
 def index(request):
     airlines = AirLine.objects.all()
@@ -152,6 +154,14 @@ def edit_flight(request,airline_pk):
 
 
 # -------------------- schedule--------------------
+
+def schedule(request):
+    schedules = FlightSchedule.objects.all()
+    return render(request, 'schedule/schedule.html', {
+        'schedules':schedules,
+    })
+
+
 def schedule_index(request,airline_pk,flight_pk):
     airline = get_object_or_404(AirLine, pk=airline_pk)
     flight = get_object_or_404(Flight,pk = flight_pk)
@@ -191,9 +201,19 @@ def add_schedule(request,airline_pk,flight_pk):
     airline = get_object_or_404(AirLine, pk=airline_pk)
     flight = get_object_or_404(Flight,pk = flight_pk)
     if request.method == "POST":
+        # changed_data = dict(request.POST)
+        # form = FlightScheduleForm(data = changed_data)
+
         form = FlightScheduleForm(request.POST)
+        # print("departueTime",request.POST.get('departueTime'))
         if form.is_valid():
+            # form.cleaned_data['origin'] =get_object_or_404(AirPort,iata_code=request.POST.get('origin')).id
+            # form.cleaned_data['destination'] = get_object_or_404(AirPort,iata_code=request.POST.get('destination')).id
+            # print('origin',form.cleaned_data['origin'])
+            # print('destination',form.cleaned_data['destination'])
             schedule = form.save(commit=False)
+            schedule.origin=get_object_or_404(AirPort,iata_code=request.POST.get('origin'))
+            schedule.destination=get_object_or_404(AirPort,iata_code=request.POST.get('destination'))
             schedule.author=request.user
             schedule.company=request.user.company
             schedule.flight=flight
@@ -207,6 +227,7 @@ def add_schedule(request,airline_pk,flight_pk):
                     })
                 })
         else:
+            print('form not valid..............',form.errors)
             return render(request, 'schedule/schedule_form.html', {
         'form': form,'airline':airline,'flight':flight
     })

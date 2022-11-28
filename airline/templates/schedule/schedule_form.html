@@ -1,6 +1,8 @@
 {% load static %}
 {% load crispy_forms_tags %}
-<div hx-trigger=" scheduleListChanged from:body" hx-target="this" id="scheduleform" {% if not schedule %} x-data="{ open: false  }" {% else %} x-data="{open:true  }" {% endif %} class="container">
+<div hx-trigger=" scheduleListChanged from:body" hx-target="this" id="scheduleform"
+{% if not schedule %} x-data="{ open: false  }" {% else %} x-data="{open:true  }" {% endif %}
+class="container">
     <div class="container ">
         <div class="row gutters justify-content-between">
             <div class="form-group col-md-2 my-2 ">
@@ -24,36 +26,85 @@
         class="modal-content"
         hx-target='#scheduleList'
         x-transition>
+
+
         <div class="modal-body container " x-show="open" x-transition:enter.duration.1000ms x-transition:leave.duration.1000ms>
             <div class="row gutters">
-                <div class="form-group col-md-3 mb-0">
-                    {{ form.origin|as_crispy_field }}
+                <div class="form-group col-md-4 mb-0"  >
+
+                   <label for="origin">Origin:</label>
+                  <input type="text" type="search"
+                  id="origin"
+                  name="origin"
+                  list="originlist"
+                  autocomplete="off"
+                  hx-get="{% url 'searchAirport' %}"
+                  hx-target="#originlist"
+                  hx-trigger="keyup changed delay:250ms"
+                   hx-indicator="#loading"
+                   placeholder="Search"
+                   class="form-control" required
+                  />
+                  <datalist id="originlist"  hx-trigger=" load from:body" hx-get="{% url 'searchAirport' %}" hx-target="this">
+                  </datalist>
+
                 </div>
-                <div class="form-group col-md-3 mb-0">
+                <div class="form-group col-md-4 mb-0">
                     {{ form.departueTime|as_crispy_field }}
                 </div>
-                <div class="form-group col-md-3 mb-0">
-                    {{ form.destination|as_crispy_field }}
-                </div>
-                <div class="form-group col-md-3 mb-0">
-                    {{ form.arrivalTime|as_crispy_field }}
+                <div class="form-group col-md-4 mb-0">
+                    {{ form.departueDate|as_crispy_field }}
                 </div>
             </div>
             <div class="row gutters">
-                <div class="form-group col-md-3 mb-0">
+
+                <div class="form-group col-md-4 mb-0" >
+
+                <label for="destination">destination:</label>
+                  <input type="text"
+                  type="search"
+                  id="destination"
+                  name="destination"
+                  list="destinationlist"
+                  autocomplete="off"
+                  hx-get="{% url 'searchAirport' %}"
+                  hx-target="#destinationlist"
+                  hx-trigger="keyup changed delay:250ms"
+                   hx-indicator="#loading"
+                   placeholder="Search"
+                   class="form-control"
+                   required
+                  />
+                  <datalist id="destinationlist" hx-trigger=" load from:body" hx-get="{% url 'searchAirport' %}" hx-target="this">
+
+                  </datalist>
+
+
+                </div>
+                <div class="form-group col-md-4 mb-0">
+                    {{ form.arrivalTime|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-4 mb-0">
+                    {{ form.arrivalDate|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row gutters">
+                <div class="form-group col-md-4 mb-0">
                     {{ form.duration|as_crispy_field }}
                 </div>
-                <div class="form-group col-md-3 mb-0">
+                <div class="form-group col-md-4 mb-0">
                     {{ form.remarks|as_crispy_field }}
                 </div>
-                <div class="form-group col-md-3 mb-0">
+                <div class="form-group col-md-4 mb-0">
                     {{ form.status|as_crispy_field }}
                 </div>
             </div>
+
+
             <div class="row gutters">
                 <div class="col-xl-6 col-lg-6 col-md-3 col-sm-3 col-3">
                     <div class="custom-btn-group" style=" justify-content:space-between;">
-                        <button type="submit" class="btn btn-primary" @click="open = ! open">Save</button>
+                        <button type="submit" class="btn btn-primary" >Save</button>
                         <!-- <button type="reset" class="btn btn-primary" >Reset</button> -->
                         {% if schedule %}
                         <button type="button" class="btn btn-danger" hx-confirm="Are you sure you wish to delete {{ schedule.name }}?" hx-post="{% url 'remove_schedule' airline_pk=airline.pk flight_pk=flight.pk pk=schedule.pk %}" @click="open = ! open">Remove</button>
@@ -66,3 +117,8 @@
         </div>
     </form>
 </div>
+
+
+
+
+<!-- {% include 'schedule/bs4_form.html' with form=form %} -->

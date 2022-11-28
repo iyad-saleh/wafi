@@ -29,7 +29,11 @@ SECRET_KEY = 'django-insecure-gk4y-p)ek1r3jcuxg_(x*#hl%a@#wt_q=dl*h2kic!5+8cq91k
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
+]
 AUTH_USER_MODEL = 'users.MyUser'
 # Application definition
 
@@ -51,7 +55,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'import_export',
     'django_extensions',
-
+ "debug_toolbar",
     'common',
     'company',
     'account',
@@ -88,7 +92,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 
 ]
 
@@ -162,7 +166,7 @@ TIME_ZONE = 'Asia/Damascus'
 
 USE_I18N = True
 
-USE_L10N = True
+# USE_L10N = True
 
 USE_TZ = True
 

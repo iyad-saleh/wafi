@@ -7,7 +7,7 @@ from customer.models import Customer
 from account.models import Account
 from django.utils import translation
 from django.http import HttpResponseRedirect
-
+from airline.models import FlightSchedule
 
 def dashboard(request):
     if hasattr( request.user  ,'is_MANAGER' ) :
@@ -20,12 +20,14 @@ def dashboard(request):
         customers = Customer.objects.filter(company=company)
         accounts = Account.objects.filter(company=company)
         employees = Employee.objects.filter(company=company)
+        flightSchedules = FlightSchedule.objects.filter(company=company)
         return render(request, 'dashboard/admin_home.html',
             {
             'company':company,
             'customers':customers,
             'accounts':accounts,
             'employees':employees,
+            'flightSchedules':flightSchedules,
             })
     return HttpResponse(
         status=403,

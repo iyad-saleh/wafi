@@ -30,6 +30,9 @@ urlpatterns =[
     path('box/', include('box.urls')),
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')), # The CKEditor path
     path('guest/', include('guest.urls')),
+    path('international/', include('international.urls')),
+
+    path('__debug__/', include('debug_toolbar.urls')),
    ]
 
 

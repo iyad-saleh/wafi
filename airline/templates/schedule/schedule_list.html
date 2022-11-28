@@ -3,14 +3,16 @@
 
     <td>{{ forloop.counter }}</td>
 
-    <td>{{ schedule.origin  }}</td>
-    <td>{{ schedule.destination  }}</td>
-    <td>{{ schedule.departueTime  }}</td>
-    <td>{{ schedule.arrivalTime  }}</td>
+    <td>{{ schedule.origin.iata_code  }}<br/>
+        <small  class="form-text text-muted">{{ schedule.origin.name  }}</small> </td>
+    <td>{{ schedule.destination.iata_code  }}<br/>
+    <small  class="form-text text-muted">{{ schedule.destination.name  }}</small></td>
+    <td>{{ schedule.departueDate|date:"Y-m-d"  }}<br/>{{ schedule.departueTime  }}</td>
+    <td>{{ schedule.arrivalDate|date:"Y-m-d"  }}<br/>{{ schedule.arrivalTime  }}</td>
     <td>{{ schedule.duration  }}</td>
-    <td>{{ schedule.remarks  }}</td>
-    <td>{{ schedule.status  }}</td>
-    <td>{{ schedule..updated_at|date:"Y-m-d"    }}</td>
+    <td>{{ schedule.remarks|truncatechars:10   }}</td>
+    <td>{{ schedule.get_status_display  }}</td>
+    <td>{{ schedule.updated_at|date:"Y-m-d"    }}</td>
     <td>{{ schedule.author  }}</td>
     <td>action</td>
 {% endfor %}

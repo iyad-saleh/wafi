@@ -43,8 +43,10 @@ class FlightSchedule(BaseModel, SoftDeleteModel):
     flight            = models.ForeignKey(Flight, on_delete=models.CASCADE ,related_name='flight' )
     origin        = models.ForeignKey(AirPort, on_delete=models.CASCADE ,related_name='origin')
     destination   = models.ForeignKey(AirPort, on_delete=models.CASCADE ,related_name='destination')
-    departueTime      = models.DateTimeField( blank=True,null=True ,help_text="تاريخ المغادرة " )
-    arrivalTime       = models.DateTimeField( blank=True,null=True ,help_text="تاريخ المغادرة " )
+    departueDate      = models.DateField( blank=True,null=True ,help_text="تاريخ المغادرة " )
+    departueTime      = models.TimeField( blank=True,null=True ,help_text="تاريخ المغادرة " )
+    arrivalDate       = models.DateField( blank=True,null=True ,help_text="تاريخ المغادرة " )
+    arrivalTime       = models.TimeField( blank=True,null=True ,help_text="تاريخ المغادرة " )
     duration          = models.CharField(max_length=200, blank=True, null=True)
     remarks           = models.TextField(  blank=True, null=True)
     status            = models.CharField(max_length=3, choices=(  ('1','ACTIVE') ,
@@ -53,7 +55,7 @@ class FlightSchedule(BaseModel, SoftDeleteModel):
                                                                    ('4','DEPARTED'), ('5','CANCELLED')))
 
     def __str__(self):
-         return self.origin+'-'+ self.destination
+         return self.origin.name+'-'+ self.destination.name
 
 class Seat(BaseModel, SoftDeleteModel): # fix for flight
     flight = models.ForeignKey(Flight, on_delete=models.CASCADE ,related_name='flightSeat' )

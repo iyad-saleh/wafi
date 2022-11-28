@@ -16,6 +16,8 @@ urlpatterns = [
     path('<int:airline_pk>/flight/<int:pk>/remove', remove_flight, name='remove_flight'),
     path('<int:airline_pk>/flight/<int:pk>/edit', edit_flight, name='edit_flight'),
 
+
+    path('schedule/',schedule,name='schedule'),
     path('<int:airline_pk>/<int:flight_pk>', schedule_index, name='schedule_index'),
     path('<int:airline_pk>/<int:flight_pk>/schedule', schedule_list, name='schedule_list'),
     path('<int:airline_pk>/<int:flight_pk>/schedule/add', add_schedule, name='add_schedule'),
