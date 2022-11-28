@@ -95,7 +95,10 @@ class Reservation_visa(Reservation):
                                             ('2','pending'),
                                             ('3','Cancelled')))
     passenger       = models.ManyToManyField(Passenger)
-
+    validUntil= models.DateField(blank=True,null=True)
+    placeOfIssue=models.CharField(max_length=255,blank=True,null=True)
+    dateOfIssue= models.DateField(blank=True,null=True)
+    maxStay= models.PositiveSmallIntegerField( null=True,blank=True)
 
 
 

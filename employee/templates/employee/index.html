@@ -9,6 +9,16 @@
 <link rel="stylesheet" href="{% static 'fonts/style.css' %}">
 <link href="{% static 'vendor/datatables/buttons.bs.css' %}" rel="stylesheet" />
 {% endblock stylesheets %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item ">
+      <a class="black-text active-2" href="#">
+        <span class="icon-user1">Customers</span>
+      </a>
+    </li>
+{% endblock %}
+
+
 {% block content %}
 <div class="col-12" x-data="{ open: false }">
     <div class="container ">
